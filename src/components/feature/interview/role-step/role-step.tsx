@@ -1,4 +1,3 @@
-import type { JSX } from "react";
 import { ChevronRight } from "lucide-react";
 import RoleCard from "../role-card/role-card";
 import type { RoleStepProps } from "./rolte-step.types";

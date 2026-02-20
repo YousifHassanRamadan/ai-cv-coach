@@ -1,4 +1,3 @@
-import type { JSX } from "react";
 import { Camera, Mic, User } from "lucide-react";
 import type { EquipmentCardProps } from "./equipment-card.types";
 

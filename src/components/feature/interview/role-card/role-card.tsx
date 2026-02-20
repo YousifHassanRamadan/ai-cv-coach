@@ -1,4 +1,3 @@
-import type { JSX } from "react";
 import type { RoleCardProps } from "./role-card.types";
 
 const RoleCard = ({ icon, label, selected, onClick }: RoleCardProps) => {
