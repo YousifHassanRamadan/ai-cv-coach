@@ -1,11 +1,5 @@
-import {
-  TrendingUp,
-  CheckCircle,
-  AlertCircle,
-  TargetIcon,
-  DotSquare,
-} from "lucide-react";
-import { useState } from "react";
+import { TargetIcon, DotSquare } from "lucide-react";
+
 import PageHeader from "../../components/common/page-header/page-header";
 import UploadCvSection from "../../components/feature/resume/upload-cv-section/upload-cv-section";
 import ProgressCard from "../../components/common/progess-card/progress-card";

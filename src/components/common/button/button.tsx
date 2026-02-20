@@ -1,5 +1,3 @@
-import { Video } from "lucide-react";
-import React from "react";
 import type { TButtonProps } from "./button.types";
 
 const Button: React.FC<TButtonProps> = ({ text, icon, onClick }) => {

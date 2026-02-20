@@ -1,4 +1,4 @@
-import { Video, FileText, ChevronRight } from "lucide-react";
+import { Video, ChevronRight } from "lucide-react";
 
 import {
   achievements,

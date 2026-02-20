@@ -4,12 +4,6 @@ import KeywordItem from "../../../../common/keyword-item/keyword-item";
 import { KEYWORDS, STRENGTHS } from "../../../../../constants/resume/resume";
 import KeywordPoint from "../../../../common/keyword-point/keyword-point";
 
-const strengths = [
-  "Strong technical skills in frontend development",
-  "Clear progression in career history",
-  "Quantified achievements with metrics",
-];
-
 const MatchedKeyword: React.FC = () => {
   return (
     <div>

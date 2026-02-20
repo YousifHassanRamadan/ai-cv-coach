@@ -1,5 +1,5 @@
 import { FileText, Sparkles } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 import { TONES } from "../../../../constants/cover-letter/cover-letter";
 import type { TLeftSideProps } from "./left-side.types";
 import ToneItem from "../tone-item/tone-item";

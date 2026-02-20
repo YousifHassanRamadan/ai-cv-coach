@@ -1,5 +1,4 @@
 import { TrendingUp } from "lucide-react";
-import React from "react";
 
 const TopSkills = () => {
   return (

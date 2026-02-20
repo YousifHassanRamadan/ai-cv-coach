@@ -1,4 +1,3 @@
-import { FileText } from "lucide-react";
 import { useState } from "react";
 import PageHeader from "../../components/common/page-header/page-header";
 import LeftSide from "../../components/feature/cover-letter/left-side/left-side";

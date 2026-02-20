@@ -1,6 +1,6 @@
 import React from "react";
 import type { SearchFilterBarProps } from "./search-filter-bar.types";
-import { FilterIcon, SearchIcon, SendIcon } from "lucide-react";
+import { FilterIcon, SearchIcon } from "lucide-react";
 
 const SearchFilterBar: React.FC<SearchFilterBarProps> = ({
   searchTerm,
