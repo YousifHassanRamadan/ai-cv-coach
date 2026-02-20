@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+  /* Primary Brand Colors */
+  --color-primary: #211339; /* Purple/Indigo for buttons and accents */ /*used*/
+  --color-primary-dark: #4f46e5; /* Darker shade for hover states */
+
+  /* Background Colors */
+  --color-bg-primary: #0d0d12; /* Main dark background */ /*used*/
+  --color-bg-secondary: #0f0f18; /* Card/sidebar background */ /*used*/
+  --color-bg-tertiary: #16161f; /* Hover states */ /*used*/
+  --color-bg-active: #7c3bed; /* Hover states, borders */ /*used*/
+  --color-bg-header: #09090c; /* Hover states, borders */ /*used*/
+  --color-bg-card: #0e0e15; /* Hover states, borders */ /*used*/
+  --color-bg-subcard: #14131b; /* Hover states, borders */ /*used*/
+  --color-bg-input: #18181f; /* Hover states, borders */ /*used*/
+
+  /* Text Colors */
+  --color-text-primary: #ffffff; /* Main text (white) */
+  --color-text-secondary: #9ca3af; /* Muted text (gray) */ /*used*/
+  --color-text-muted: #6b7280; /* Very muted text */ /*used*/
+  --color-text-active: #7c3bed; /* Very muted text */ /*used*/
+
+  /*gray*/
+  --color-text-gray1: #65758d; /* Muted text (gray) */ /*used*/
+  --color-text-gray2: #829bb4; /* Muted text (gray) */ /*used*/
+
+  /* Accent Colors */
+  --color-accent-cyan: #06b6d4; /* Cyan for progress rings */
+  --color-accent-purple: #8b5cf6; /* Purple for icons */
+  --color-accent-orange: #f97316; /* Orange for streak */
+  --color-accent-green: #10b981; /* Green for success/growth */
+  --color-accent-blue: #3b82f6; /* Blue accents */
+
+  /* Status Colors */
+  --color-success: #10b981; /* Green - success states */
+  --color-warning: #f59e0b; /* Orange/Yellow - warnings */
+  --color-danger: #ef4444; /* Red - errors */
+  --color-info: #06b6d4; /* Cyan - info states */
+
+  /* Score/Performance Colors */
+  --color-score-high: #10b981; /* 85%+ - Green */
+  --color-score-medium: #f59e0b; /* 70-84% - Orange */
+  --color-score-low: #ef4444; /* Below 70% - Red */
+
+  /* Sidebar */
+  --color-sidebar-bg: #1a1a24; /*used*/
+  --color-sidebar-hover: #2a2a3a; /*used*/
+  --color-sidebar-active: #7638e1; /*used*/
+
+  /* Borders */
+  --color-border: #1f1f27; /*used*/
+  --color-border-light: #374151;
+  --color-border-active: #7c3bed; /*used*/
+  --color-border-card: #14141c; /*used*/
+}
+
+body {
+  background: linear-gradient(135deg, #0f0f18 70%, #1a1128 100%, #0d0d15 50%);
+  min-height: 100vh;
+}
+/* Or if you want it on a specific container */
+.dashboard-bg {
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a24 50%, #0c0815 100%);
+  min-height: 100vh;
+}
