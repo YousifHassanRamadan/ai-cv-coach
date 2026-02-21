@@ -1,6 +1,7 @@
 import { Camera, Mic, Video } from "lucide-react";
 import EquipmentCard from "../equipment-card/equipment-card";
 import type { EquipmentStepProps } from "./equipment-step.types";
+import { Link } from "react-router-dom";
 
 const EquipmentStep = ({
   cameraEnabled,
@@ -55,21 +56,23 @@ const EquipmentStep = ({
       )}
 
       {/* Navigation */}
-      <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">
+      <div className="flex flex-col sm:flex-row-reverse justify-between gap-3 sm:gap-0">
         <button
           onClick={onBack}
           className="px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 order-2 sm:order-1 text-sm sm:text-base"
         >
           Back
         </button>
-        <button
-          disabled={!allReady}
-          className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:shadow-2xl hover:shadow-purple-500/50 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 disabled:shadow-none order-1 sm:order-2"
-        >
-          <Video size={18} className="sm:w-5 sm:h-5" />
-          Start Interview
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-        </button>
+        <Link to="/session">
+          <button
+            disabled={!allReady}
+            className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:shadow-2xl hover:shadow-purple-500/50 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 disabled:shadow-none order-1 sm:order-2"
+          >
+            <Video size={18} className="sm:w-5 sm:h-5" />
+            Start Interview
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+          </button>
+        </Link>
       </div>
 
       <style>{`
