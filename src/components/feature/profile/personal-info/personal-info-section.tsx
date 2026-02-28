@@ -1,44 +1,57 @@
-import FormInput from "../form-input/form-input";
+import React from "react";
+import { useFormik } from "formik";
+
+import { toast } from "sonner";
+import * as Yup from "yup";
 import type {
-  FieldConfig,
-  PersonalInfoSectionProps,
+  PersonalInfoData,
+  PersonalInfoFormProps,
 } from "./personal-info.types";
+import { ProfileSchema } from "../../../../schema/profile-info.schema";
+import FormInput from "../form-input/form-input";
+import SubmitButton from "../../form/submit-button/submit-button";
+import { FIELDS } from "../../../../constants/profile/profile";
+import { useUpdateMe } from "../../../../api/profile";
 
-const FIELDS: FieldConfig[] = [
-  { label: "Full Name", name: "fullName" },
-  { label: "Email", name: "email", type: "email" },
-  { label: "Phone", name: "phone", type: "tel" },
-  { label: "Location", name: "location" },
-  { label: "Current Role", name: "currentRole", fullWidth: true },
-];
+const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
+  const { mutate: updateProfile, isPending: isUpdating } = useUpdateMe();
 
-const PersonalInfoSection = ({
-  profile,
-  onInputChange,
-}: PersonalInfoSectionProps) => {
+  const formik = useFormik<PersonalInfoData>({
+    initialValues: {
+      fName: profile.fName,
+      lName: profile.lName,
+      email: profile.email,
+    },
+    enableReinitialize: true,
+    validationSchema: ProfileSchema,
+    onSubmit: (values) => {
+      console.log("Form submitted:", values);
+      updateProfile(values);
+    },
+  });
+
+  console.log("profile:", profile);
+
   return (
-    <div className="bg-bg-card border-border-card rounded-xl border p-6 mb-6">
-      <h3 className="text-lg font-semibold mb-6">Personal Information</h3>
+    <form className="flex flex-col gap-5 my-5" onSubmit={formik.handleSubmit}>
+      {FIELDS.map(({ name, label, type }) => (
+        <FormInput
+          key={name}
+          name={name}
+          label={label}
+          type={type}
+          value={formik.values[name]}
+          onChange={formik.handleChange}
+          error={formik.errors[name] || ""}
+        />
+      ))}
 
-      <div className="grid grid-cols-2 gap-6">
-        {FIELDS.map(({ name, ...rest }) => (
-          <FormInput
-            key={name}
-            name={name}
-            value={profile[name]}
-            onChange={onInputChange}
-            {...rest}
-          />
-        ))}
-      </div>
-
-      <div className="mt-6 flex justify-end">
-        <button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-6 py-2.5 rounded-lg transition-all shadow-lg">
-          Save Changes
-        </button>
-      </div>
-    </div>
+      <SubmitButton
+        type="submit"
+        label={isUpdating ? "Saving..." : "Save Changes"}
+      />
+    </form>
   );
 };
 
-export default PersonalInfoSection;
+export default PersonalInfoForm;

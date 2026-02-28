@@ -11,9 +11,12 @@ import StatusCard from "../../components/feature/dashboard/status-card/status-ca
 import Sessions from "../../components/feature/dashboard/sessions/sessions";
 import Achievements from "../../components/feature/dashboard/achievements/achievements";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../store/auth";
 
 const DashboardPage = () => {
   const navigation = useNavigate();
+
+  const { token, refreshToken } = useAuthStore();
 
   const handleStartInterview = () => {
     navigation("/interview");
@@ -22,6 +25,9 @@ const DashboardPage = () => {
   const handleResume = () => {
     navigation("/resume");
   };
+
+  console.log("Token in Dashboard:", token);
+  console.log("Refresh Token in Dashboard:", refreshToken);
 
   return (
     <div className="min-h-screen bg-[#0A0A0F] text-white px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">

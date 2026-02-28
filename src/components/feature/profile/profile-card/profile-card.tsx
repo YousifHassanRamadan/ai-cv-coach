@@ -6,12 +6,10 @@ import type { ProfileCardProps } from "./profile-card.types";
 const ProfileCard = ({
   fullName,
   email,
-  location,
-  currentRole,
   interviews,
   avgScore,
-  dayStreak,
-  badges,
+  totalUploads,
+  currentRole,
 }: ProfileCardProps) => {
   return (
     <div className="bg-bg-card rounded-xl border border-border-card p-4 sm:p-6 lg:p-8 mb-6">
@@ -19,12 +17,7 @@ const ProfileCard = ({
         {/* Avatar + Info */}
         <div className="flex items-start gap-4 sm:gap-6 min-w-0">
           <ProfileAvatar />
-          <ProfileInfo
-            name={fullName}
-            role={currentRole}
-            email={email}
-            location={location}
-          />
+          <ProfileInfo name={fullName} email={email} role={currentRole} />
         </div>
 
         {/* Stats — full width on mobile, auto width on sm+ */}
@@ -32,8 +25,7 @@ const ProfileCard = ({
           <ProfileStats
             interviews={interviews}
             avgScore={avgScore}
-            dayStreak={dayStreak}
-            badges={badges}
+            totalUploads={totalUploads}
           />
         </div>
       </div>

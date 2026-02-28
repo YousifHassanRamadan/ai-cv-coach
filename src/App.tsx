@@ -11,6 +11,7 @@ import ResumePage from "./pages/resume/resume";
 import HistoryPage from "./pages/history/history";
 import InterviewSession from "./pages/session/session";
 import ProcessingScreen from "./pages/processing/processing";
+import AuthForm from "./pages/form/form";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
   {
     path: "/processing",
     element: <ProcessingScreen />,
+  },
+  {
+    path: "/auth",
+    element: <AuthForm />,
   },
 ]);
 

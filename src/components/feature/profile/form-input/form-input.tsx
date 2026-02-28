@@ -7,6 +7,7 @@ const FormInput = ({
   value,
   onChange,
   fullWidth = false,
+  error,
 }: FormInputProps) => {
   return (
     <div className={fullWidth ? "col-span-2" : ""}>
@@ -20,6 +21,7 @@ const FormInput = ({
         onChange={onChange}
         className="w-full bg-[#13131a] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
       />
+      {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>
   );
 };

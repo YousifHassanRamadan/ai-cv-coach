@@ -4,19 +4,12 @@ import PersonalInfoSection from "../../components/feature/profile/personal-info/
 import NotificationPreferencesSection from "../../components/feature/profile/notifications/notification-preferences";
 import PageHeader from "../../components/common/page-header/page-header";
 import type { NotificationPreferences, ProfileData } from "./profile.type";
+import { useMe } from "../../api/profile";
 
 const ProfilePage: React.FC = () => {
-  const [profile, setProfile] = useState<ProfileData>({
-    fullName: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 (555) 123-4567",
-    location: "San Francisco, CA",
-    currentRole: "Frontend Developer",
-    interviews: 12,
-    avgScore: 82,
-    dayStreak: 5,
-    badges: 8,
-  });
+  const { data, isLoading, isError } = useMe();
+
+  console.log("User data:", data, "Loading:", isLoading, "Error:", isError);
 
   const [notifications, setNotifications] = useState<NotificationPreferences>({
     emailNotifications: true,
@@ -24,11 +17,6 @@ const ProfilePage: React.FC = () => {
     weeklyInsights: false,
     interviewTips: true,
   });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setProfile((prev) => ({ ...prev, [name]: value }));
-  };
 
   const toggleNotification = (key: keyof NotificationPreferences) => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -43,25 +31,24 @@ const ProfilePage: React.FC = () => {
         />
 
         <ProfileCard
-          fullName={profile.fullName}
-          email={profile.email}
-          location={profile.location}
-          currentRole={profile.currentRole}
-          interviews={profile.interviews}
-          avgScore={profile.avgScore}
-          dayStreak={profile.dayStreak}
-          badges={profile.badges}
+          fullName={
+            data?.fName && data.lName
+              ? `${data.fName} ${data.lName}`
+              : "John Doe"
+          }
+          email={data?.email || "john.doe@example.com"}
+          interviews={data?.userStats?.totalInterviews || 0}
+          avgScore={data?.userStats?.avgScore || 0}
+          totalUploads={data?.userStats?.totalUploads || 0}
+          currentRole={data?.role || "user"}
         />
 
         <PersonalInfoSection
           profile={{
-            fullName: profile.fullName,
-            email: profile.email,
-            phone: profile.phone,
-            location: profile.location,
-            currentRole: profile.currentRole,
+            fName: data?.fName || "",
+            lName: data?.lName || "",
+            email: data?.email || "",
           }}
-          onInputChange={handleInputChange}
         />
 
         <NotificationPreferencesSection
