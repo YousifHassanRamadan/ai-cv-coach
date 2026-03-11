@@ -8,6 +8,7 @@ import DataManagementSection from "../../components/feature/settings/data-manage
 import DangerZoneSection from "../../components/feature/settings/danger-zone/danger-zone";
 import EthicalAISection from "../../components/feature/settings/ethical-ai-section/ethical-ai-section";
 import DeleteAccountModal from "../../components/feature/settings/delete-account-model/delete-account-model";
+import Logout from "../../components/feature/settings/logout/logout";
 
 const SettingsPage: React.FC = () => {
   const [privacySettings, setPrivacySettings] = useState<PrivacySettings>({
@@ -74,15 +75,18 @@ const SettingsPage: React.FC = () => {
         <DangerZoneSection onDeleteAccount={handleDeleteAccount} />
 
         {/* Ethical AI Commitment */}
-        <EthicalAISection />
-      </div>
+        {/* <EthicalAISection /> */}
 
-      {/* Delete Account Modal */}
-      <DeleteAccountModal
-        isOpen={showDeleteModal}
-        onClose={() => setShowDeleteModal(false)}
-        onConfirm={handleConfirmDelete}
-      />
+        {/* logout Account Modal */}
+
+        <Logout />
+        {/* Delete Account Modal */}
+        <DeleteAccountModal
+          isOpen={showDeleteModal}
+          onClose={() => setShowDeleteModal(false)}
+          onConfirm={handleConfirmDelete}
+        />
+      </div>
     </div>
   );
 };

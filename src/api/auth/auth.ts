@@ -44,3 +44,8 @@ export const refreshToken = async (): Promise<RefreshResponse> => {
 
   return res.data;
 };
+
+export const logout = async () => {
+  const response = await api.post("/auth/logout");
+  return response.data;
+};

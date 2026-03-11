@@ -3,8 +3,18 @@ import React from "react";
 import KeywordItem from "../../../../common/keyword-item/keyword-item";
 import { KEYWORDS, STRENGTHS } from "../../../../../constants/resume/resume";
 import KeywordPoint from "../../../../common/keyword-point/keyword-point";
+import type { EvaluateCvResponse } from "../../../../../api/cv";
+import { useQuery } from "@tanstack/react-query";
 
 const MatchedKeyword: React.FC = () => {
+  const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
+    queryKey: ["cv-evaluate"],
+    enabled: false,
+  });
+
+  const matchedSkills = cvEvaluation?.evaluation?.matched_skills ?? [];
+  const strengths = cvEvaluation?.evaluation?.strengths ?? [];
+
   return (
     <div>
       {/* Header */}
@@ -17,22 +27,27 @@ const MatchedKeyword: React.FC = () => {
 
       {/* Keywords */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {KEYWORDS.map((item) => (
-          <KeywordItem
-            key={item.keyword}
-            keyword={item.keyword}
-            matched={item.matched}
-          />
-        ))}
+        {matchedSkills.length === 0 ? (
+          <p className="text-sm text-gray-400">No matched keywords found.</p>
+        ) : (
+          matchedSkills.map((item) => (
+            <KeywordItem key={item} keyword={item} matched={true} />
+          ))
+        )}
       </div>
 
       {/* Strengths */}
-      <div className="bg-bg-card  rounded-lg p-4">
+      <div className="bg-bg-card rounded-lg p-4">
         <h3 className="text-sm font-semibold text-green-400 mb-2">Strengths</h3>
+
         <ul className="space-y-1 text-sm text-gray-400">
-          {STRENGTHS.map((str, idx) => (
-            <KeywordPoint str={str} key={idx} color="green" />
-          ))}
+          {strengths.length === 0 ? (
+            <p className="text-sm text-gray-400">No strengths detected.</p>
+          ) : (
+            strengths.map((str, idx) => (
+              <KeywordPoint str={str} key={idx} color="green" />
+            ))
+          )}
         </ul>
       </div>
     </div>

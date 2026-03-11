@@ -1,127 +1,167 @@
 import React, { useState } from "react";
-import { CheckCircle, Upload, FileText } from "lucide-react";
-import OutlinedButton from "../../../common/outlined-button/outlined-button";
+
+import {
+  useUploadCv,
+  useCvDocuments,
+  useDeleteCvDocument,
+  useEvaluateCv,
+  type CvDocument,
+} from "../../../../api/cv";
+import { useTracks } from "../../../../api/tracks";
+import TrackSelector from "../track-selector/track-selector";
+import JobDescriptionInput from "../job-description-input/job-description-input";
+import UploadArea from "../upload-area/upload-area";
+import CvDocumentsList from "../cv-documents-list/cv-documents-list";
+import { useQueryClient } from "@tanstack/react-query";
 
 const UploadCvSection: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [selectedTrackId, setSelectedTrackId] = useState<string>("");
+  const [isTrackDropdownOpen, setIsTrackDropdownOpen] = useState(false);
+  const [jdText, setJdText] = useState("");
+  const [showJdInput, setShowJdInput] = useState(false);
+  const [evaluatingCvId, setEvaluatingCvId] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      handleFileUpload(file);
-    }
-  };
+  const { data: tracks = [], isLoading: isTracksLoading } = useTracks();
+  const { data: cvDocuments = [], isLoading: isCvDocumentsLoading } =
+    useCvDocuments();
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files?.[0];
-    if (file) {
-      handleFileUpload(file);
-    }
-  };
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
+  const { mutate: uploadCvMutation } = useUploadCv();
+  const { mutate: deleteCvMutation, isPending: isDeletePending } =
+    useDeleteCvDocument();
+  const { mutate: evaluateCvMutation, isPending: isEvaluatePending } =
+    useEvaluateCv();
 
   const handleFileUpload = (file: File) => {
-    console.log(file); // this is the real file
+    if (!selectedTrackId) return;
     setIsUploading(true);
     setUploadProgress(0);
 
-    // Simulate upload progress
     const interval = setInterval(() => {
       setUploadProgress((prev) => {
-        if (prev >= 100) {
+        if (prev >= 90) {
           clearInterval(interval);
-          setIsUploading(false);
-          setUploadedFile(file);
-          return 100;
+          return 90;
         }
         return prev + 10;
       });
     }, 150);
+
+    uploadCvMutation(
+      { file, trackId: selectedTrackId, jdText: jdText || undefined },
+      {
+        onSuccess: () => {
+          clearInterval(interval);
+          queryClient.setQueryData(["cv-evaluate"], null);
+          setUploadProgress(100);
+          setTimeout(() => {
+            setIsUploading(false);
+            setUploadedFile(file);
+          }, 400);
+        },
+        onError: () => {
+          clearInterval(interval);
+          setIsUploading(false);
+          setUploadProgress(0);
+        },
+      },
+    );
   };
 
-  const handleUploadNewCV = () => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    queryClient.setQueryData(["cv-evaluate"], null);
+    if (file) handleFileUpload(file);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files?.[0];
+    queryClient.setQueryData(["cv-evaluate"], null);
+    if (file) handleFileUpload(file);
+  };
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) =>
+    e.preventDefault();
+
+  const handleUploadNew = () => {
     setUploadedFile(null);
     setIsUploading(false);
     setUploadProgress(0);
   };
 
+  const handleDelete = (cvDocumentId: string) => {
+    deleteCvMutation(cvDocumentId, {
+      onSuccess: () => {
+        queryClient.setQueryData(["cv-evaluate"], null);
+        setEvaluatingCvId(null);
+      },
+    });
+  };
+
+  const handleEvaluate = (doc: CvDocument) => {
+    if (!selectedTrackId) return;
+    setEvaluatingCvId(doc.id);
+    evaluateCvMutation(
+      {
+        cvDocumentId: doc.id,
+        trackId: selectedTrackId,
+        jdText: jdText || undefined,
+      },
+      {
+        onSuccess: () => setEvaluatingCvId(null),
+        onError: () => setEvaluatingCvId(null),
+      },
+    );
+  };
+
   return (
-    <div className="bg-bg-card rounded-lg p-6 border border-gray-800/50">
-      <h2 className="text-lg font-semibold mb-4">Upload CV</h2>
+    <div className="bg-bg-card rounded-lg p-6 border border-gray-800/50 space-y-5">
+      <h2 className="text-lg font-semibold">Upload CV</h2>
 
-      {/* Upload Complete State */}
-      {uploadedFile && !isUploading && (
-        <div className="text-center py-8">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center">
-              <CheckCircle className="w-8 h-8 text-green-500" strokeWidth={2} />
-            </div>
-          </div>
+      <TrackSelector
+        tracks={tracks}
+        selectedTrackId={selectedTrackId}
+        isLoading={isTracksLoading}
+        isOpen={isTrackDropdownOpen}
+        onToggle={() => setIsTrackDropdownOpen((v) => !v)}
+        onSelect={(id) => {
+          setSelectedTrackId(id);
+          setIsTrackDropdownOpen(false);
+        }}
+      />
 
-          <p className="text-green-500 font-medium mb-1">Analysis Complete!</p>
-          <p className="text-sm text-gray-500 mb-6">{uploadedFile.name}</p>
-          <div className="flex justify-center">
-            <OutlinedButton text="Upload New CV" onClick={handleUploadNewCV} />
-          </div>
-        </div>
-      )}
+      <JobDescriptionInput
+        isVisible={showJdInput}
+        value={jdText}
+        onToggle={() => setShowJdInput((v) => !v)}
+        onChange={setJdText}
+      />
 
-      {/* Uploading State */}
-      {isUploading && (
-        <div className="text-center py-8">
-          <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-purple-500/10 rounded-full flex items-center justify-center">
-              <FileText className="w-8 h-8 text-text-active" strokeWidth={2} />
-            </div>
-          </div>
+      <UploadArea
+        uploadedFile={uploadedFile}
+        isUploading={isUploading}
+        uploadProgress={uploadProgress}
+        selectedTrackId={selectedTrackId}
+        onFileSelect={handleFileSelect}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onUploadNew={handleUploadNew}
+      />
 
-          <p className="text-gray-300 font-medium mb-4">Uploading...</p>
-
-          <div className="max-w-xs mx-auto">
-            <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 transition-all duration-300 ease-out rounded-full"
-                style={{ width: `${uploadProgress}%` }}
-              />
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Empty State - Drop Zone */}
-      {!uploadedFile && !isUploading && (
-        <div
-          className="border-2 border-dashed border-gray-700 rounded-lg p-12 text-center hover:border-purple-600/50 transition-colors cursor-pointer"
-          onDrop={handleDrop}
-          onDragOver={handleDragOver}
-          onClick={() => document.getElementById("cv-upload-input")?.click()}
-        >
-          <div className="flex justify-center mb-4">
-            <div className="w-14 h-14 bg-purple-500/10 rounded-full flex items-center justify-center">
-              <Upload className="w-7 h-7 text-purple-500" strokeWidth={2} />
-            </div>
-          </div>
-
-          <p className="text-gray-300 font-medium mb-1">Drop your CV here</p>
-          <p className="text-sm text-gray-500">
-            or click to browse (PDF, DOCX)
-          </p>
-
-          <input
-            id="cv-upload-input"
-            type="file"
-            accept=".pdf,.doc,.docx"
-            onChange={handleFileSelect}
-            className="hidden"
-          />
-        </div>
-      )}
+      <CvDocumentsList
+        documents={cvDocuments}
+        isLoading={isCvDocumentsLoading}
+        selectedTrackId={selectedTrackId}
+        evaluatingCvId={evaluatingCvId}
+        isEvaluatePending={isEvaluatePending}
+        isDeletePending={isDeletePending}
+        onEvaluate={handleEvaluate}
+        onDelete={handleDelete}
+      />
     </div>
   );
 };

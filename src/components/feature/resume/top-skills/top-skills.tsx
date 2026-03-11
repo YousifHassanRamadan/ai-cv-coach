@@ -1,6 +1,13 @@
+import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
+import type { EvaluateCvResponse } from "../../../../api/cv";
 
 const TopSkills = () => {
+  const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
+    queryKey: ["cv-evaluate"],
+    enabled: false,
+  });
+
   return (
     <div className="bg-bg-card rounded-lg p-6 border border-gray-800">
       <div className="flex justify-between items-center mb-4">
@@ -10,49 +17,81 @@ const TopSkills = () => {
       <div className="space-y-4">
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">React</span>
-            <span className="text-sm text-indigo-400">95%</span>
+            <span className="text-sm">Experience relevance</span>
+            <span className="text-sm text-indigo-400">
+              {cvEvaluation
+                ? cvEvaluation?.evaluation.category_scores.experience_relevance
+                    .score * 100
+                : 0}
+              %
+            </span>
           </div>
           <div className="w-full bg-gray-800 rounded-full h-2">
             <div
               className="bg-bg-active h-2 rounded-full"
-              style={{ width: "95%" }}
+              style={{
+                width: `${cvEvaluation ? cvEvaluation?.evaluation.category_scores.experience_relevance.score * 100 : 0}%`,
+              }}
             ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">TypeScript</span>
-            <span className="text-sm text-indigo-400">88%</span>
+            <span className="text-sm">Formatting</span>
+            <span className="text-sm text-indigo-400">
+              {cvEvaluation
+                ? cvEvaluation?.evaluation.category_scores.formatting.score *
+                  100
+                : 0}
+              %
+            </span>
           </div>
           <div className="w-full bg-gray-800 rounded-full h-2">
             <div
               className="bg-bg-active h-2 rounded-full"
-              style={{ width: "88%" }}
+              style={{
+                width: `${cvEvaluation ? cvEvaluation?.evaluation.category_scores.formatting.score * 100 : 0}%`,
+              }}
             ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Node.js</span>
-            <span className="text-sm text-cyan-400">75%</span>
+            <span className="text-sm">Keyword coverage</span>
+            <span className="text-sm text-cyan-400">
+              {cvEvaluation
+                ? cvEvaluation?.evaluation.category_scores.keyword_coverage
+                    .score * 100
+                : 0}
+              %
+            </span>
           </div>
           <div className="w-full bg-gray-800 rounded-full h-2">
             <div
               className="bg-cyan-500 h-2 rounded-full"
-              style={{ width: "75%" }}
+              style={{
+                width: `${cvEvaluation ? cvEvaluation?.evaluation.category_scores.keyword_coverage.score * 100 : 0}%`,
+              }}
             ></div>
           </div>
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Leadership</span>
-            <span className="text-sm text-cyan-400">70%</span>
+            <span className="text-sm">Skills match</span>
+            <span className="text-sm text-cyan-400">
+              {cvEvaluation
+                ? cvEvaluation?.evaluation.category_scores.skills_match.score *
+                  100
+                : 0}
+              %
+            </span>
           </div>
           <div className="w-full bg-gray-800 rounded-full h-2">
             <div
               className="bg-cyan-500 h-2 rounded-full"
-              style={{ width: "70%" }}
+              style={{
+                width: `${cvEvaluation ? cvEvaluation?.evaluation.category_scores.skills_match.score * 100 : 0}%`,
+              }}
             ></div>
           </div>
         </div>

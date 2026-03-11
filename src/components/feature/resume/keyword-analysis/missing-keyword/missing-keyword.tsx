@@ -2,12 +2,18 @@ import { AlertCircle } from "lucide-react";
 import React from "react";
 import KeywordItem from "../../../../common/keyword-item/keyword-item";
 import KeywordPoint from "../../../../common/keyword-point/keyword-point";
-import {
-  MISSING_KEYWORDS,
-  AREAS_TO_IMPROVE,
-} from "../../../../../constants/resume/resume";
+import type { EvaluateCvResponse } from "../../../../../api/cv";
+import { useQuery } from "@tanstack/react-query";
 
 const MissingKeyword: React.FC = () => {
+  const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
+    queryKey: ["cv-evaluate"],
+    enabled: false,
+  });
+
+  const missingSkills = cvEvaluation?.evaluation?.missing_skills ?? [];
+  const weaknesses = cvEvaluation?.evaluation?.weaknesses ?? [];
+
   return (
     <div>
       {/* Header */}
@@ -18,15 +24,14 @@ const MissingKeyword: React.FC = () => {
         </span>
       </div>
 
-      {/* Keywords */}
       <div className="flex flex-wrap gap-2 mb-4">
-        {MISSING_KEYWORDS.map((item) => (
-          <KeywordItem
-            key={item.keyword}
-            keyword={item.keyword}
-            matched={false}
-          />
-        ))}
+        {missingSkills.length === 0 ? (
+          <p className="text-sm text-gray-400">No missing keywords found.</p>
+        ) : (
+          missingSkills.map((item) => (
+            <KeywordItem key={item} keyword={item} matched={false} />
+          ))
+        )}
       </div>
 
       {/* Areas to Improve */}
@@ -34,10 +39,15 @@ const MissingKeyword: React.FC = () => {
         <h3 className="text-sm font-semibold text-orange-400 mb-2">
           Areas to Improve
         </h3>
+
         <ul className="space-y-1 text-sm text-gray-400">
-          {AREAS_TO_IMPROVE.map((str, idx) => (
-            <KeywordPoint str={str} key={idx} color="orange" />
-          ))}
+          {weaknesses.length === 0 ? (
+            <p className="text-sm text-gray-400">No areas to improve.</p>
+          ) : (
+            weaknesses.map((str, idx) => (
+              <KeywordPoint str={str} key={idx} color="orange" />
+            ))
+          )}
         </ul>
       </div>
     </div>

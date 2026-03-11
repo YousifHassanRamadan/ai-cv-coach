@@ -12,9 +12,23 @@ import Sessions from "../../components/feature/dashboard/sessions/sessions";
 import Achievements from "../../components/feature/dashboard/achievements/achievements";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth";
+import { useDashboardStats } from "../../api/dashboard";
+import { useMe } from "../../api/profile";
 
 const DashboardPage = () => {
   const navigation = useNavigate();
+
+  const {
+    data: dashboardStats,
+    isLoading: isDashboardStatsLoading,
+    error,
+  } = useDashboardStats();
+
+  const {
+    data: userData,
+    isLoading: isUserLoading,
+    isError: isUserError,
+  } = useMe();
 
   const { token, refreshToken } = useAuthStore();
 
@@ -35,7 +49,13 @@ const DashboardPage = () => {
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Good afternoon, <span className="text-indigo-400">John</span> 👋
+            Good afternoon,{" "}
+            <span className="text-indigo-400">
+              {isUserLoading
+                ? "Loading..."
+                : userData?.fName + " " + userData?.lName}
+            </span>{" "}
+            👋
           </h1>
           <p className="text-gray-500 mt-1 text-sm sm:text-base">
             Ready to ace your next interview? Let's practice!
