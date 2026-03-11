@@ -6,6 +6,7 @@ import {
   SettingsIcon,
   User,
   Video,
+  MessageSquare,
 } from "lucide-react";
 
 export const LINKS = [
@@ -15,6 +16,7 @@ export const LINKS = [
   { text: "Interview", link: "/interview" },
   { text: "Insights", link: "/insights" },
   { text: "Profile", link: "/profile" },
+  { text: "Feedback", link: "/feedback" },
 ];
 
 export const ICON_MAP = {
@@ -25,4 +27,5 @@ export const ICON_MAP = {
   insights: BarChart3,
   profile: User,
   settings: SettingsIcon,
+  feedback: MessageSquare,
 };

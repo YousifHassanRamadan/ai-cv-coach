@@ -12,6 +12,7 @@ import HistoryPage from "./pages/history/history";
 import InterviewSession from "./pages/session/session";
 import ProcessingScreen from "./pages/processing/processing";
 import AuthForm from "./pages/form/form";
+import FeedbackPage from "./pages/feedback/feedback";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthForm />,
+  },
+  {
+    path: "/feedback",
+    element: <FeedbackPage />,
   },
 ]);
 

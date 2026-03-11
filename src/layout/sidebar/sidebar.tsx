@@ -7,7 +7,7 @@ const Sidebar: React.FC<TSidebarProps> = ({ collapsed, setCollapsed }) => {
   return (
     <div className="w-full h-screen flex flex-col justify-between border-r border-border bg-bg-primary overflow-x-hidden ">
       {/* Logo */}
-      <div className="border-b-2 border-border  p-3 pt-3 h-[77.5px] flex items-center justify-center">
+      <div className="border-b-2 border-border  p-3 pt-3 pl-0 h-[77.5px] flex items-center justify-start">
         <SidebarHeader collapsed={collapsed} />
       </div>
 
