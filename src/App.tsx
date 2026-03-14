@@ -27,6 +27,10 @@ export const router = createBrowserRouter([
       { path: "interview", element: <InterviewPage /> },
       { path: "resume", element: <ResumePage /> },
       { path: "history", element: <HistoryPage /> },
+      {
+        path: "/feedback",
+        element: <FeedbackPage />,
+      },
     ],
   },
   {
@@ -40,10 +44,6 @@ export const router = createBrowserRouter([
   {
     path: "/auth",
     element: <AuthForm />,
-  },
-  {
-    path: "/feedback",
-    element: <FeedbackPage />,
   },
 ]);
 

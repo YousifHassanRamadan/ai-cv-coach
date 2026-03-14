@@ -25,11 +25,10 @@ export const roles = [
 ];
 
 export const difficultyLabels = [
-  { value: 1, label: "Beginner" },
-  { value: 2, label: "Easy" },
-  { value: 3, label: "Medium" },
-  { value: 4, label: "Hard" },
-  { value: 5, label: "Expert" },
+  { value: 1, label: "Easy" },
+  { value: 2, label: "Medium" },
+  { value: 3, label: "Hard" },
+  { value: 4, label: "Custom" },
 ];
 
 export const interviewStyles = [

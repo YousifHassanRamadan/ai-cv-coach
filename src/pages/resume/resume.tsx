@@ -11,8 +11,6 @@ import type { EvaluateCvResponse } from "../../api/cv";
 import OptimizationTips from "../../components/feature/resume/optimization-tips/optimization-tips";
 
 const ResumePage = () => {
-  const { data: tracks, isLoading: isTracksLoading } = useTracks();
-
   const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
     queryKey: ["cv-evaluate"],
     enabled: false,

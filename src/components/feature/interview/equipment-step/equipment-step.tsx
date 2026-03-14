@@ -9,8 +9,10 @@ const EquipmentStep = ({
   setCameraEnabled,
   setMicEnabled,
   onBack,
+  handleStartInterview,
+  isStartingInterview,
 }: EquipmentStepProps) => {
-  const allReady = cameraEnabled && micEnabled;
+  const allReady = cameraEnabled || micEnabled;
 
   return (
     <div className="animate-fadeIn">
@@ -63,16 +65,15 @@ const EquipmentStep = ({
         >
           Back
         </button>
-        <Link to="/session">
-          <button
-            disabled={!allReady}
-            className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:shadow-2xl hover:shadow-purple-500/50 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 disabled:shadow-none order-1 sm:order-2"
-          >
-            <Video size={18} className="sm:w-5 sm:h-5" />
-            Start Interview
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-          </button>
-        </Link>
+        <button
+          disabled={!allReady || isStartingInterview}
+          onClick={handleStartInterview}
+          className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:shadow-2xl hover:shadow-purple-500/50 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 disabled:shadow-none order-1 sm:order-2"
+        >
+          <Video size={18} className="sm:w-5 sm:h-5" />
+          {isStartingInterview ? "Starting..." : "Start Interview"}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+        </button>
       </div>
 
       <style>{`

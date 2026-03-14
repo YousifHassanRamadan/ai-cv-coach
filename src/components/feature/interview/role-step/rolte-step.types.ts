@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import type { Track } from "../../../../api/tracks";
 
 export interface Role {
   id: string;
@@ -7,7 +8,7 @@ export interface Role {
 }
 
 export interface RoleStepProps {
-  roles: Role[];
+  roles: Track[];
   selectedRole: string;
   setSelectedRole: (v: string) => void;
   customRole: string;

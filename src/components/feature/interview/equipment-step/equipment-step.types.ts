@@ -4,4 +4,6 @@ export interface EquipmentStepProps {
   setCameraEnabled: (v: boolean) => void;
   setMicEnabled: (v: boolean) => void;
   onBack: () => void;
+  handleStartInterview: () => void;
+  isStartingInterview: boolean;
 }

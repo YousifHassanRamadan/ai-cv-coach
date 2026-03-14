@@ -12,37 +12,80 @@ import {
   roles,
   steps,
 } from "../../constants/interview/interview";
+import { useTracks } from "../../api/tracks";
+import {
+  useStartInterview,
+  type ExperienceLevel,
+  type InterviewDifficulty,
+  type StartInterviewPayload,
+} from "../../api/interviews";
+import { useNavigate, useNavigation } from "react-router-dom";
+import { toast } from "sonner";
 
 const InterviewPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedRole, setSelectedRole] = useState("");
   const [customRole, setCustomRole] = useState("");
   const [difficultyLevel, setDifficultyLevel] = useState(3);
+  const [numberOfQuestions, setNumberOfQuestions] = useState(3);
   const [selectedStyle, setSelectedStyle] = useState("");
   const [cameraEnabled, setCameraEnabled] = useState(false);
   const [micEnabled, setMicEnabled] = useState(false);
+  const [selectedWeightProfile, setSelectedWeightProfile] = useState("");
+  const [selectedCvId, setSelectedCvId] = useState("");
+  const [experienceLevel, setExperienceLevel] = useState("");
+
+  const navigate = useNavigate();
+
+  const { data: tracks, isLoading: isTracksLoading } = useTracks();
+
+  const { mutate: startInterview, isPending: isStartingInterview } =
+    useStartInterview();
+
+  const handleStartInterview = () => {
+    const difficultyMap: Record<number, InterviewDifficulty> = {
+      1: "easy",
+      2: "medium",
+      3: "hard",
+      4: "custom",
+    };
+
+    const payload: StartInterviewPayload = {
+      cvDocumentId: selectedCvId,
+      trackId: selectedRole,
+      difficulty: difficultyMap[difficultyLevel],
+      weightProfile: selectedWeightProfile,
+      totalQuestions: numberOfQuestions,
+      experienceLevel: experienceLevel as ExperienceLevel,
+      mode: cameraEnabled ? "video" : "audio",
+    };
+
+    console.log("Starting interview with payload:", payload);
+    startInterview(payload, {
+      onSuccess: (data) => {
+        toast.success("Interview started successfully!");
+        navigate("/session");
+      },
+    });
+  };
 
   const getDifficultyDescription = () => {
     const descriptions = {
       1: {
-        title: "Beginner Mode",
+        title: "Easy Mode",
         desc: "Basic foundational questions for those just starting out",
       },
       2: {
-        title: "Easy Mode",
-        desc: "Straightforward questions to build confidence",
-      },
-      3: {
         title: "Medium Mode",
         desc: "Standard industry questions for mid-level roles",
       },
-      4: {
+      3: {
         title: "Hard Mode",
         desc: "Advanced challenges for experienced professionals",
       },
-      5: {
-        title: "Expert Mode",
-        desc: "Extremely difficult questions for senior-level positions",
+      4: {
+        title: "Custom Mode",
+        desc: "Tailored questions for your specific needs",
       },
     };
     return descriptions[difficultyLevel as keyof typeof descriptions];
@@ -61,7 +104,7 @@ const InterviewPage = () => {
       <div className="max-w-4xl mx-auto bg-[#0f0e17] p-4 sm:p-8 md:p-12 lg:p-16 rounded-2xl">
         {currentStep === 1 && (
           <RoleStep
-            roles={roles}
+            roles={isTracksLoading ? [] : tracks || []}
             selectedRole={selectedRole}
             setSelectedRole={setSelectedRole}
             customRole={customRole}
@@ -78,6 +121,10 @@ const InterviewPage = () => {
             getDifficultyDescription={getDifficultyDescription}
             onBack={() => setCurrentStep(1)}
             onContinue={() => setCurrentStep(3)}
+            setNumberOfQuestions={setNumberOfQuestions}
+            numberOfQuestions={numberOfQuestions}
+            experienceLevel={experienceLevel}
+            setExperienceLevel={setExperienceLevel}
           />
         )}
 
@@ -88,6 +135,10 @@ const InterviewPage = () => {
             setSelectedStyle={setSelectedStyle}
             onBack={() => setCurrentStep(2)}
             onContinue={() => setCurrentStep(4)}
+            selectedCvId={selectedCvId}
+            setSelectedCvId={setSelectedCvId}
+            selectedWeightProfile={selectedWeightProfile}
+            setSelectedWeightProfile={setSelectedWeightProfile}
           />
         )}
 
@@ -98,6 +149,8 @@ const InterviewPage = () => {
             setCameraEnabled={setCameraEnabled}
             setMicEnabled={setMicEnabled}
             onBack={() => setCurrentStep(3)}
+            handleStartInterview={handleStartInterview}
+            isStartingInterview={isStartingInterview}
           />
         )}
       </div>

@@ -1,5 +1,7 @@
 import { ChevronRight } from "lucide-react";
 import type { DifficultyStepProps } from "./difficulty-step.types";
+import NumberOfQuestionsStep from "../number-of-question-step/number-of-question-step";
+import ExperienceLevel from "../experience-level/experience-level";
 
 const DifficultyStep = ({
   difficultyLevel,
@@ -8,6 +10,10 @@ const DifficultyStep = ({
   getDifficultyDescription,
   onBack,
   onContinue,
+  setNumberOfQuestions,
+  numberOfQuestions,
+  experienceLevel,
+  setExperienceLevel,
 }: DifficultyStepProps) => {
   const getGradientColor = () => {
     const colors = [
@@ -40,14 +46,14 @@ const DifficultyStep = ({
           {/* Gradient progress */}
           <div
             className={`absolute h-2 rounded-full bg-gradient-to-r ${getGradientColor()} transition-all duration-500`}
-            style={{ width: `${((difficultyLevel - 1) / 4) * 100}%` }}
+            style={{ width: `${((difficultyLevel - 1) / 3) * 100}%` }}
           />
 
           {/* Slider input */}
           <input
             type="range"
             min="1"
-            max="5"
+            max="4"
             value={difficultyLevel}
             onChange={(e) => setDifficultyLevel(Number(e.target.value))}
             className="relative w-full appearance-none bg-transparent cursor-pointer z-10"
@@ -82,6 +88,16 @@ const DifficultyStep = ({
         </h3>
         <p className="text-gray-400 text-base sm:text-lg">{description.desc}</p>
       </div>
+
+      <NumberOfQuestionsStep
+        numberOfQuestions={numberOfQuestions}
+        setNumberOfQuestions={setNumberOfQuestions}
+      />
+
+      <ExperienceLevel
+        experienceLevel={experienceLevel}
+        setExperienceLevel={setExperienceLevel}
+      />
 
       {/* Navigation */}
       <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-0">

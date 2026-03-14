@@ -4,6 +4,9 @@ import SessionHeader from "../../components/feature/session/session-header/sessi
 import ControlBar from "../../components/feature/session/control-bar/control-bar";
 import AIAvatar from "../../components/feature/session/aI-avatar/aI-avatar";
 import QuestionPanel from "../../components/feature/session/question-panel/question-panel";
+import { useCompleteInterview } from "../../api/interviews";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 const QUESTIONS: Question[] = [
   {
@@ -22,19 +25,37 @@ const InterviewSession: React.FC = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(108);
 
+  const { mutate: completeInterview } = useCompleteInterview();
+
+  const navigation = useNavigate();
+
   useEffect(() => {
     if (!isRecording) return;
     const interval = setInterval(() => setTimer((prev) => prev + 1), 1000);
     return () => clearInterval(interval);
   }, [isRecording]);
 
-  const handleEndInterview = () => setIsRecording(false);
+  const handleEndInterview = () => {
+    completeInterview(localStorage.getItem("current-session-id") || "", {
+      onSuccess: (date) => {
+        navigation("/processing");
+      },
+    });
+    setIsRecording(false);
+  };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     }
   };
+
+  const { data: currentInterview } = useQuery({
+    queryKey: ["current-interview"],
+    enabled: false,
+  });
+
+  console.log("Current Interview Data:", currentInterview);
 
   return (
     <div className="h-screen bg-[#0a0a0a] text-white flex flex-col overflow-hidden">

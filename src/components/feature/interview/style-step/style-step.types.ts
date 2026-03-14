@@ -11,7 +11,21 @@ export interface Style {
 export interface StyleStepProps {
   interviewStyles: Style[];
   selectedStyle: string;
+  selectedWeightProfile: string;
+  selectedCvId: string;
+  setSelectedWeightProfile: (v: string) => void;
+  setSelectedCvId: (v: string) => void;
   setSelectedStyle: (v: string) => void;
   onBack: () => void;
   onContinue: () => void;
+}
+
+export interface WeightProfile {
+  id: string;
+  label: string;
+  description: string;
+  technical: number;
+  behavioral: number;
+  situational: number;
+  tag: string;
 }
