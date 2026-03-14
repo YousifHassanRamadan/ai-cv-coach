@@ -53,8 +53,10 @@ const DashboardPage = () => {
             <span className="text-indigo-400">
               {isUserLoading
                 ? "Loading..."
-                : userData?.fName + " " + userData?.lName}
-            </span>{" "}
+                : userData
+                  ? userData.fName + " " + userData.lName
+                  : "User"}
+            </span>
             👋
           </h1>
           <p className="text-gray-500 mt-1 text-sm sm:text-base">
