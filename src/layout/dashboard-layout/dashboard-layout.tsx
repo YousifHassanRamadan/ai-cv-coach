@@ -23,10 +23,14 @@ const DashboardLayout = () => {
   const navItems = [
     { path: "/", icon: "🏠", label: "Dashboard" },
     { path: "/resume", icon: "📄", label: "Resume" },
-    { path: "/cover-letter", icon: "✉️", label: "Cover" },
+    { path: "/cover-letter", icon: "✉️", label: "Cover Letter" },
     { path: "/interview", icon: "🎥", label: "Interview" },
     { path: "/insights", icon: "📊", label: "Insights" },
     { path: "/profile", icon: "👤", label: "Profile" },
+    { path: "/feedback", icon: "💬", label: "Feedback" },
+    { path: "/question-bank", icon: "❓", label: "Questions" },
+    { path: "/ai-chat", icon: "🤖", label: "AI Chat" },
+    { path: "/history", icon: "🕘", label: "History" },
   ];
 
   return (
