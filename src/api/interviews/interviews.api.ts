@@ -1,6 +1,7 @@
 import { api } from "../../utils/axios";
 import type {
   CompleteInterviewResponse,
+  InterviewHistoryResponse,
   StartInterviewPayload,
   StartInterviewResponse,
 } from "./interviews.types";
@@ -25,3 +26,9 @@ export const completeInterview = async (
 
   return res.data;
 };
+
+export const getInterviewHistory =
+  async (): Promise<InterviewHistoryResponse> => {
+    const res = await api.get<InterviewHistoryResponse>("/interviews/history");
+    return res.data;
+  };

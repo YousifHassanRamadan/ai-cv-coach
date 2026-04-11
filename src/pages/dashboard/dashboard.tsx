@@ -14,6 +14,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store/auth";
 import { useDashboardStats } from "../../api/dashboard";
 import { useMe } from "../../api/profile";
+import { useInterviewHistory } from "../../api/interviews";
+import DashboardStats from "../../components/feature/dashboard/dashboard-stats/dashboard-stats";
 
 const DashboardPage = () => {
   const navigation = useNavigate();
@@ -30,6 +32,9 @@ const DashboardPage = () => {
     isError: isUserError,
   } = useMe();
 
+  const { data: interviewHistory, isLoading: isInterviewHistoryLoading } =
+    useInterviewHistory();
+
   const { token, refreshToken } = useAuthStore();
 
   const handleStartInterview = () => {
@@ -40,8 +45,10 @@ const DashboardPage = () => {
     navigation("/resume");
   };
 
-  console.log("Token in Dashboard:", token);
-  console.log("Refresh Token in Dashboard:", refreshToken);
+  // console.log("Token in Dashboard:", token);
+  // console.log("Refresh Token in Dashboard:", refreshToken);
+
+  console.log("dashboardStats:", dashboardStats);
 
   return (
     <div className="min-h-screen bg-[#0A0A0F] text-white px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
@@ -74,10 +81,11 @@ const DashboardPage = () => {
       </div>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        {stats.map((stat, i) => (
-          <StatusCard key={i} {...stat} />
-        ))}
+      <div className="w-full">
+        <DashboardStats
+          data={dashboardStats}
+          isLoading={isDashboardStatsLoading}
+        />
       </div>
 
       {/* Bottom Section: Sessions + Achievements */}
@@ -95,10 +103,31 @@ const DashboardPage = () => {
               View all <ChevronRight size={16} />
             </Link>
           </div>
-          <div className="space-y-2">
-            {sessions.map((session, i) => (
-              <Sessions key={i} {...session} />
-            ))}
+          <div className="space-y-2 overflow-y-auto max-h-[400px]">
+            {isInterviewHistoryLoading ? (
+              <>
+                <p className="text-gray-500 text-sm">
+                  Loading interview history...
+                </p>
+              </>
+            ) : (
+              <>
+                {interviewHistory?.map((session, i) => (
+                  <Sessions
+                    key={i}
+                    id={session.id}
+                    track={session.track}
+                    questionCount={session.questionCount}
+                    status={session.status}
+                    totalScore={session.totalScore}
+                    startedAt={session.startedAt}
+                    endedAt={session.endedAt} // placeholder if endedAt isn't available
+                    difficulty={session.difficulty ?? "medium"}
+                    weightProfile={session.weightProfile ?? ""}
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
 

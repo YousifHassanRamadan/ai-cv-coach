@@ -7,3 +7,10 @@ export interface EquipmentStepProps {
   handleStartInterview: () => void;
   isStartingInterview: boolean;
 }
+
+export type DeviceStatus =
+  | "idle"
+  | "requesting"
+  | "granted"
+  | "denied"
+  | "error";

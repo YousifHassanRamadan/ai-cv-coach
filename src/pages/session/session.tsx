@@ -1,87 +1,158 @@
-import React, { useState, useEffect } from "react";
-import type { Question } from "./session.types";
+import React, { useState, useEffect, useRef } from "react";
 import SessionHeader from "../../components/feature/session/session-header/session-header";
 import ControlBar from "../../components/feature/session/control-bar/control-bar";
 import AIAvatar from "../../components/feature/session/aI-avatar/aI-avatar";
 import QuestionPanel from "../../components/feature/session/question-panel/question-panel";
-import { useCompleteInterview } from "../../api/interviews";
+import {
+  useCompleteInterview,
+  type StartInterviewResponse,
+} from "../../api/interviews";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-
-const QUESTIONS: Question[] = [
-  {
-    id: 1,
-    text: "Tell me about yourself and your experience with React development.",
-  },
-  { id: 2, text: "Where do you see yourself in 5 years?" },
-  { id: 3, text: "Describe a challenging project you've worked on." },
-  { id: 4, text: "How do you handle conflicts in a team?" },
-  { id: 5, text: "What are your strengths and weaknesses?" },
-];
+import { useChunkRecorder } from "../../hooks/useChunkRecorder";
+import type { ChunkProcessResponse } from "../../api/chunk";
+import { toast } from "sonner";
+import { useAudioChunkRecorder } from "../../hooks/useAudioChunkRecorder";
 
 const InterviewSession: React.FC = () => {
   const [isRecording, setIsRecording] = useState(true);
   const [isListening] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timer, setTimer] = useState(108);
+  const [timer, setTimer] = useState(0);
+  const [cameraEnabled, setCameraEnabled] = useState(false);
 
+  const mode = localStorage.getItem("interview-mode");
+  const isVideoMode = mode === "video";
+
+  const videoRef = useRef<HTMLVideoElement | null>(null);
   const { mutate: completeInterview } = useCompleteInterview();
-
   const navigation = useNavigate();
 
+  const { data: interviewInfo } = useQuery<StartInterviewResponse>({
+    queryKey: ["current-interview"],
+    enabled: false,
+    queryFn: () => Promise.resolve(null as unknown as StartInterviewResponse),
+  });
+
+  const { data: chunkResponse } = useQuery<ChunkProcessResponse>({
+    queryKey: ["chunk-response"],
+    enabled: false,
+    queryFn: () => Promise.resolve(null as unknown as ChunkProcessResponse),
+  });
+
+  const totalQuestions = interviewInfo?.questions?.length ?? 0;
+
+  const { startRecording, stopRecording } = useChunkRecorder();
+  const { startAudioRecording, stopAudioRecording } = useAudioChunkRecorder();
+
+  // ── Timer ──────────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!isRecording) return;
     const interval = setInterval(() => setTimer((prev) => prev + 1), 1000);
     return () => clearInterval(interval);
   }, [isRecording]);
 
+  useEffect(() => {
+    console.log("chunkResponse=>>>", chunkResponse);
+  }, [chunkResponse]);
+
+  // ── On mount: permission was already granted in the equipment step,
+  //    so getUserMedia will resolve silently with no browser prompt.
+  useEffect(() => {
+    if (isVideoMode) {
+      openCamera();
+    } else {
+      startAudioRecording();
+    }
+
+    return () => {
+      releaseAllMedia();
+    };
+  }, []);
+
+  // ── Release all tracks → clears the browser tab recording indicator ───────
+  const releaseAllMedia = () => {
+    const videoStream = videoRef.current?.srcObject as MediaStream | null;
+    if (videoStream) {
+      videoStream.getTracks().forEach((t) => {
+        t.enabled = false;
+        t.stop();
+      });
+    }
+    if (videoRef.current) videoRef.current.srcObject = null;
+    setCameraEnabled(false);
+  };
+
+  // ── Camera ─────────────────────────────────────────────────────────────────
+  const openCamera = async () => {
+    try {
+      // No prompt shown — permission was granted on the equipment check page
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: true,
+      });
+      if (videoRef.current) videoRef.current.srcObject = stream;
+      setCameraEnabled(true);
+      await startRecording(stream);
+    } catch (error) {
+      console.error("Error accessing camera:", error);
+      setCameraEnabled(false);
+      toast.error(
+        "Could not access camera. Please check your browser settings.",
+      );
+    }
+  };
+
+  // ── End interview ──────────────────────────────────────────────────────────
   const handleEndInterview = () => {
-    completeInterview(localStorage.getItem("current-session-id") || "", {
-      onSuccess: (date) => {
+    // 1. Kill all chunk sending immediately
+    stopRecording();
+    stopAudioRecording();
+    // 2. Release all tracks → removes the browser recording dot
+    releaseAllMedia();
+    setIsRecording(false);
+
+    completeInterview(localStorage.getItem("session-id") || "", {
+      onSuccess: (data) => {
+        toast.success(data.message || "Interview completed successfully!");
         navigation("/processing");
+        localStorage.removeItem("interview-mode");
       },
     });
-    setIsRecording(false);
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < QUESTIONS.length - 1) {
+    if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex((prev) => prev + 1);
     }
   };
 
-  const { data: currentInterview } = useQuery({
-    queryKey: ["current-interview"],
-    enabled: false,
-  });
-
-  console.log("Current Interview Data:", currentInterview);
-
   return (
-    <div className="h-screen bg-[#0a0a0a] text-white flex flex-col overflow-hidden">
+    <div className="relative h-screen bg-[#0a0a0a] text-white flex flex-col overflow-hidden">
       <SessionHeader
         timer={timer}
         currentQuestionIndex={currentQuestionIndex}
-        totalQuestions={QUESTIONS.length}
+        totalQuestions={totalQuestions}
       />
 
-      {/* Body: stacks vertically on mobile, side-by-side on sm+ */}
       <div className="flex flex-col sm:flex-row flex-1 overflow-hidden">
-        {/* Left — AI avatar + controls */}
         <div className="flex-1 flex flex-col items-center justify-around py-6 sm:py-8 px-4 overflow-auto">
-          <AIAvatar isListening={isListening} />
+          <AIAvatar
+            isListening={isListening}
+            cameraEnabled={cameraEnabled}
+            videoRef={videoRef}
+          />
           <ControlBar
             onNextQuestion={handleNextQuestion}
             onEndInterview={handleEndInterview}
-            isLastQuestion={currentQuestionIndex >= QUESTIONS.length - 1}
+            isLastQuestion={currentQuestionIndex >= totalQuestions - 1}
           />
         </div>
 
-        {/* Right — question panel */}
         <QuestionPanel
-          questionText={QUESTIONS[currentQuestionIndex].text}
+          questionText={interviewInfo?.questions ?? []}
           currentIndex={currentQuestionIndex}
-          totalQuestions={QUESTIONS.length}
+          totalQuestions={totalQuestions}
         />
       </div>
     </div>

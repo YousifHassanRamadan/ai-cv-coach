@@ -35,3 +35,20 @@ export interface CompleteInterviewResponse {
   message_ar?: string;
   sessionId: string;
 }
+
+export interface InterviewHistoryItem {
+  id: string;
+  status: string;
+  totalScore: number | null;
+  difficulty: "easy" | "medium" | "hard" | "custom";
+  weightProfile: string;
+  startedAt: string;
+  endedAt: string | null;
+  questionCount: number;
+  track: {
+    name: string;
+    slug: string;
+  };
+}
+
+export type InterviewHistoryResponse = InterviewHistoryItem[];

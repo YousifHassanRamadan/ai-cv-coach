@@ -2,26 +2,90 @@ import React from "react";
 import { MessageSquare } from "lucide-react";
 import type { AIAvatarProps } from "./aI-avatar.types";
 
-const AIAvatar: React.FC<AIAvatarProps> = ({ isListening }) => {
+const AIAvatar: React.FC<AIAvatarProps> = ({
+  isListening,
+  cameraEnabled,
+  videoRef,
+}) => {
+  const mode = localStorage.getItem("interview-mode");
   return (
     <div className="flex flex-col items-center gap-4 sm:gap-6">
-      {/* Listening badge */}
-      <div
-        className={`flex items-center gap-2 text-green-400 transition-opacity ${isListening ? "opacity-100" : "opacity-0"}`}
-      >
-        <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-        <span className="text-xs sm:text-sm font-medium">Listening...</span>
-      </div>
-
-      {/* Avatar circle */}
-      <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 flex items-center justify-center shadow-2xl">
-        <MessageSquare
-          className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-white/90"
-          strokeWidth={1.5}
+      {cameraEnabled && mode === "video" ? (
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
+          className="w-full max-w-lg rounded mb-4 border border-white"
         />
-      </div>
+      ) : (
+        <>
+          {/* Listening badge */}
+          <div
+            className={`flex items-center gap-2 text-green-400 transition-opacity duration-300 ${isListening ? "opacity-100" : "opacity-0"}`}
+          >
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            <span className="text-xs sm:text-sm font-medium">Listening...</span>
+          </div>
 
-      <span className="text-gray-400 text-xs sm:text-sm">AI Interviewer</span>
+          {/* Avatar with ripple rings */}
+          <div className="relative flex items-center justify-center">
+            {/* Ripple rings — only when listening */}
+            {isListening && (
+              <>
+                <div
+                  className="absolute w-44 h-44 sm:w-52 sm:h-52 rounded-full border border-purple-500/40 animate-ping"
+                  style={{ animationDuration: "1.5s" }}
+                />
+                <div
+                  className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full border border-purple-500/20 animate-ping"
+                  style={{ animationDuration: "2s" }}
+                />
+              </>
+            )}
+
+            {/* Main circle */}
+            <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 flex items-center justify-center z-10">
+              <svg
+                width="52"
+                height="52"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="rgba(255,255,255,0.9)"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="9" y="2" width="6" height="11" rx="3" />
+                <path d="M5 10a7 7 0 0 0 14 0" />
+                <line x1="12" y1="19" x2="12" y2="22" />
+                <line x1="8" y1="22" x2="16" y2="22" />
+              </svg>
+            </div>
+          </div>
+
+          {/* Sound bars */}
+          <div className="flex items-center gap-1 h-8">
+            {[0.7, 0.9, 0.6, 0.8, 1].map((duration, i) => (
+              <div
+                key={i}
+                className={`w-1 rounded-full bg-purple-500 transition-all duration-300 ${isListening ? "animate-bounce" : "h-1.5 opacity-30"}`}
+                style={
+                  isListening
+                    ? {
+                        animationDuration: `${duration}s`,
+                        animationDelay: `${i * 0.1}s`,
+                      }
+                    : {}
+                }
+              />
+            ))}
+          </div>
+
+          <span className="text-gray-400 text-xs sm:text-sm">
+            AI Interviewer
+          </span>
+        </>
+      )}
     </div>
   );
 };

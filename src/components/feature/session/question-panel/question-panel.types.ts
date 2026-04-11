@@ -1,5 +1,7 @@
+import type { InterviewQuestion } from "../../../../api/interviews";
+
 export interface QuestionPanelProps {
-  questionText: string;
+  questionText: InterviewQuestion[];
   currentIndex: number;
   totalQuestions: number;
 }

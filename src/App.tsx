@@ -13,37 +13,38 @@ import InterviewSession from "./pages/session/session";
 import ProcessingScreen from "./pages/processing/processing";
 import AuthForm from "./pages/form/form";
 import FeedbackPage from "./pages/feedback/feedback";
+import { QuestionsBankPage } from "./pages/question-bank";
+import ChatPage from "./pages/ai-chat/ai-chat";
+import { ProtectedRoute, PublicOnlyRoute } from "./guards/protected-route";
 
 export const router = createBrowserRouter([
   {
-    path: "/",
-    element: <DashboardLayout />,
+    element: <ProtectedRoute />,
     children: [
-      { index: true, element: <DashboardPage /> },
-      { path: "cover-letter", element: <CoverLetterPage /> },
-      { path: "profile", element: <ProfilePage /> },
-      { path: "settings", element: <SettingsPage /> },
-      { path: "insights", element: <InsightsPage /> },
-      { path: "interview", element: <InterviewPage /> },
-      { path: "resume", element: <ResumePage /> },
-      { path: "history", element: <HistoryPage /> },
       {
-        path: "/feedback",
-        element: <FeedbackPage />,
+        path: "/",
+        element: <DashboardLayout />,
+        children: [
+          { index: true, element: <DashboardPage /> },
+          { path: "cover-letter", element: <CoverLetterPage /> },
+          { path: "profile", element: <ProfilePage /> },
+          { path: "settings", element: <SettingsPage /> },
+          { path: "insights", element: <InsightsPage /> },
+          { path: "interview", element: <InterviewPage /> },
+          { path: "resume", element: <ResumePage /> },
+          { path: "history", element: <HistoryPage /> },
+          { path: "feedback", element: <FeedbackPage /> },
+          { path: "question-bank", element: <QuestionsBankPage /> },
+        ],
       },
+      { path: "/session", element: <InterviewSession /> },
+      { path: "/processing", element: <ProcessingScreen /> },
+      { path: "/ai-chat", element: <ChatPage /> },
     ],
   },
   {
-    path: "/session",
-    element: <InterviewSession />,
-  },
-  {
-    path: "/processing",
-    element: <ProcessingScreen />,
-  },
-  {
-    path: "/auth",
-    element: <AuthForm />,
+    element: <PublicOnlyRoute />,
+    children: [{ path: "/auth", element: <AuthForm /> }],
   },
 ]);
 

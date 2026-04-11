@@ -1,7 +1,11 @@
 import { Search, Bell } from "lucide-react";
 import userImg from "../../assets/user.png";
+import { useEffect, useState } from "react";
 
 const Header = () => {
+  const token = localStorage.getItem("auth-storage");
+
+  // console.log("Header token=>>>", token ? JSON.parse(token).state : null);
   return (
     <header className="w-full border-b-2 text-border px-6 py-[13px]  bg-bg-header">
       <div className="flex items-center justify-between">

@@ -9,6 +9,7 @@ import {
   type SignInResponse,
 } from "../api/auth";
 import { toast } from "sonner";
+import { useAuthStore } from "../store/auth";
 
 export const useRegister = () => {
   return useMutation<RegisterResponse, Error, RegisterPayload>({
@@ -33,13 +34,15 @@ export const useLogout = (navigate: any) => {
   return useMutation({
     mutationFn: logout,
     onSuccess: (data) => {
-      queryClient.removeQueries({ queryKey: ["me"] });
+      useAuthStore.getState().clearTokens();
+
+      localStorage.clear();
 
       queryClient.clear();
 
-      localStorage.removeItem("auth-storage");
-
       navigate("/auth");
+
+      queryClient.removeQueries({ queryKey: ["me"] });
 
       toast.success(data.message || "Logged out successfully");
     },

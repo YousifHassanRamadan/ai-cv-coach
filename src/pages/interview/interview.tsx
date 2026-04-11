@@ -64,6 +64,7 @@ const InterviewPage = () => {
     startInterview(payload, {
       onSuccess: (data) => {
         toast.success("Interview started successfully!");
+        localStorage.setItem("interview-mode", data.mode);
         navigate("/session");
       },
     });

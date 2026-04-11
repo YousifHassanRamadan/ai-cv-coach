@@ -7,6 +7,9 @@ import {
   User,
   Video,
   MessageSquare,
+  FileQuestion,
+  MessageCircleCodeIcon,
+  FileTextIcon,
 } from "lucide-react";
 
 export const LINKS = [
@@ -17,6 +20,9 @@ export const LINKS = [
   { text: "Insights", link: "/insights" },
   { text: "Profile", link: "/profile" },
   { text: "Feedback", link: "/feedback" },
+  { text: "Questions", link: "/question-bank" },
+  { text: "Ai Chat", link: "/ai-chat" },
+  { text: "History", link: "/history" },
 ];
 
 export const ICON_MAP = {
@@ -28,4 +34,7 @@ export const ICON_MAP = {
   profile: User,
   settings: SettingsIcon,
   feedback: MessageSquare,
+  questions: FileQuestion,
+  history: FileTextIcon,
+  "ai chat": MessageCircleCodeIcon,
 };

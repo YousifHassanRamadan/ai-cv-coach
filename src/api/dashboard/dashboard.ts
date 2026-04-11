@@ -4,7 +4,7 @@ import { getDashboardStats } from "./dashboard.api";
 
 export const useDashboardStats = () => {
   return useQuery<DashboardStats>({
-    queryKey: ["dashboardStats"],
+    queryKey: ["dashboard-stats"],
     queryFn: getDashboardStats,
   });
 };

@@ -1,6 +1,5 @@
-import type { Interview } from "../interview-card";
+import type { InterviewHistoryResponse } from "../../../../api/interviews";
 
 export interface InterviewListProps {
-  interviews: Interview[];
-  onInterviewClick?: (interview: Interview) => void;
+  interviews: InterviewHistoryResponse;
 }

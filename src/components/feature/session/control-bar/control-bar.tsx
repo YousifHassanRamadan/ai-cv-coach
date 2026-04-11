@@ -15,15 +15,6 @@ const ControlBar: React.FC<ControlBarProps> = ({
     <div className="flex flex-col items-center gap-4 sm:gap-6">
       {/* Icon controls */}
       <div className="flex items-center gap-2 sm:gap-3">
-        <button className={iconBtnClass} aria-label="Toggle microphone">
-          <Mic className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 group-hover:text-indigo-300" />
-        </button>
-        <button className={iconBtnClass} aria-label="Toggle video">
-          <Video className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 group-hover:text-indigo-300" />
-        </button>
-        <button className={iconBtnClass} aria-label="Pause interview">
-          <Pause className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 group-hover:text-indigo-300" />
-        </button>
         <button
           onClick={onNextQuestion}
           disabled={isLastQuestion}

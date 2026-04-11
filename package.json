@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^5.90.21",
+    "audiobuffer-to-wav": "^1.0.0",
     "axios": "^1.13.6",
     "formik": "^2.4.9",
     "lucide-react": "^0.563.0",
