@@ -46,7 +46,7 @@ const SettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-gray-100 p-8">
+    <div className="min-h-screen bg-bg-primary text-gray-100 p-8">
       <div className="max-w-4xl mx-auto px-6 py-5 space-y-4">
         {/* Header */}
         <PageHeader
@@ -54,22 +54,22 @@ const SettingsPage: React.FC = () => {
           subtitle="Manage your privacy preferences and data"
         />
         {/* Privacy Controls */}
-        <PrivacyControlsSection
+        {/* <PrivacyControlsSection
           settings={privacySettings}
           onToggle={togglePrivacySetting}
-        />
+        /> */}
 
         {/* Data Retention */}
-        <DataRetentionSection
+        {/* <DataRetentionSection
           period={dataRetentionPeriod}
           onPeriodChange={setDataRetentionPeriod}
-        />
+        /> */}
 
         {/* Data Management */}
-        <DataManagementSection
+        {/* <DataManagementSection
           onExportData={handleExportData}
           onClearMemory={handleClearMemory}
-        />
+        /> */}
 
         {/* Danger Zone */}
         <DangerZoneSection onDeleteAccount={handleDeleteAccount} />

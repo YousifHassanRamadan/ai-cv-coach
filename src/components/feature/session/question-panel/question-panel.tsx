@@ -48,10 +48,10 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
   });
 
   return (
-    <div className="w-full sm:w-[340px] lg:w-[420px] bg-[#0d0d0d] border-t sm:border-t-0 sm:border-l border-gray-800/50 flex flex-col shrink-0">
+    <div className="w-full sm:w-[340px] lg:w-[420px] bg-bg-primary border-t sm:border-t-0 sm:border-l border-border-light flex flex-col shrink-0">
       <div className="p-4 sm:p-6 flex-1 flex flex-col">
         {/* Label */}
-        <div className="flex items-center gap-2 text-gray-400 mb-3 sm:mb-4">
+        <div className="flex items-center gap-2 text-text-muted mb-3 sm:mb-4">
           <MessageSquare className="w-4 h-4 shrink-0" />
           <span className="uppercase tracking-wider text-[10px] sm:text-xs font-semibold">
             Current Question
@@ -76,7 +76,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
         {/* Keywords */}
         {question?.keywords?.length > 0 && (
           <div className="mb-6 sm:mb-8">
-            <div className="flex items-center gap-1.5 text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-2">
+            <div className="flex items-center gap-1.5 text-text-muted text-[10px] uppercase tracking-wider font-semibold mb-2">
               <Hash className="w-3 h-3" />
               Keywords
             </div>
@@ -84,7 +84,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
               {question.keywords.map((kw) => (
                 <span
                   key={kw}
-                  className="text-[11px] px-2 py-0.5 rounded-md bg-gray-800 text-gray-400 border border-gray-700/50"
+                  className="text-[11px] px-2 py-0.5 rounded-md bg-bg-subcard text-text-muted border border-border-light/50"
                 >
                   {kw}
                 </span>
@@ -103,7 +103,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
                   index < currentIndex
                     ? "bg-green-400"
                     : index === currentIndex
-                      ? "bg-purple-500"
+                      ? "bg-bg-active"
                       : "bg-gray-700/50"
                 }`}
               />

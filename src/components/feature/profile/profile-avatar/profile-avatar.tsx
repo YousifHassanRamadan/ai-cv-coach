@@ -8,7 +8,7 @@ const ProfileAvatar = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="absolute -bottom-1 -right-1 bg-purple-600 text-white text-xs px-2 py-0.5 rounded font-medium">
+      <div className="absolute -bottom-1 -right-1 bg-bg-active text-white text-xs px-2 py-0.5 rounded font-medium">
         Pro
       </div>
     </div>

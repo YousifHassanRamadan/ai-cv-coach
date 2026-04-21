@@ -15,6 +15,7 @@ import {
   Box,
   ClipboardList,
 } from "lucide-react";
+import ContinueButton from "../../../common/continue-button/continue-button";
 
 const iconMap: Record<string, React.ReactNode> = {
   "git-branch": <GitBranch size={20} />,
@@ -41,7 +42,7 @@ const RoleStep = ({
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">Choose Your Role</h2>
-      <p className="text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">
+      <p className="text-text-muted mb-6 sm:mb-8 text-sm sm:text-base">
         Select the position you're interviewing for
       </p>
 
@@ -76,17 +77,10 @@ const RoleStep = ({
       </div> */}
 
       <div className="flex justify-end">
-        <button
-          disabled={!selectedRole && !customRole}
+        <ContinueButton
           onClick={onContinue}
-          className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold flex items-center gap-2 transition-all duration-300 shadow-lg disabled:shadow-none text-sm sm:text-base w-full sm:w-auto justify-center"
-        >
-          Continue
-          <ChevronRight
-            size={18}
-            className="group-hover:translate-x-1 transition-transform duration-300 sm:w-5 sm:h-5"
-          />
-        </button>
+          disabled={!selectedRole && !customRole}
+        />
       </div>
     </div>
   );

@@ -9,16 +9,16 @@ const TopSkills = () => {
   });
 
   return (
-    <div className="bg-bg-card rounded-lg p-6 border border-gray-800">
+    <div className="bg-bg-card rounded-lg p-6 border border-border-light">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold">Top Skills</h2>
-        <TrendingUp className="w-5 h-5 text-gray-400" />
+        <h2 className="text-lg font-semibold text-text-primary">Top Skills</h2>
+        <TrendingUp className="w-5 h-5 text-text-muted" />
       </div>
       <div className="space-y-4">
         <div>
           <div className="flex justify-between mb-2">
             <span className="text-sm">Experience relevance</span>
-            <span className="text-sm text-indigo-400">
+            <span className="text-sm text-text-active">
               {cvEvaluation
                 ? cvEvaluation?.evaluation.category_scores.experience_relevance
                     .score * 100
@@ -26,7 +26,7 @@ const TopSkills = () => {
               %
             </span>
           </div>
-          <div className="w-full bg-gray-800 rounded-full h-2">
+          <div className="w-full bg-bg-gray1 rounded-full h-2">
             <div
               className="bg-bg-active h-2 rounded-full"
               style={{

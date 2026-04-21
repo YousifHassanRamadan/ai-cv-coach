@@ -44,7 +44,9 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
 
   return (
     <div className="bg-bg-card border border-border rounded-xl p-6">
-      <h2 className="text-lg font-semibold text-white mb-5">Submit Feedback</h2>
+      <h2 className="text-lg font-semibold text-text-primary mb-5">
+        Submit Feedback
+      </h2>
 
       {submitted && (
         <div className="mb-4 px-4 py-3 rounded-lg bg-green-900/40 border border-green-800 text-green-400 text-sm">
@@ -55,7 +57,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
       <form onSubmit={formik.handleSubmit} className="space-y-4">
         {/* Rating */}
         <div>
-          <label className="block text-xs text-gray-500 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs text-text-muted uppercase tracking-wider mb-1.5">
             Rating
           </label>
           <StarRating
@@ -72,14 +74,14 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
 
         {/* Message */}
         <div>
-          <label className="block text-xs text-gray-500 uppercase tracking-wider mb-1.5">
+          <label className="block text-xs text-text-muted uppercase tracking-wider mb-1.5">
             Message
           </label>
           <textarea
             {...formik.getFieldProps("message")}
             placeholder="Tell us what you think..."
             rows={4}
-            className={`${fieldClass("message")} resize-none`}
+            className={`${fieldClass("message")} resize-none text-text-muted`}
           />
           {formik.touched.message && formik.errors.message && (
             <p className="text-xs text-red-400 mt-1">{formik.errors.message}</p>

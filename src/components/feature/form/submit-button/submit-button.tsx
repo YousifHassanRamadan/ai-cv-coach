@@ -11,7 +11,7 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({
     disabled={disabled}
     className="
       w-full py-3 rounded-xl font-semibold text-sm text-text-primary
-      bg-primary hover:bg-primary-dark
+      bg-bg-active/30 hover:bg-bg-active
       flex items-center justify-center gap-2
       transition-all duration-200 shadow-lg
       active:scale-[0.98]

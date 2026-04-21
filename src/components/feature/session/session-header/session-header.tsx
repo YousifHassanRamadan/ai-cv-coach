@@ -8,10 +8,10 @@ const SessionHeader: React.FC<SessionHeaderProps> = ({
   totalQuestions,
 }) => {
   return (
-    <header className="flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 border-b border-gray-800/50 shrink-0">
+    <header className="flex items-center justify-between bg-bg-active px-4 sm:px-6 py-3 sm:py-4 border-b border-border-light shrink-0">
       {/* Brand */}
       <div className="flex items-center gap-2 sm:gap-3">
-        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 bg-bg-subcard rounded-lg flex items-center justify-center shrink-0">
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5"
             fill="currentColor"
@@ -38,7 +38,7 @@ const SessionHeader: React.FC<SessionHeaderProps> = ({
             {formatTime(timer)}
           </span>
         </div>
-        <span className="text-gray-400 text-xs sm:text-sm">
+        <span className="text-white text-xs sm:text-sm">
           Q{currentQuestionIndex + 1}/{totalQuestions}
         </span>
       </div>

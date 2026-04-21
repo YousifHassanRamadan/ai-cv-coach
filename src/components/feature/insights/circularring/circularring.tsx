@@ -37,10 +37,11 @@ const CircularRing = ({ percentage, color, size = 90 }: CircularRingProps) => {
         y={size / 2}
         textAnchor="middle"
         dominantBaseline="middle"
-        fill="white"
-        fontSize={size * 0.22}
-        fontWeight="700"
-        style={{ transform: `rotate(90deg) translate(0px, -${size}px)` }}
+        className="fill-bg-active text-[length:var(--size)] font-bold"
+        style={{
+          fontSize: size * 0.22,
+          transform: `rotate(90deg) translate(0px, -${size}px)`,
+        }}
       >
         {percentage}%
       </text>

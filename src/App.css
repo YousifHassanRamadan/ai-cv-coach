@@ -2,65 +2,179 @@
 
 @theme {
   /* Primary Brand Colors */
-  --color-primary: #211339; /* Purple/Indigo for buttons and accents */ /*used*/
-  --color-primary-dark: #4f46e5; /* Darker shade for hover states */
+  --color-primary: #211339;
+  --color-primary-dark: #4f46e5;
 
   /* Background Colors */
-  --color-bg-primary: #0d0d12; /* Main dark background */ /*used*/
-  --color-bg-secondary: #0f0f18; /* Card/sidebar background */ /*used*/
-  --color-bg-tertiary: #16161f; /* Hover states */ /*used*/
-  --color-bg-active: #7c3bed; /* Hover states, borders */ /*used*/
-  --color-bg-header: #09090c; /* Hover states, borders */ /*used*/
-  --color-bg-card: #0e0e15; /* Hover states, borders */ /*used*/
-  --color-bg-subcard: #14131b; /* Hover states, borders */ /*used*/
-  --color-bg-input: #18181f; /* Hover states, borders */ /*used*/
+  --color-bg-primary: #0d0d12;
+  --color-bg-secondary: #0f0f18;
+  --color-bg-tertiary: #16161f;
+  --color-bg-active: #7c3bed;
+  --color-bg-header: #09090c;
+  --color-bg-card: #0e0e15;
+  --color-bg-subcard: #14131b;
+  --color-bg-input: #18181f;
 
   /* Text Colors */
-  --color-text-primary: #ffffff; /* Main text (white) */
-  --color-text-secondary: #9ca3af; /* Muted text (gray) */ /*used*/
-  --color-text-muted: #6b7280; /* Very muted text */ /*used*/
-  --color-text-active: #7c3bed; /* Very muted text */ /*used*/
-
-  /*gray*/
-  --color-text-gray1: #65758d; /* Muted text (gray) */ /*used*/
-  --color-text-gray2: #829bb4; /* Muted text (gray) */ /*used*/
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #9ca3af;
+  --color-text-muted: #6b7280;
+  --color-text-active: #7c3bed;
+  --color-text-gray1: #65758d;
+  --color-text-gray2: #829bb4;
 
   /* Accent Colors */
-  --color-accent-cyan: #06b6d4; /* Cyan for progress rings */
-  --color-accent-purple: #8b5cf6; /* Purple for icons */
-  --color-accent-orange: #f97316; /* Orange for streak */
-  --color-accent-green: #10b981; /* Green for success/growth */
-  --color-accent-blue: #3b82f6; /* Blue accents */
+  --color-accent-cyan: #06b6d4;
+  --color-accent-purple: #8b5cf6;
+  --color-accent-orange: #f97316;
+  --color-accent-green: #10b981;
+  --color-accent-blue: #3b82f6;
 
   /* Status Colors */
-  --color-success: #10b981; /* Green - success states */
-  --color-warning: #f59e0b; /* Orange/Yellow - warnings */
-  --color-danger: #ef4444; /* Red - errors */
-  --color-info: #06b6d4; /* Cyan - info states */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #06b6d4;
 
   /* Score/Performance Colors */
-  --color-score-high: #10b981; /* 85%+ - Green */
-  --color-score-medium: #f59e0b; /* 70-84% - Orange */
-  --color-score-low: #ef4444; /* Below 70% - Red */
+  --color-score-high: #10b981;
+  --color-score-medium: #f59e0b;
+  --color-score-low: #ef4444;
 
   /* Sidebar */
-  --color-sidebar-bg: #1a1a24; /*used*/
-  --color-sidebar-hover: #2a2a3a; /*used*/
-  --color-sidebar-active: #7638e1; /*used*/
+  --color-sidebar-bg: #1a1a24;
+  --color-sidebar-hover: #2a2a3a;
+  --color-sidebar-active: #7638e1;
 
   /* Borders */
-  --color-border: #1f1f27; /*used*/
+  --color-border: #1f1f27;
   --color-border-light: #374151;
-  --color-border-active: #7c3bed; /*used*/
-  --color-border-card: #14141c; /*used*/
+  --color-border-active: #7c3bed;
+  --color-border-card: #14141c;
+}
+
+/* ─── DARK MODE (default) ─── */
+:root,
+[data-theme="dark"] {
+  --bg-primary: #0d0d12;
+  --bg-secondary: #0f0f18;
+  --bg-tertiary: #16161f;
+  --bg-active: #7c3bed;
+  --bg-header: #09090c;
+  --bg-card: #0e0e15;
+  --bg-subcard: #14131b;
+  --bg-input: #18181f;
+  --bg-headerrr: #f8f8f8;
+  --bg-gray1: #829bb4;
+
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-active: #7c3bed;
+  --text-gray1: #65758d;
+  --text-gray2: #829bb4;
+
+  --sidebar-bg: #1a1a24;
+  --sidebar-hover: #2a2a3a;
+  --sidebar-active: #7638e1;
+
+  --border-color: #1f1f27;
+  --border-light: #2f3744;
+  --border-active: #7c3bed;
+  --border-card: #7c3bed;
+
+  --body-gradient: linear-gradient(
+    135deg,
+    #0f0f18 70%,
+    #1a1128 100%,
+    #0d0d15 50%
+  );
+}
+
+/* ─── LIGHT MODE ─── */
+[data-theme="light"] {
+  --bg-primary: #f3f8f4;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e8f1ea;
+  --bg-active: #1a7a45; /* emerald-600 */
+  --bg-header: #1a7a45;
+  --bg-card: #ffffff;
+  --bg-subcard: #e8f1ea;
+  --bg-input: #e8f1ea;
+  --bg-headerrr: #000000;
+  --bg-gray1: #587a62;
+
+  --text-primary: #1a3d26; /* deep forest */
+  --text-secondary: #3a6645; /* mid green */
+  --text-muted: #587a62; /* sage */
+  --text-active: #145c34; /* hover green */
+  --text-gray1: #587a62;
+  --text-gray2: #3a6645;
+
+  --sidebar-bg: #ffffff;
+  --sidebar-hover: #eaf5ee;
+  --sidebar-active: #1a7a45;
+
+  --border-color: #d1e8d8;
+  --border-light: #c0ddc8;
+  --border-active: #1a7a45;
+  --border-card: #d1e8d8;
+
+  --body-gradient: linear-gradient(
+    135deg,
+    #f5f5fa 70%,
+    #ede9fb 100%,
+    #f0f0f8 50%
+  );
+}
+
+/* ─── Bridge CSS vars → Tailwind @theme tokens ─── */
+:root {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-bg-active: var(--bg-active);
+  --color-bg-header: var(--bg-header);
+  --color-bg-card: var(--bg-card);
+  --color-bg-subcard: var(--bg-subcard);
+  --color-bg-input: var(--bg-input);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-active: var(--text-active);
+  --color-text-gray1: var(--text-gray1);
+  --color-text-gray2: var(--text-gray2);
+
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-hover: var(--sidebar-hover);
+  --color-sidebar-active: var(--sidebar-active);
+
+  --color-border: var(--border-color);
+  --color-border-light: var(--border-light);
+  --color-border-active: var(--border-active);
+  --color-border-card: var(--border-card);
 }
 
 body {
-  background: linear-gradient(135deg, #0f0f18 70%, #1a1128 100%, #0d0d15 50%);
+  background: var(--body-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.dashboard-bg {
+  background: var(--body-gradient);
   min-height: 100vh;
 }
-/* Or if you want it on a specific container */
-.dashboard-bg {
-  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a24 50%, #0c0815 100%);
-  min-height: 100vh;
+
+/* Smooth theme transitions */
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
 }

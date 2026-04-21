@@ -15,7 +15,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-full max-w-lg rounded mb-4 border border-white"
+          className="w-full max-w-lg rounded mb-4 border border-border-active"
         />
       ) : (
         <>
@@ -33,18 +33,18 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
             {isListening && (
               <>
                 <div
-                  className="absolute w-44 h-44 sm:w-52 sm:h-52 rounded-full border border-purple-500/40 animate-ping"
+                  className="absolute w-44 h-44 sm:w-52 sm:h-52 rounded-full border border-border-active animate-ping"
                   style={{ animationDuration: "1.5s" }}
                 />
                 <div
-                  className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full border border-purple-500/20 animate-ping"
+                  className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full border border-border-active animate-ping"
                   style={{ animationDuration: "2s" }}
                 />
               </>
             )}
 
             {/* Main circle */}
-            <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 flex items-center justify-center z-10">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-bg-active flex items-center justify-center z-10">
               <svg
                 width="52"
                 height="52"
@@ -81,7 +81,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
             ))}
           </div>
 
-          <span className="text-gray-400 text-xs sm:text-sm">
+          <span className="text-text-muted text-xs sm:text-sm">
             AI Interviewer
           </span>
         </>

@@ -10,7 +10,7 @@ const SectionCard = ({
   rightSlot,
 }: SectionCardProps) => (
   <div
-    className={`bg-[#1a1a24] rounded-lg p-6 border border-gray-800 ${className}`}
+    className={`bg-bg-subcard rounded-lg p-6 border border-border-light ${className}`}
   >
     <div className="flex items-center justify-between mb-6">
       <div className="flex items-center gap-2">

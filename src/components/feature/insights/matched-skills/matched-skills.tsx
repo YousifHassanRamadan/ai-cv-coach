@@ -7,8 +7,8 @@ const MatchedSkills = ({ skills }: MatchedSkillsProps) => {
 
   return (
     <SectionCard
-      icon={<Eye className="w-4 h-4 text-teal-400" />}
-      iconBg="bg-teal-500/20"
+      icon={<Eye className="w-4 h-4 text-text-active" />}
+      iconBg="bg-bg-active/20"
       title="Matched Skills"
       className="mb-8"
     >
@@ -16,7 +16,7 @@ const MatchedSkills = ({ skills }: MatchedSkillsProps) => {
         {skills.map((skill) => (
           <span
             key={skill}
-            className="px-3 py-1 bg-teal-500/10 text-teal-300 border border-teal-500/20 rounded-full text-xs font-medium"
+            className="px-3 py-1 bg-bg-active/30 text-text-active border border-teal-500/20 rounded-full text-xs font-medium"
           >
             {skill}
           </span>

@@ -1,5 +1,6 @@
 import { MenuIcon, BotIcon, CircleDotIcon } from "lucide-react";
 import type { ChatHeaderProps } from "./chat-header.types";
+import { Link } from "react-router-dom";
 
 export default function ChatHeader({
   chatId,
@@ -7,19 +8,19 @@ export default function ChatHeader({
   onToggleSidebar,
 }: ChatHeaderProps) {
   return (
-    <header className="flex items-center justify-between px-4 py-3 border-b border-border bg-bg-header shrink-0">
+    <header className="flex items-center justify-between px-4 py-3 border-b border-l-0 border-border-light bg-bg-header shrink-0  border-r-0 h-[61px]">
       <div className="flex items-center gap-3">
         <button
           onClick={onToggleSidebar}
-          className="p-1.5 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-tertiary transition-colors"
+          className="p-1.5 rounded-md text-white hover:text-text-primary hover:bg-bg-tertiary transition-colors"
         >
-          <MenuIcon size={18} />
+          <MenuIcon size={18} className="text-white hover:text-text-primary" />
         </button>
 
         <div className="flex items-center gap-2.5">
           <div className="relative">
-            <div className="w-8 h-8 rounded-xl bg-bg-active flex items-center justify-center">
-              <BotIcon size={16} className="text-white" />
+            <div className="w-8 h-8 rounded-xl bg-bg-subcard flex items-center justify-center">
+              <BotIcon size={16} className="text-text-primary" />
             </div>
             <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-success border-2 border-bg-header" />
           </div>
@@ -37,6 +38,12 @@ export default function ChatHeader({
       </div>
 
       <div className="flex items-center gap-1">
+        <Link
+          to="/"
+          className="px-4 py-1 text-xs bg-bg-subcard text-text-primary rounded-lg hover:bg-bg-active/15 transition"
+        >
+          Go Home
+        </Link>
         <span className="text-[10px] text-text-muted bg-bg-subcard px-2 py-1 rounded-md border border-border font-mono">
           #{chatId.slice(0, 8)}
         </span>

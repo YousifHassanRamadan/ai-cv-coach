@@ -34,13 +34,15 @@ const StatItem: React.FC<StatItemProps> = ({
   const colorClass = accentMap[accent] || accentMap.indigo;
 
   return (
-    <div className="flex items-center gap-3 p-4 bg-[#0E0E18] border border-gray-800 rounded-xl hover:border-gray-700 transition-colors">
+    <div className="flex items-center gap-3 p-4 bg-bg-card border border-border-light rounded-xl hover:border-border-light transition-colors">
       <div className={`p-2 rounded-lg border ${colorClass} flex-shrink-0`}>
         <Icon size={18} className={colorClass.split(" ")[0]} />
       </div>
       <div className="min-w-0">
-        <p className="text-xs text-gray-500 truncate">{label}</p>
-        <p className="text-lg font-bold text-white leading-tight">{value}</p>
+        <p className="text-xs text-text-secondary truncate">{label}</p>
+        <p className="text-lg font-bold text-text-active leading-tight">
+          {value}
+        </p>
         {sub && <p className="text-xs text-gray-600 truncate">{sub}</p>}
       </div>
     </div>
@@ -75,10 +77,10 @@ const SessionBreakdown: React.FC<SessionBreakdownProps> = ({ sessions }) => {
   ].filter((b) => b.count > 0);
 
   return (
-    <div className="p-4 bg-[#0E0E18] border border-gray-800 rounded-xl">
+    <div className="p-4 bg-bg-card border border-border-light rounded-xl">
       <div className="flex items-center justify-between mb-3">
         <p className="text-xs text-gray-500">Session Breakdown</p>
-        <span className="text-xs font-semibold text-gray-400">
+        <span className="text-xs font-semibold text-text-muted">
           {total} total
         </span>
       </div>
@@ -97,9 +99,9 @@ const SessionBreakdown: React.FC<SessionBreakdownProps> = ({ sessions }) => {
         {bars.map((b) => (
           <div key={b.label} className="flex items-center gap-1.5">
             <span className={`w-2 h-2 rounded-full ${b.color} flex-shrink-0`} />
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-text-muted">
               {b.label}{" "}
-              <span className="text-white font-medium">{b.count}</span>
+              <span className="text-text-active font-medium">{b.count}</span>
             </span>
           </div>
         ))}

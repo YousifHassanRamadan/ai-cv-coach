@@ -13,7 +13,7 @@ const AuthToggle: React.FC<AuthToggleProps> = ({ mode, onChange }) => (
           flex-1 py-2 rounded-lg text-sm font-medium transition-all duration-200
           ${
             mode === value
-              ? "bg-primary text-text-primary shadow-md"
+              ? "bg-bg-primary text-text-primary shadow-md"
               : "text-text-muted hover:text-text-secondary"
           }
         `}

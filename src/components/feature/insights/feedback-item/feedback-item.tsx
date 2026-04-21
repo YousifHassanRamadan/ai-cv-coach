@@ -10,10 +10,10 @@ const FeedbackItem = ({ text, color }: FeedbackItemProps) => {
 
   return (
     <div
-      className={`flex items-start gap-3 bg-[#0f1419] rounded-lg p-4 border ${border}`}
+      className={`flex items-start gap-3 bg-bg-card rounded-lg p-4 border ${border}`}
     >
       <div className={`w-2 h-2 ${dot} rounded-full mt-2 flex-shrink-0`} />
-      <p className="text-sm text-gray-300">{text}</p>
+      <p className="text-sm text-text-muted">{text}</p>
     </div>
   );
 };

@@ -15,10 +15,10 @@ const ProgressCard: React.FC<TATSScoreCardProps> = ({
   const dashOffset = circumference * (1 - score / 100);
 
   return (
-    <div className="bg-bg-card rounded-lg p-6 border border-gray-800">
+    <div className="bg-bg-card rounded-lg p-6 border border-border-light">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold">{title}</h2>
-        {Icon && <Icon size={22} className={"text-gray-600 mb-1"} />}
+        {Icon && <Icon size={22} className={"text-text-muted mb-1"} />}
       </div>
 
       <div className="flex items-center justify-center py-8">
@@ -63,7 +63,7 @@ const ProgressCard: React.FC<TATSScoreCardProps> = ({
         </div>
       </div>
 
-      <p className="text-center text-gray-400 text-sm">{description}</p>
+      <p className="text-center text-text-muted text-sm">{description}</p>
     </div>
   );
 };

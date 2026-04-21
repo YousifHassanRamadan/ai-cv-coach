@@ -35,15 +35,15 @@ const UploadArea: React.FC<UploadAreaProps> = ({
     return (
       <div className="text-center py-6">
         <div className="flex justify-center mb-3">
-          <div className="w-14 h-14 bg-purple-500/10 rounded-full flex items-center justify-center">
+          <div className="w-14 h-14 bg-bg-active/10 rounded-full flex items-center justify-center">
             <FileText className="w-7 h-7 text-text-active" strokeWidth={2} />
           </div>
         </div>
-        <p className="text-gray-300 font-medium mb-4">Uploading...</p>
+        <p className="text-text-muted font-medium mb-4">Uploading...</p>
         <div className="max-w-xs mx-auto">
-          <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
+          <div className="h-2 bg-bg-secondary rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-purple-600 to-cyan-500 transition-all duration-300 ease-out rounded-full"
+              className="h-full bg-gradient-to-r from-text-active to-text-active transition-all duration-300 ease-out rounded-full"
               style={{ width: `${uploadProgress}%` }}
             />
           </div>
@@ -56,7 +56,7 @@ const UploadArea: React.FC<UploadAreaProps> = ({
     <div
       className={`border-2 border-dashed rounded-lg p-10 text-center transition-colors ${
         selectedTrackId
-          ? "border-gray-700 hover:border-purple-600/50 cursor-pointer"
+          ? "border-border-light hover:border-border-active/50 cursor-pointer"
           : "border-gray-800 opacity-50 cursor-not-allowed"
       }`}
       onDrop={selectedTrackId ? onDrop : undefined}
@@ -66,14 +66,14 @@ const UploadArea: React.FC<UploadAreaProps> = ({
       }
     >
       <div className="flex justify-center mb-3">
-        <div className="w-12 h-12 bg-purple-500/10 rounded-full flex items-center justify-center">
-          <Upload className="w-6 h-6 text-purple-500" strokeWidth={2} />
+        <div className="w-12 h-12 bg-bg-active/10 rounded-full flex items-center justify-center">
+          <Upload className="w-6 h-6 text-text-active" strokeWidth={2} />
         </div>
       </div>
-      <p className="text-gray-300 font-medium mb-1 text-sm">
+      <p className="text-text-muted font-medium mb-1 text-sm">
         Drop your CV here
       </p>
-      <p className="text-xs text-gray-600">
+      <p className="text-xs text-text-muted">
         {selectedTrackId
           ? "or click to browse (PDF, DOCX)"
           : "Select a track first"}

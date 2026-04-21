@@ -11,7 +11,7 @@ const KeywordPoint: React.FC<TKeywordPointProps> = ({
   return (
     <li className="flex items-center gap-2">
       <ArrowRight className={`w-4 h-4 ${iconColor}`} />
-      <span className="text-sm text-gray-400">{str}</span>
+      <span className="text-sm text-text-primary">{str}</span>
     </li>
   );
 };

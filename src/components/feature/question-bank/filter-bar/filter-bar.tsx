@@ -25,7 +25,7 @@ export const FilterBar = ({
       {/* Row 1: Search */}
       <div className="relative">
         <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#65758d]"
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-muted"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -42,7 +42,7 @@ export const FilterBar = ({
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search questions..."
-          className="w-full pl-9 pr-4 py-2 rounded-lg bg-[#18181f] border border-[#1f1f27] text-sm text-white placeholder:text-[#6b7280] focus:outline-none focus:border-[#7c3bed] transition-colors"
+          className="w-full pl-9 pr-4 py-2 rounded-lg bg-bg-subcard border border-border-light text-sm text-text-muted placeholder:text-text-muted focus:outline-none focus:border-text-active transition-colors"
         />
       </div>
 
@@ -56,8 +56,8 @@ export const FilterBar = ({
               onClick={() => onDifficultyChange(value)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 difficulty === value
-                  ? "bg-[#7c3bed] text-white border border-[#7c3bed]"
-                  : "bg-[#18181f] text-[#9ca3af] border border-[#1f1f27] hover:border-[#7c3bed]/40 hover:text-white"
+                  ? "bg-bg-active text-text-primary border border-border-active"
+                  : "bg-bg-subcard text-text-muted border border-border-light hover:border-border-active hover:text-text-primary"
               }`}
             >
               {label}
@@ -66,7 +66,7 @@ export const FilterBar = ({
         </div>
 
         {/* Divider */}
-        <div className="w-px h-5 bg-[#1f1f27] mx-0.5 shrink-0" />
+        <div className="w-px h-5 bg-border-light mx-0.5 shrink-0" />
 
         {/* Track dropdown */}
         <TrackDropdown

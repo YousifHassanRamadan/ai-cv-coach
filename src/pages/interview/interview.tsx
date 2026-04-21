@@ -93,7 +93,7 @@ const InterviewPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white p-4 sm:p-6 md:p-8">
+    <div className="min-h-screen bg-bg-primary text-text-primary p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-5 space-y-4">
         <PageHeader
           title="AI Interview Practice"
@@ -102,7 +102,7 @@ const InterviewPage = () => {
         <Stepper steps={steps} currentStep={currentStep} />
       </div>
 
-      <div className="max-w-4xl mx-auto bg-[#0f0e17] p-4 sm:p-8 md:p-12 lg:p-16 rounded-2xl">
+      <div className="max-w-4xl mx-auto bg-bg-subcard p-4 sm:p-8 md:p-12 lg:p-16 rounded-2xl">
         {currentStep === 1 && (
           <RoleStep
             roles={isTracksLoading ? [] : tracks || []}

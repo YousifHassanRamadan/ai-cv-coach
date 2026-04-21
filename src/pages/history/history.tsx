@@ -29,7 +29,7 @@ const HistoryPage: React.FC = () => {
   }, [interviewHistory, searchTerm]);
 
   return (
-    <div className="flex-1 h-full p-4 sm:p-6 bg-[#0A0A0F]">
+    <div className="flex-1 h-full p-4 sm:p-6 bg-bg-primary">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
         <PageHeader

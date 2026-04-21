@@ -78,11 +78,11 @@ const InsightsPage = () => {
   } = data;
 
   return (
-    <div className="min-h-full bg-[#0a0a0f] text-white p-8">
+    <div className="min-h-full bg-bg-primary text-text-primary p-8">
       {/* Header */}
       <header className="mb-8">
         <h1 className="text-2xl font-bold mb-1">Interview Insights</h1>
-        <p className="text-gray-400 text-sm">
+        <p className="text-text-muted text-sm">
           {track.name} · {formatDate(startedAt)} ·{" "}
           {calcDuration(startedAt, endedAt)}
         </p>
@@ -107,13 +107,13 @@ const InsightsPage = () => {
       </div>
 
       {/* Notable moments */}
-      <NotableMomentsCard chunks={chunks} />
+      {/* <NotableMomentsCard chunks={chunks} /> */}
 
       {/* Questions asked */}
       <QuestionsList questions={finalQuestions} />
 
       {/* Progress over time */}
-      <ProgressChart currentScore={finalScores.overall} />
+      {/* <ProgressChart currentScore={finalScores.overall} /> */}
     </div>
   );
 };

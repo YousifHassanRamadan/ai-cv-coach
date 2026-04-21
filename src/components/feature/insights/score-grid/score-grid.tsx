@@ -11,9 +11,9 @@ const ScoreCard = ({
   isOverall = false,
 }: ScoreCardProps) => (
   <div
-    className={`bg-[#1a1a24] rounded-lg p-6 border ${isOverall ? "border-purple-700/50" : "border-gray-800"}`}
+    className={`bg-bg-subcard rounded-lg p-6 border ${isOverall ? "border-border-active" : "border-border-light"}`}
   >
-    <p className="text-xs text-gray-400 uppercase tracking-wider mb-4">
+    <p className="text-xs text-text-muted uppercase tracking-wider mb-4">
       {isOverall ? "Overall Score" : "Score Breakdown"}
     </p>
     <div className="flex items-center justify-center py-4">
@@ -21,7 +21,7 @@ const ScoreCard = ({
     </div>
     <div className="text-center">
       <p className="text-sm font-semibold mb-1">{label}</p>
-      <p className="text-xs text-gray-400">{subtitle}</p>
+      <p className="text-xs text-text-muted">{subtitle}</p>
     </div>
   </div>
 );

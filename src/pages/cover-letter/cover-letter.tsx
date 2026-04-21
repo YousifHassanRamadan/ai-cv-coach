@@ -22,7 +22,7 @@ const CoverLetterPage = () => {
   };
 
   return (
-    <div className="min-h-full bg-[#0a0a0f] text-white p-8">
+    <div className="min-h-full bg-bg-primary text-text-primary p-8">
       {/* Header */}
 
       <PageHeader

@@ -14,7 +14,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       className={`text-sm font-semibold mb-3.5 flex items-center gap-2 ${textColor}`}
     >
       <span className={iconColor}>{icon}</span>
-      <span className="text-white">{title}</span>
+      <span className="text-text-primary">{title}</span>
     </h3>
   );
 };

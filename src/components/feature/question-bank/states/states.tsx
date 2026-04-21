@@ -3,13 +3,13 @@ export const LoadingState = () => (
     {Array.from({ length: 5 }).map((_, i) => (
       <div
         key={i}
-        className="rounded-xl border border-[#14141c] bg-[#0e0e15] p-4 animate-pulse"
+        className="rounded-xl border border-border-light bg-bg-subcard p-4 animate-pulse"
       >
-        <div className="h-4 bg-[#1f1f27] rounded w-3/4 mb-3" />
-        <div className="h-3 bg-[#1f1f27] rounded w-1/2 mb-3" />
+        <div className="h-4 bg-bg-card rounded w-3/4 mb-3" />
+        <div className="h-3 bg-bg-card rounded w-1/2 mb-3" />
         <div className="flex gap-2">
-          <div className="h-5 bg-[#1f1f27] rounded-full w-16" />
-          <div className="h-5 bg-[#1f1f27] rounded-full w-20" />
+          <div className="h-5 bg-bg-card rounded-full w-16" />
+          <div className="h-5 bg-bg-card rounded-full w-20" />
         </div>
       </div>
     ))}
@@ -22,9 +22,9 @@ export const EmptyState = ({
   message?: string;
 }) => (
   <div className="flex flex-col items-center justify-center py-16 text-center">
-    <div className="w-12 h-12 rounded-2xl bg-[#211339] flex items-center justify-center mb-4">
+    <div className="w-12 h-12 rounded-2xl bg-bg-subcard flex items-center justify-center mb-4">
       <svg
-        className="w-6 h-6 text-[#7c3bed]"
+        className="w-6 h-6 text-text-active"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ export const EmptyState = ({
         />
       </svg>
     </div>
-    <p className="text-sm text-[#6b7280]">{message}</p>
+    <p className="text-sm text-text-muted">{message}</p>
   </div>
 );
 

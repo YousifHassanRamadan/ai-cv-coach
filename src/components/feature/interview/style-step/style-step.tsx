@@ -5,6 +5,7 @@ import type { StyleStepProps, WeightProfile } from "./style-step.types";
 import { useCvDocuments } from "../../../../api/cv";
 import CvDocumentItem from "./cv-document-item/cv-document-item";
 import WeightProfilesCard from "./weight-profiles-card/weight-profiles-card";
+import ContinueButton from "../../../common/continue-button/continue-button";
 
 const weightProfiles: WeightProfile[] = [
   {
@@ -79,14 +80,14 @@ const StyleStep = ({
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
         Choose Interviewer Style
       </h2>
-      <p className="text-gray-400 mb-8 sm:mb-12 text-sm sm:text-base">
+      <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
         Select the personality of your AI interviewer
       </p>
 
       {/* Weight Profile */}
       <div className="mb-10">
         <h3 className="text-lg font-bold mb-1">Question Weight Profile</h3>
-        <p className="text-gray-400 text-sm mb-4">
+        <p className="text-text-muted text-sm mb-4">
           How questions are distributed across categories
         </p>
 
@@ -104,12 +105,12 @@ const StyleStep = ({
       {/* CV Selector */}
       <div className="mb-8 sm:mb-10">
         <h3 className="text-lg font-bold mb-1">Select Your CV</h3>
-        <p className="text-gray-400 text-sm mb-4">
+        <p className="text-text-muted text-sm mb-4">
           Choose which CV to base your interview on
         </p>
 
         {isCvDocumentsLoading ? (
-          <div className="flex items-center justify-center py-10 text-gray-500 text-sm">
+          <div className="flex items-center justify-center py-10 text-text-muted text-sm">
             <svg
               className="animate-spin w-5 h-5 mr-2 text-purple-400"
               fill="none"
@@ -132,7 +133,7 @@ const StyleStep = ({
             Loading your CVs…
           </div>
         ) : cvDocuments.length === 0 ? (
-          <div className="bg-[#13131a] border-2 border-dashed border-gray-700 rounded-xl p-8 text-center text-gray-500 text-sm">
+          <div className="bg-bg-card border-2 border-dashed border-border-light rounded-xl p-8 text-center text-text-muted text-sm">
             No CVs uploaded yet. Upload one to get started.
           </div>
         ) : (
@@ -156,17 +157,11 @@ const StyleStep = ({
         >
           Back
         </button>
-        <button
+
+        <ContinueButton
           disabled={!selectedWeightProfile || !selectedCvId}
           onClick={onContinue}
-          className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg disabled:shadow-none order-1 sm:order-2 text-sm sm:text-base"
-        >
-          Continue
-          <ChevronRight
-            size={18}
-            className="group-hover:translate-x-1 transition-transform duration-300 sm:w-5 sm:h-5"
-          />
-        </button>
+        />
       </div>
 
       <style>{`

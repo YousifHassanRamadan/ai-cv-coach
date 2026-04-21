@@ -11,7 +11,7 @@ const FormInput = ({
 }: FormInputProps) => {
   return (
     <div className={fullWidth ? "col-span-2" : ""}>
-      <label className="block text-sm font-medium text-gray-400 mb-2">
+      <label className="block text-sm font-medium text-text-muted mb-2">
         {label}
       </label>
       <input
@@ -19,7 +19,7 @@ const FormInput = ({
         name={name}
         value={value}
         onChange={onChange}
-        className="w-full bg-[#13131a] border border-gray-800 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
+        className="w-full bg-bg-primary border border-border-light rounded-lg px-4 py-2.5 text-text-muted focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all"
       />
       {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
     </div>

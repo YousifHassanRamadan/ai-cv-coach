@@ -20,13 +20,13 @@ export default function ChatSidebar({
 
   return (
     <aside
-      className={`flex flex-col bg-sidebar-bg border-r border-border transition-all duration-300 ease-in-out shrink-0 ${isOpen ? "w-64" : "w-0 overflow-hidden"}`}
+      className={`flex flex-col bg-sidebar-bg  border-border transition-all duration-300 ease-in-out shrink-0 ${isOpen ? "w-64" : "w-0 overflow-hidden"}`}
     >
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-4 border-b border-border bg-bg-header shrink-0">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-bg-active flex items-center justify-center">
-            <BotIcon size={15} className="text-white" />
+          <div className="w-7 h-7 rounded-lg bg-bg-subcard flex items-center justify-center">
+            <BotIcon size={15} className="text-text-primary" />
           </div>
           <span className="text-sm font-semibold tracking-wide text-text-primary">
             AI Assistant
@@ -34,7 +34,7 @@ export default function ChatSidebar({
         </div>
         <button
           onClick={onToggle}
-          className="p-1 rounded-md text-text-muted hover:text-text-primary hover:bg-sidebar-hover transition-colors"
+          className="p-1 rounded-md text-text-primary hover:text-text-primary hover:bg-sidebar-hover transition-colors"
         >
           <ChevronLeftIcon size={16} />
         </button>

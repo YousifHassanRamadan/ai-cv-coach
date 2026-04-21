@@ -164,35 +164,37 @@ const EquipmentStep = ({
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">Equipment Check</h2>
-      <p className="text-gray-400 mb-8 sm:mb-10 text-sm sm:text-base">
+      <p className="text-text-muted mb-8 sm:mb-10 text-sm sm:text-base">
         Test your devices before the interview starts
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
         {/* ── Camera card ── */}
         <div
-          className={`rounded-2xl border bg-white/[0.03] p-5 flex flex-col gap-4 transition-all duration-300 ${cardBorder[cameraStatus]}`}
+          className={`rounded-2xl border bg-bg-card p-5 flex flex-col gap-4 transition-all duration-300 ${cardBorder[cameraStatus]}`}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div
                 className={`w-9 h-9 rounded-xl flex items-center justify-center
-                ${cameraStatus === "granted" ? "bg-teal-500/15" : "bg-white/5"}`}
+                ${cameraStatus === "granted" ? "bg-bg-active/50" : "bg-bg-subcard"}`}
               >
                 <Camera
                   size={18}
                   className={
                     cameraStatus === "granted"
-                      ? "text-teal-400"
-                      : "text-gray-400"
+                      ? "text-text-active"
+                      : "text-text-muted"
                   }
                 />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Camera</p>
+                <p className="text-sm font-semibold text-text-primary">
+                  Camera
+                </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <StatusIcon status={cameraStatus} />
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-muted">
                     {statusLabel[cameraStatus]}
                   </p>
                 </div>
@@ -205,7 +207,7 @@ const EquipmentStep = ({
                 ${
                   cameraStatus === "granted"
                     ? "bg-teal-500/15 text-teal-400 hover:bg-teal-500/25"
-                    : "bg-purple-600/80 text-white hover:bg-purple-500"
+                    : "bg-bg-subcard text-text-primary hover:bg-bg-active"
                 }`}
             >
               {cameraStatus === "granted"
@@ -247,26 +249,30 @@ const EquipmentStep = ({
 
         {/* ── Microphone card ── */}
         <div
-          className={`rounded-2xl border bg-white/[0.03] p-5 flex flex-col gap-4 transition-all duration-300 ${cardBorder[micStatus]}`}
+          className={`rounded-2xl border bg-bg-card p-5 flex flex-col gap-4 transition-all duration-300 ${cardBorder[micStatus]}`}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div
                 className={`w-9 h-9 rounded-xl flex items-center justify-center
-                ${micStatus === "granted" ? "bg-teal-500/15" : "bg-white/5"}`}
+                ${micStatus === "granted" ? "bg-bg-active/50" : "bg-bg-subcard"}`}
               >
                 <Mic
                   size={18}
                   className={
-                    micStatus === "granted" ? "text-teal-400" : "text-gray-400"
+                    micStatus === "granted"
+                      ? "text-text-active"
+                      : "text-text-muted"
                   }
                 />
               </div>
               <div>
-                <p className="text-sm font-semibold text-white">Microphone</p>
+                <p className="text-sm font-semibold text-text-primary">
+                  Microphone
+                </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <StatusIcon status={micStatus} />
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-text-muted">
                     {statusLabel[micStatus]}
                   </p>
                 </div>
@@ -279,7 +285,7 @@ const EquipmentStep = ({
                 ${
                   micStatus === "granted"
                     ? "bg-teal-500/15 text-teal-400 hover:bg-teal-500/25"
-                    : "bg-purple-600/80 text-white hover:bg-purple-500"
+                    : "bg-bg-subcard text-text-primary hover:bg-bg-active"
                 }`}
             >
               {micStatus === "granted"

@@ -4,7 +4,7 @@ import type { StrengthsCardProps } from "./strengths-card.types";
 
 const CheckIcon = () => (
   <svg
-    className="w-4 h-4 text-teal-500"
+    className="w-4 h-4 text-text-active"
     fill="none"
     stroke="currentColor"
     viewBox="0 0 24 24"
@@ -19,7 +19,7 @@ const CheckIcon = () => (
 );
 
 const StrengthsCard = ({ strengths }: StrengthsCardProps) => (
-  <SectionCard icon={<CheckIcon />} iconBg="bg-teal-500/20" title="Strengths">
+  <SectionCard icon={<CheckIcon />} iconBg="bg-bg-active/20" title="Strengths">
     <div className="space-y-3">
       {strengths.map((text, i) => (
         <FeedbackItem key={i} text={text} color="teal" />

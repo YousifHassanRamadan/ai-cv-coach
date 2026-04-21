@@ -44,14 +44,14 @@ const Sessions: React.FC<TSessionItem> = ({
   const diffStyle = difficultyStyles[difficulty] ?? difficultyStyles.custom;
 
   return (
-    <div className="flex items-center justify-between group bg-bg-subcard hover:bg-[#1a1a26] rounded-xl px-4 py-3.5 transition-colors cursor-pointer">
+    <div className="flex items-center justify-between group bg-bg-subcard hover:bg-bg-active/20 rounded-xl px-4 py-3.5 transition-colors cursor-pointer">
       {/* Left */}
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 bg-gradient-to-br from-blue-500/10 to-purple-600/10 border border-indigo-600/30 rounded-lg flex items-center justify-center shrink-0">
+        <div className="w-9 h-9 bg-gradient-to-br from-bg-active/10 to-bg-primary/10 border border-border-light rounded-lg flex items-center justify-center shrink-0">
           <Video size={15} className="text-text-active" />
         </div>
         <div>
-          <p className="font-medium text-sm text-white group-hover:text-text-active leading-tight">
+          <p className="font-medium text-sm text-text-primary group-hover:text-text-active leading-tight">
             {track.name}
           </p>
           <div className="flex items-center gap-1.5 mt-0.5">
@@ -60,7 +60,7 @@ const Sessions: React.FC<TSessionItem> = ({
             >
               {difficulty}
             </span>
-            <span className="text-gray-600 text-[10px]">
+            <span className="text-text-muted text-[10px]">
               {questionCount} questions
             </span>
           </div>

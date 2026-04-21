@@ -12,21 +12,21 @@ const DIFFICULTY_STYLES = {
 };
 
 const QuestionRow = ({ question, index }: QuestionRowProps) => (
-  <div className="bg-[#0f1419] rounded-lg p-4 border border-gray-800">
+  <div className="bg-bg-card rounded-lg p-4 border border-border-light">
     <div className="flex items-center justify-between gap-3 mb-2">
-      <span className="text-xs text-gray-500 font-mono">Q{index + 1}</span>
+      <span className="text-xs text-text-muted font-mono">Q{index + 1}</span>
       <span
         className={`text-xs px-2 py-0.5 rounded-full font-medium ${DIFFICULTY_STYLES[question.difficulty]}`}
       >
         {question.difficulty}
       </span>
     </div>
-    <p className="text-sm text-gray-200 mb-3">{question.text}</p>
+    <p className="text-sm text-text-muted mb-3">{question.text}</p>
     <div className="flex flex-wrap gap-1">
       {question.keywords.slice(0, 4).map((keyword) => (
         <span
           key={keyword}
-          className="text-xs px-2 py-0.5 bg-purple-500/10 text-purple-300 rounded"
+          className="text-xs px-2 py-0.5 bg-bg-active/30 text-text-active rounded"
         >
           {keyword}
         </span>
@@ -40,12 +40,14 @@ const QuestionsList = ({ questions }: QuestionsListProps) => {
 
   return (
     <SectionCard
-      icon={<Brain className="w-4 h-4 text-cyan-400" />}
-      iconBg="bg-cyan-500/20"
+      icon={<Brain className="w-4 h-4 text-text-active" />}
+      iconBg="bg-bg-active/20"
       title="Questions Asked"
       className="mb-8"
       rightSlot={
-        <span className="text-xs text-gray-500">{questions.length} total</span>
+        <span className="text-xs text-text-muted">
+          {questions.length} total
+        </span>
       }
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

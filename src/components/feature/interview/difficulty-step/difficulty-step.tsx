@@ -2,6 +2,7 @@ import { ChevronRight } from "lucide-react";
 import type { DifficultyStepProps } from "./difficulty-step.types";
 import NumberOfQuestionsStep from "../number-of-question-step/number-of-question-step";
 import ExperienceLevel from "../experience-level/experience-level";
+import ContinueButton from "../../../common/continue-button/continue-button";
 
 const DifficultyStep = ({
   difficultyLevel,
@@ -33,7 +34,7 @@ const DifficultyStep = ({
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
         Set Difficulty Level
       </h2>
-      <p className="text-gray-400 mb-8 sm:mb-12 text-sm sm:text-base">
+      <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
         Adjust the complexity of interview questions
       </p>
 
@@ -41,7 +42,7 @@ const DifficultyStep = ({
       <div className="mb-8 sm:mb-12">
         <div className="relative mb-6 sm:mb-8">
           {/* Slider track */}
-          <div className="absolute w-full h-2 bg-gray-800 rounded-full" />
+          <div className="absolute w-full h-2 bg-bg-active/20 rounded-full" />
 
           {/* Gradient progress */}
           <div
@@ -69,10 +70,10 @@ const DifficultyStep = ({
             <button
               key={l.value}
               onClick={() => setDifficultyLevel(l.value)}
-              className={`text-xs sm:text-sm font-medium transition-all duration-300 hover:text-white ${
+              className={`text-xs sm:text-sm font-medium transition-all duration-300 hover:text-text-primary ${
                 difficultyLevel === l.value
-                  ? "text-white scale-110"
-                  : "text-gray-500"
+                  ? "text-text-active scale-110"
+                  : "text-text-muted"
               }`}
             >
               {l.label}
@@ -82,11 +83,13 @@ const DifficultyStep = ({
       </div>
 
       {/* Description Card */}
-      <div className="bg-[#13131a] border-2 border-gray-800 p-6 sm:p-8 rounded-xl mb-6 sm:mb-8">
+      <div className="bg-bg-card border-2 border-border-light p-6 sm:p-8 rounded-xl mb-6 sm:mb-8">
         <h3 className="text-xl sm:text-2xl font-bold mb-2">
           {description.title}
         </h3>
-        <p className="text-gray-400 text-base sm:text-lg">{description.desc}</p>
+        <p className="text-text-muted text-base sm:text-lg">
+          {description.desc}
+        </p>
       </div>
 
       <NumberOfQuestionsStep
@@ -107,16 +110,11 @@ const DifficultyStep = ({
         >
           Back
         </button>
-        <button
+
+        <ContinueButton
           onClick={onContinue}
-          className="group bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 sm:px-8 py-2.5 sm:py-3 rounded-xl font-semibold flex items-center justify-center gap-2 transition-all duration-300 shadow-lg order-1 sm:order-2 text-sm sm:text-base"
-        >
-          Continue
-          <ChevronRight
-            size={18}
-            className="group-hover:translate-x-1 transition-transform duration-300 sm:w-5 sm:h-5"
-          />
-        </button>
+          disabled={numberOfQuestions === 0 || !experienceLevel}
+        />
       </div>
 
       <style>{`

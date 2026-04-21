@@ -10,8 +10,8 @@ const Section = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="rounded-xl bg-[#14131b] border border-[#1f1f27] p-4">
-    <h3 className="text-xs font-semibold uppercase tracking-widest text-[#65758d] mb-3">
+  <div className="rounded-xl bg-bg-subcard border border-border-light p-4">
+    <h3 className="text-xs font-semibold uppercase tracking-widest text-text-muted mb-3">
       {title}
     </h3>
     {children}
@@ -21,12 +21,12 @@ const Section = ({
 export const QuestionDetailPanel = ({ question }: QuestionDetailPanalProps) => (
   <div className="flex flex-col gap-4 h-full overflow-y-auto pr-1">
     {/* Header */}
-    <div className="rounded-xl bg-[#0e0e15] border border-[#14141c] p-5">
+    <div className="rounded-xl bg-bg-card border border-border-light p-5">
       <div className="flex items-center justify-between mb-3">
         <DifficultyBadge difficulty={question.difficulty} />
         <PointsBadge points={question.points} />
       </div>
-      <p className="text-white text-base font-medium leading-relaxed">
+      <p className="text-text-primary text-base font-medium leading-relaxed">
         {question.text}
       </p>
     </div>
@@ -34,10 +34,10 @@ export const QuestionDetailPanel = ({ question }: QuestionDetailPanalProps) => (
     {/* Track & Category */}
     <Section title="Track & Category">
       <div className="flex flex-wrap gap-2">
-        <span className="text-xs text-[#829bb4] bg-[#18181f] px-3 py-1 rounded-full border border-[#1f1f27]">
+        <span className="text-xs text-text-muted bg-bg-subcard px-3 py-1 rounded-full border border-border-light">
           🗂 {question.track.name}
         </span>
-        <span className="text-xs text-[#829bb4] bg-[#18181f] px-3 py-1 rounded-full border border-[#1f1f27]">
+        <span className="text-xs text-text-muted bg-bg-subcard px-3 py-1 rounded-full border border-border-light">
           📁 {question.category}
         </span>
       </div>
@@ -45,7 +45,7 @@ export const QuestionDetailPanel = ({ question }: QuestionDetailPanalProps) => (
 
     {/* Model Answer */}
     <Section title="Model Answer">
-      <p className="text-sm text-[#9ca3af] leading-relaxed">
+      <p className="text-sm text-text-muted leading-relaxed">
         {question.modelAnswer.definition}
       </p>
     </Section>

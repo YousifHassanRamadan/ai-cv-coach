@@ -12,7 +12,7 @@ const ProfileCard = ({
   currentRole,
 }: ProfileCardProps) => {
   return (
-    <div className="bg-bg-card rounded-xl border border-border-card p-4 sm:p-6 lg:p-8 mb-6">
+    <div className="bg-bg-card rounded-xl border border-border-light p-4 sm:p-6 lg:p-8 mb-6">
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6">
         {/* Avatar + Info */}
         <div className="flex items-start gap-4 sm:gap-6 min-w-0">

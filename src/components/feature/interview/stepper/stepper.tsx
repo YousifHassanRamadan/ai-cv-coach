@@ -12,10 +12,10 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
               <div
                 className={`w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center font-semibold mb-1 sm:mb-2 transition-all duration-300 ${
                   step.number === currentStep
-                    ? "bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg shadow-blue-500/50"
+                    ? "bg-gradient-to-br from-bg-primary to-blue-600 shadow-lg shadow-blue-500/50"
                     : step.number < currentStep
-                      ? "bg-gradient-to-br from-teal-500 to-teal-600"
-                      : "bg-gray-800 text-gray-500"
+                      ? "bg-gradient-to-br from-bg-active to-teal-600"
+                      : "bg-bg-active/30 text-text-muted"
                 }`}
               >
                 {step.number < currentStep ? (

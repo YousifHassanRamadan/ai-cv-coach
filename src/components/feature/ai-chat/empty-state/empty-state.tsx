@@ -7,6 +7,7 @@ import {
   ShieldIcon,
 } from "lucide-react";
 import type { EmptyStateProps } from "./empty-state.types";
+import { Link } from "react-router-dom";
 
 const SUGGESTIONS = [
   {
@@ -32,15 +33,21 @@ export default function EmptyState({
   onToggleSidebar,
 }: EmptyStateProps) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full ">
       {/* Header bar */}
-      <header className="flex items-center px-4 py-3 border-b border-border bg-bg-header shrink-0">
+      <header className="flex justify-between items-center gap-2 px-4 py-3 border-b border-border bg-bg-header shrink-0  h-[61px]">
         <button
           onClick={onToggleSidebar}
-          className="p-1.5 rounded-md text-text-muted hover:text-text-primary hover:bg-bg-tertiary transition-colors"
+          className="p-1.5 rounded-md text-text-primary  hover:text-text-primary hover:bg-bg-tertiary transition-colors"
         >
           <MenuIcon size={18} />
         </button>
+        <Link
+          to="/"
+          className="px-4 py-2 bg-bg-subcard text-text-primary rounded-lg hover:bg-bg-active/15 transition"
+        >
+          Go Home
+        </Link>
       </header>
 
       {/* Center Content */}

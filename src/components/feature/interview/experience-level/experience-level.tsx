@@ -8,7 +8,7 @@ const ExperienceLevel: React.FC<ExperienceLevelProps> = ({
   return (
     <div className="mb-8 sm:mb-10">
       <h3 className="text-lg font-bold mb-1">Experience Level</h3>
-      <p className="text-gray-400 text-sm mb-4">
+      <p className="text-text-muted text-sm mb-4">
         Tailor questions to your seniority
       </p>
 
@@ -20,8 +20,8 @@ const ExperienceLevel: React.FC<ExperienceLevelProps> = ({
             className={`flex flex-col items-center gap-1.5 py-3 sm:py-4 rounded-xl border-2 font-semibold transition-all duration-300
           ${
             experienceLevel === level
-              ? "border-purple-500 bg-purple-500/10 text-white shadow-md shadow-purple-500/20 scale-105"
-              : "border-gray-800 bg-[#13131a] text-gray-400 hover:border-gray-600 hover:text-white"
+              ? "border-border-active bg-bg-active text-white shadow-md shadow-bg-active/20 scale-105"
+              : "border-border-light bg-bg-active/10 text-text-muted hover:border-border-active hover:text-white"
           }`}
           >
             <span className="text-lg sm:text-xl">

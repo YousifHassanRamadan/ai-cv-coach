@@ -119,7 +119,7 @@ const UploadCvSection: React.FC = () => {
   };
 
   return (
-    <div className="bg-bg-card rounded-lg p-6 border border-gray-800/50 space-y-5">
+    <div className="bg-bg-card rounded-lg p-6 border border-border-light space-y-5">
       <h2 className="text-lg font-semibold">Upload CV</h2>
 
       <TrackSelector

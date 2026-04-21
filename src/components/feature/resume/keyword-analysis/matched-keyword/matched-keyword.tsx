@@ -28,7 +28,7 @@ const MatchedKeyword: React.FC = () => {
       {/* Keywords */}
       <div className="flex flex-wrap gap-2 mb-4">
         {matchedSkills.length === 0 ? (
-          <p className="text-sm text-gray-400">No matched keywords found.</p>
+          <p className="text-sm text-text-muted">No matched keywords found.</p>
         ) : (
           matchedSkills.map((item) => (
             <KeywordItem key={item} keyword={item} matched={true} />
@@ -37,12 +37,12 @@ const MatchedKeyword: React.FC = () => {
       </div>
 
       {/* Strengths */}
-      <div className="bg-bg-card rounded-lg p-4">
+      <div className="bg-bg-subcard rounded-lg p-4">
         <h3 className="text-sm font-semibold text-green-400 mb-2">Strengths</h3>
 
         <ul className="space-y-1 text-sm text-gray-400">
           {strengths.length === 0 ? (
-            <p className="text-sm text-gray-400">No strengths detected.</p>
+            <p className="text-sm text-text-muted">No strengths detected.</p>
           ) : (
             strengths.map((str, idx) => (
               <KeywordPoint str={str} key={idx} color="green" />

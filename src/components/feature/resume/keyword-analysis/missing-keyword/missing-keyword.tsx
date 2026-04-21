@@ -26,7 +26,7 @@ const MissingKeyword: React.FC = () => {
 
       <div className="flex flex-wrap gap-2 mb-4">
         {missingSkills.length === 0 ? (
-          <p className="text-sm text-gray-400">No missing keywords found.</p>
+          <p className="text-sm text-text-muted">No missing keywords found.</p>
         ) : (
           missingSkills.map((item) => (
             <KeywordItem key={item} keyword={item} matched={false} />
@@ -42,7 +42,7 @@ const MissingKeyword: React.FC = () => {
 
         <ul className="space-y-1 text-sm text-gray-400">
           {weaknesses.length === 0 ? (
-            <p className="text-sm text-gray-400">No areas to improve.</p>
+            <p className="text-sm text-text-muted">No areas to improve.</p>
           ) : (
             weaknesses.map((str, idx) => (
               <KeywordPoint str={str} key={idx} color="orange" />

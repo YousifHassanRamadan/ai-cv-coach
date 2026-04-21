@@ -90,13 +90,7 @@ export const QuestionsBankPage = () => {
     : (data?.total ?? 0);
 
   return (
-    <div
-      className="min-h-screen font-sans"
-      style={{
-        background:
-          "linear-gradient(135deg, #0f0f18 70%, #1a1128 100%, #0d0d15 50%)",
-      }}
-    >
+    <div className="min-h-screen font-sans bg-bg-primary">
       {/* Body */}
       <div className="max-w-7xl mx-auto px-4 lg:px-6 py-4 lg:py-6 flex flex-col lg:flex-row gap-4 lg:gap-6 lg:h-[calc(100vh-3.5rem)]">
         {/* Left: list */}
@@ -152,12 +146,12 @@ export const QuestionsBankPage = () => {
         </div>
 
         {/* Right: detail */}
-        <div className="flex-1 rounded-2xl bg-[#0f0f18] border border-[#1f1f27] p-5 min-h-[400px] lg:overflow-hidden">
+        <div className="flex-1 rounded-2xl bg-bg-subcard border border-border-light p-5 min-h-[400px] lg:overflow-hidden">
           {!selectedId && (
             <div className="flex flex-col items-center justify-center h-full text-center gap-4">
-              <div className="w-14 h-14 rounded-2xl bg-[#211339]/60 border border-[#7c3bed]/20 flex items-center justify-center">
+              <div className="w-14 h-14 rounded-2xl bg-bg-card border border-border-light flex items-center justify-center">
                 <svg
-                  className="w-7 h-7 text-[#7c3bed]/60"
+                  className="w-7 h-7 text-text-primary"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -171,10 +165,10 @@ export const QuestionsBankPage = () => {
                 </svg>
               </div>
               <div>
-                <p className="text-sm font-medium text-[#9ca3af]">
+                <p className="text-sm font-medium text-text-muted">
                   Select a question
                 </p>
-                <p className="text-xs text-[#6b7280] mt-1">
+                <p className="text-xs text-text-muted mt-1">
                   Click any card to see details
                 </p>
               </div>
@@ -183,9 +177,9 @@ export const QuestionsBankPage = () => {
 
           {selectedId && detailLoading && (
             <div className="flex flex-col gap-4 animate-pulse">
-              <div className="h-24 rounded-xl bg-[#14131b]" />
-              <div className="h-16 rounded-xl bg-[#14131b]" />
-              <div className="h-20 rounded-xl bg-[#14131b]" />
+              <div className="h-24 rounded-xl bg-bg-subcard" />
+              <div className="h-16 rounded-xl bg-bg-subcard" />
+              <div className="h-20 rounded-xl bg-bg-subcard" />
             </div>
           )}
 

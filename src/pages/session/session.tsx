@@ -128,7 +128,7 @@ const InterviewSession: React.FC = () => {
   };
 
   return (
-    <div className="relative h-screen bg-[#0a0a0a] text-white flex flex-col overflow-hidden">
+    <div className="relative h-screen bg-bg-primary text-text-primary flex flex-col overflow-hidden">
       <SessionHeader
         timer={timer}
         currentQuestionIndex={currentQuestionIndex}

@@ -7,13 +7,15 @@ const DangerZoneSection: React.FC<DangerZoneSectionProps> = ({
   onDeleteAccount,
 }) => {
   return (
-    <div className="bg-[#0e1016] rounded-xl border border-red-900/30 p-5">
+    <div className="bg-bg-subcard rounded-xl border border-border-light/30 p-5">
       <SectionHeader icon="⚠️" title="Danger Zone" variant="danger" />
 
       <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-3.5 flex items-center justify-between">
         <div>
-          <div className="font-medium text-sm text-red-300">Delete Account</div>
-          <div className="text-xs text-gray-400 mt-0.5">
+          <div className="font-medium text-sm text-text-muted">
+            Delete Account
+          </div>
+          <div className="text-xs text-text-muted mt-0.5">
             Permanently delete your account and all associated data
           </div>
         </div>

@@ -41,7 +41,7 @@ const ProcessingScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center">
+    <div className="min-h-screen bg-bg-primary flex items-center justify-center">
       <div className="flex flex-col items-center">
         {/* Animated Spinner */}
         <div className="relative mb-12">
@@ -107,12 +107,12 @@ const ProcessingScreen: React.FC = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl font-semibold text-white mb-3">
+        <h1 className="text-3xl font-semibold text-text-muted mb-3">
           Processing Your Interview
         </h1>
 
         {/* Current step text */}
-        <p className="text-gray-400 text-base mb-8">
+        <p className="text-text-muted text-base mb-8">
           {STEPS[currentStep]}
           {".".repeat(dots)}
         </p>
@@ -124,9 +124,9 @@ const ProcessingScreen: React.FC = () => {
               key={index}
               className={`h-2 rounded-full transition-all duration-300 ${
                 index === currentStep
-                  ? "bg-purple-500 w-6"
+                  ? "bg-bg-active w-6"
                   : index < currentStep
-                    ? "bg-purple-600 w-2"
+                    ? "bg-bg-card w-2"
                     : "bg-gray-700 w-2"
               }`}
             />

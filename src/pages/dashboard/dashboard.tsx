@@ -51,13 +51,13 @@ const DashboardPage = () => {
   console.log("dashboardStats:", dashboardStats);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0F] text-white px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
+    <div className="min-h-screen bg-bg-primary text-text-primary px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
       {/* Greeting + Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold">
             Good afternoon,{" "}
-            <span className="text-indigo-400">
+            <span className="text-text-active">
               {isUserLoading
                 ? "Loading..."
                 : userData
@@ -66,7 +66,7 @@ const DashboardPage = () => {
             </span>
             👋
           </h1>
-          <p className="text-gray-500 mt-1 text-sm sm:text-base">
+          <p className="text-text-muted mt-1 text-sm sm:text-base">
             Ready to ace your next interview? Let's practice!
           </p>
         </div>
@@ -89,16 +89,16 @@ const DashboardPage = () => {
       </div>
 
       {/* Bottom Section: Sessions + Achievements */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+      <div className=" w-full">
         {/* Recent Sessions */}
-        <div className="lg:col-span-2 bg-bg-card border border-gray-800 rounded-2xl p-4 sm:p-6">
+        <div className="lg:col-span-2 bg-bg-card border border-border-light rounded-2xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
-            <h2 className="text-base sm:text-lg font-semibold">
+            <h2 className="text-base sm:text-lg font-semibold text-text-primary">
               Recent Sessions
             </h2>
             <Link
               to="/history"
-              className="text-text-active text-xs sm:text-sm hover:text-indigo-300 flex items-center gap-1 transition-colors"
+              className="text-text-active text-xs sm:text-sm hover:text-text-active/30 flex items-center gap-1 transition-colors"
             >
               View all <ChevronRight size={16} />
             </Link>
@@ -106,7 +106,7 @@ const DashboardPage = () => {
           <div className="space-y-2 overflow-y-auto max-h-[400px]">
             {isInterviewHistoryLoading ? (
               <>
-                <p className="text-gray-500 text-sm">
+                <p className="text-text-muted text-sm">
                   Loading interview history...
                 </p>
               </>
@@ -132,7 +132,7 @@ const DashboardPage = () => {
         </div>
 
         {/* Achievements */}
-        <div className="bg-[#12121A] border border-gray-800 rounded-2xl p-4 sm:p-6">
+        {/* <div className="bg-[#12121A] border border-gray-800 rounded-2xl p-4 sm:p-6">
           <h2 className="text-base sm:text-lg font-semibold mb-4 sm:mb-5">
             Achievements
           </h2>
@@ -144,7 +144,7 @@ const DashboardPage = () => {
           <button className="w-full mt-4 sm:mt-5 text-xs sm:text-sm text-white font-semibold hover:text-text-active transition-colors">
             View All Badges
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

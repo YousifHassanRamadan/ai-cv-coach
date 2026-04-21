@@ -36,8 +36,8 @@ export const TrackDropdown = ({
         className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all
           ${
             active
-              ? "bg-[#211339] text-[#7c3bed] border-[#7c3bed]/50"
-              : "bg-[#18181f] text-[#9ca3af] border-[#1f1f27] hover:border-[#7c3bed]/40 hover:text-white"
+              ? "bg-bg-subcard text-text-active border-[#7c3bed]/50"
+              : "bg-bg-subcard text-text-muted border border-border-light hover:border-border-active hover:text-text-primary"
           } ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
       >
         <span className="max-w-[120px] truncate">
@@ -60,21 +60,21 @@ export const TrackDropdown = ({
 
       {/* Dropdown panel */}
       {open && (
-        <div className="absolute left-0 top-full mt-1.5 z-50 w-48 rounded-xl bg-[#0e0e15] border border-[#1f1f27] shadow-2xl shadow-black/60 overflow-hidden">
+        <div className="absolute left-0 top-full mt-1.5 z-50 w-48 rounded-xl bg-bg-subcard border border-b border-border-light shadow-2xl shadow-black/60 overflow-hidden">
           {/* All Tracks option */}
           <button
             onClick={() => handleSelect(null)}
-            className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-xs font-semibold transition-colors border-b border-[#1f1f27]
+            className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-xs font-semibold transition-colors border-b border-border-light
               ${
                 !selectedTrack
-                  ? "bg-[#211339]/70 text-[#7c3bed]"
-                  : "text-[#9ca3af] hover:bg-[#14131b] hover:text-white"
+                  ? "bg-bg-active text-text-primary"
+                  : "text-text-muted hover:bg-bg-subcard hover:text-text-primary"
               }`}
           >
             All Tracks
             {!selectedTrack && (
               <svg
-                className="w-3 h-3 shrink-0 text-[#7c3bed]"
+                className="w-3 h-3 shrink-0 text-text-primary"
                 fill="currentColor"
                 viewBox="0 0 20 20"
               >
@@ -90,7 +90,7 @@ export const TrackDropdown = ({
           {/* Track list */}
           <div className="max-h-52 overflow-y-auto overscroll-contain">
             {tracks.length === 0 ? (
-              <p className="px-3 py-3 text-xs text-[#6b7280]">
+              <p className="px-3 py-3 text-xs text-text-muted">
                 No tracks available
               </p>
             ) : (
@@ -103,14 +103,14 @@ export const TrackDropdown = ({
                     className={`w-full flex items-center justify-between px-3 py-2.5 text-left text-xs font-semibold transition-colors
                       ${
                         isActive
-                          ? "bg-[#211339]/70 text-[#7c3bed]"
-                          : "text-[#9ca3af] hover:bg-[#14131b] hover:text-white"
+                          ? "bg-bg-active text-text-primary"
+                          : "text-text-muted hover:bg-bg-active/30 hover:text-text-primary"
                       }`}
                   >
                     <span className="truncate">{track.name}</span>
                     {isActive && (
                       <svg
-                        className="w-3 h-3 shrink-0 text-[#7c3bed]"
+                        className="w-3 h-3 shrink-0 text-text-primary"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                       >

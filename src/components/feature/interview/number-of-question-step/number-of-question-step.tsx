@@ -52,17 +52,17 @@ const NumberOfQuestionsStep = ({
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
         Number of Questions
       </h2>
-      <p className="text-gray-400 mb-8 sm:mb-12 text-sm sm:text-base">
+      <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
         Choose how many questions you want in your session
       </p>
 
       {/* Big number display */}
       <div className="flex items-center justify-center mb-8">
-        <div className="relative flex items-center justify-center w-28 h-28 rounded-full border-2 border-purple-500/40 bg-purple-500/10 shadow-lg shadow-purple-500/20">
-          <span className="text-5xl font-extrabold text-white">
+        <div className="relative flex items-center justify-center w-28 h-28 rounded-full border-2 border-border-light bg-bg-active/10 shadow-lg shadow-bg-active/20">
+          <span className="text-5xl font-extrabold text-text-primary">
             {numberOfQuestions}
           </span>
-          <span className="absolute bottom-4 text-xs text-gray-400 font-medium">
+          <span className="absolute bottom-4 text-xs text-text-muted font-medium">
             {numberOfQuestions === 1 ? "question" : "questions"}
           </span>
         </div>
@@ -71,7 +71,7 @@ const NumberOfQuestionsStep = ({
       {/* Slider */}
       <div className="mb-6 sm:mb-8">
         <div className="relative mb-6">
-          <div className="absolute w-full h-2 bg-gray-800 rounded-full" />
+          <div className="absolute w-full h-2 bg-bg-active/20 rounded-full" />
           <div
             className={`absolute h-2 rounded-full bg-gradient-to-r ${getGradientColor()} transition-all duration-300`}
             style={{ width: progressWidth }}
@@ -88,7 +88,7 @@ const NumberOfQuestionsStep = ({
         </div>
 
         {/* Min/Max labels */}
-        <div className="flex justify-between px-1 text-xs text-gray-500 font-medium">
+        <div className="flex justify-between px-1 text-xs text-text-muted font-medium">
           <span>1</span>
           <span>25</span>
           <span>50</span>
@@ -104,8 +104,8 @@ const NumberOfQuestionsStep = ({
             className={`flex-1 py-2 rounded-xl border-2 text-sm font-semibold transition-all duration-300
               ${
                 numberOfQuestions === n
-                  ? "border-purple-500 bg-purple-500/10 text-white shadow-md shadow-purple-500/20"
-                  : "border-gray-800 bg-[#13131a] text-gray-400 hover:border-gray-600 hover:text-white"
+                  ? "border-border-active bg-bg-active text-white shadow-md shadow-bg-active/20"
+                  : "border-border-light bg-bg-active/10 text-text-muted hover:border-border-active hover:text-white"
               }`}
           >
             {n}
@@ -114,11 +114,13 @@ const NumberOfQuestionsStep = ({
       </div>
 
       {/* Description Card */}
-      <div className="bg-[#13131a] border-2 border-gray-800 p-6 sm:p-8 rounded-xl mb-6 sm:mb-8">
+      <div className="bg-bg-card border-2 border-border-light p-6 sm:p-8 rounded-xl mb-6 sm:mb-8">
         <h3 className="text-xl sm:text-2xl font-bold mb-2">
           {description.title}
         </h3>
-        <p className="text-gray-400 text-base sm:text-lg">{description.desc}</p>
+        <p className="text-text-muted text-base sm:text-lg">
+          {description.desc}
+        </p>
       </div>
 
       <style>{`

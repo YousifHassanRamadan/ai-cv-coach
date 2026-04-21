@@ -38,8 +38,8 @@ const EmotionTimelineChart = ({ data }: EmotionTimelineChartProps) => {
 
   return (
     <SectionCard
-      icon={<BarChart2 className="w-4 h-4 text-purple-500" />}
-      iconBg="bg-purple-500/20"
+      icon={<BarChart2 className="w-4 h-4 text-text-active" />}
+      iconBg="bg-bg-active/20"
       title="Emotion Timeline"
       className="mb-8"
     >

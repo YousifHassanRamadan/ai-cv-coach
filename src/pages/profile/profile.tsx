@@ -23,7 +23,7 @@ const ProfilePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white p-8">
+    <div className="min-h-screen bg-bg-primary text-white p-8">
       <div className="max-w-5xl mx-auto">
         <PageHeader
           title="Profile"
@@ -51,10 +51,10 @@ const ProfilePage: React.FC = () => {
           }}
         />
 
-        <NotificationPreferencesSection
+        {/* <NotificationPreferencesSection
           notifications={notifications}
           onToggle={toggleNotification}
-        />
+        /> */}
       </div>
     </div>
   );

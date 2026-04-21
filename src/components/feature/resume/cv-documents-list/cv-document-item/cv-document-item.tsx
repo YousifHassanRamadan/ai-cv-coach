@@ -19,14 +19,14 @@ const CvDocumentItem: React.FC<CvDocumentItemProps> = ({
   onEvaluate,
   onDelete,
 }) => (
-  <div className="flex items-center gap-3 px-3 py-2.5 bg-gray-900/60 border border-gray-800 rounded-lg group">
-    <FileText className="w-4 h-4 text-gray-500 flex-shrink-0" />
+  <div className="flex items-center gap-3 px-3 py-2.5 bg-bg-secondary border border-b border-border-light rounded-lg group">
+    <FileText className="w-4 h-4 text-text-muted flex-shrink-0" />
 
     <div className="flex-1 min-w-0">
-      <p className="text-sm text-gray-300 truncate">{doc.fileName}</p>
+      <p className="text-sm text-text-primary truncate">{doc.fileName}</p>
       <div className="flex items-center gap-2 mt-0.5">
-        <Clock className="w-3 h-3 text-gray-600" />
-        <span className="text-xs text-gray-600">
+        <Clock className="w-3 h-3 text-text-muted" />
+        <span className="text-xs text-text-muted">
           {formatDate(doc.uploadedAt)}
         </span>
         {doc.jdText && (
@@ -43,7 +43,7 @@ const CvDocumentItem: React.FC<CvDocumentItemProps> = ({
       title={
         !selectedTrackId ? "Select a track to evaluate" : "Analyze with AI"
       }
-      className="flex items-center gap-1 px-2 py-1 rounded text-xs bg-purple-600/10 text-purple-400 hover:bg-purple-600/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      className="flex items-center gap-1 px-2 py-1 rounded text-xs bg-bg-active/10 text-text-active hover:bg-bg-active/20 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
     >
       {isEvaluating ? (
         <Loader2 className="w-3 h-3 animate-spin" />

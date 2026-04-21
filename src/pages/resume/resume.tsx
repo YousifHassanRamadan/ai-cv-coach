@@ -18,7 +18,7 @@ const ResumePage = () => {
 
   console.log("CV Evaluation:", cvEvaluation);
   return (
-    <div className="min-h-full bg-[#0a0a0f] text-white p-8">
+    <div className="min-h-full bg-bg-primary  p-8">
       {/* Header */}
       <PageHeader
         title="Resume Intelligence"

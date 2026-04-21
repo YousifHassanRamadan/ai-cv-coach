@@ -18,8 +18,8 @@ const Link: React.FC<TLinkProps> = ({ text, link, collapsed }) => {
           py-2.5
           ${
             isActive
-              ? "bg-primary text-white"
-              : "text-gray-400 hover:bg-primary/50 hover:text-white"
+              ? "bg-bg-active/20 text-text-active"
+              : "text-text-muted hover:bg-bg-active/20 hover:text-text-active"
           }
           `
         }
@@ -34,7 +34,7 @@ const Link: React.FC<TLinkProps> = ({ text, link, collapsed }) => {
               <Icon
                 size={20}
                 className={`flex-shrink-0 transition-all ${
-                  isActive ? "text-sidebar-active" : ""
+                  isActive ? "text-text-active" : ""
                 }`}
               />
             )}
@@ -59,7 +59,7 @@ const Link: React.FC<TLinkProps> = ({ text, link, collapsed }) => {
             pointer-events-none
             absolute left-full top-1/2 -translate-y-1/2 ml-3
             px-2.5 py-1.5 rounded-md text-xs font-medium whitespace-nowrap z-50
-            bg-gray-900 text-white shadow-lg
+            bg-bg-active/20 text-text-muted shadow-lg
             opacity-0 scale-95
             group-hover:opacity-100 group-hover:scale-100
             transition-all duration-150
@@ -68,7 +68,7 @@ const Link: React.FC<TLinkProps> = ({ text, link, collapsed }) => {
         >
           {text}
           {/* Arrow pointing left */}
-          <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-gray-900" />
+          <span className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-border-light" />
         </div>
       )}
     </div>

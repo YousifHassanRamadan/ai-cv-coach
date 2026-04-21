@@ -7,13 +7,10 @@ const Logout = () => {
   const { mutate: logout, isPending } = useLogout(navigate);
 
   return (
-    <div
-      className="rounded-xl border border-yellow-500/20 p-6"
-      style={{ background: "rgba(234, 179, 8, 0.05)" }}
-    >
+    <div className="rounded-xl border border-border-light bg-bg-subcard p-6">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-yellow-400 text-lg">⚠️</span>
-        <h2 className="text-white font-semibold text-base">Session</h2>
+        <h2 className="text-text-primary font-semibold text-base">Session</h2>
       </div>
 
       <div className="rounded-lg border border-white/10 bg-white/5 px-5 py-4 flex items-center justify-between">
