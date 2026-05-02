@@ -5,8 +5,8 @@ import { useSendMessage } from "../../../../api/chats";
 
 export default function ChatInput({
   chatId,
-  onSend,
   isSending = false,
+  onSendStart,
 }: ChatInputProps) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -23,8 +23,9 @@ export default function ChatInput({
   const handleSend = () => {
     const trimmed = value.trim();
     if (!trimmed || isSending) return;
-    sendMessage({ message: trimmed });
+    onSendStart?.(trimmed);
     setValue("");
+    sendMessage({ message: trimmed });
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

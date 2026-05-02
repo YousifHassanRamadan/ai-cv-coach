@@ -6,6 +6,7 @@ import { useCvDocuments } from "../../../../api/cv";
 import CvDocumentItem from "./cv-document-item/cv-document-item";
 import WeightProfilesCard from "./weight-profiles-card/weight-profiles-card";
 import ContinueButton from "../../../common/continue-button/continue-button";
+import { Link } from "react-router-dom";
 
 const weightProfiles: WeightProfile[] = [
   {
@@ -134,7 +135,14 @@ const StyleStep = ({
           </div>
         ) : cvDocuments.length === 0 ? (
           <div className="bg-bg-card border-2 border-dashed border-border-light rounded-xl p-8 text-center text-text-muted text-sm">
-            No CVs uploaded yet. Upload one to get started.
+            <p>No CVs uploaded yet.</p>
+
+            <Link
+              to="/resume"
+              className="mt-2 inline-block text-blue-500 font-semibold underline underline-offset-4 hover:text-text-active transition-colors duration-200"
+            >
+              Upload one to get started
+            </Link>
           </div>
         ) : (
           <div className="flex flex-wrap gap-2">

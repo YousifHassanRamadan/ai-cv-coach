@@ -16,9 +16,12 @@ import { useDashboardStats } from "../../api/dashboard";
 import { useMe } from "../../api/profile";
 import { useInterviewHistory } from "../../api/interviews";
 import DashboardStats from "../../components/feature/dashboard/dashboard-stats/dashboard-stats";
+import { useEffect, useState } from "react";
 
 const DashboardPage = () => {
   const navigation = useNavigate();
+
+  const [greeting, setGreeting] = useState("");
 
   const {
     data: dashboardStats,
@@ -50,13 +53,39 @@ const DashboardPage = () => {
 
   console.log("dashboardStats:", dashboardStats);
 
+  useEffect(() => {
+    const updateGreeting = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      if (hour >= 5 && hour < 12) {
+        setGreeting("Good Morning ☀️");
+      } else if (hour >= 12 && hour < 18) {
+        setGreeting("Good Afternoon 🌤️");
+      } else if (hour >= 18 && hour < 24) {
+        setGreeting("Good Evening 🌙");
+      } else {
+        setGreeting("Good Night 🌌");
+      }
+    };
+
+    updateGreeting();
+
+    const interval = setInterval(updateGreeting, 60 * 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // console.log("Interview History:", interviewHistory);
+
+  console.log(import.meta.env.VITE_ELEVENLABS_API_KEY);
+
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary px-4 sm:px-6 md:px-8 py-4 sm:py-6 space-y-4 sm:space-y-6">
       {/* Greeting + Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
         <div className="flex-1">
           <h1 className="text-2xl sm:text-3xl font-bold">
-            Good afternoon,{" "}
+            {greeting},{" "}
             <span className="text-text-active">
               {isUserLoading
                 ? "Loading..."
@@ -67,7 +96,7 @@ const DashboardPage = () => {
             👋
           </h1>
           <p className="text-text-muted mt-1 text-sm sm:text-base">
-            Ready to ace your next interview? Let's practice!
+            Ready to succeed in your next interview? Let's practice!
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
@@ -112,7 +141,7 @@ const DashboardPage = () => {
               </>
             ) : (
               <>
-                {interviewHistory?.map((session, i) => (
+                {interviewHistory?.slice(0, 5)?.map((session, i) => (
                   <Sessions
                     key={i}
                     id={session.id}
@@ -124,6 +153,7 @@ const DashboardPage = () => {
                     endedAt={session.endedAt} // placeholder if endedAt isn't available
                     difficulty={session.difficulty ?? "medium"}
                     weightProfile={session.weightProfile ?? ""}
+                    index={i}
                   />
                 ))}
               </>

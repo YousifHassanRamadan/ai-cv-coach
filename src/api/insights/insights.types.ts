@@ -47,6 +47,7 @@ export interface FinalScores {
     fluency_weight: number;
     head_pose_weight: number;
     eye_contact_weight: number;
+    answer_relevance_weight: number;
   };
 }
 

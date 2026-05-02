@@ -72,18 +72,23 @@ export const deriveImprovements = (scores: {
   headPose: number;
   answerRelevance: number | null;
 }): string[] => {
+  if (!scores) {
+    return ["You completed the full interview — great commitment!"];
+  }
+
   const items: string[] = [];
-  if (toPercent(scores.fluency) < 70)
+
+  if (scores.fluency != null && toPercent(scores.fluency) < 70)
     items.push("Work on reducing filler words and improving speech fluency.");
-  if (toPercent(scores.eyeContact) < 70)
+  if (scores.eyeContact != null && toPercent(scores.eyeContact) < 70)
     items.push(
       "Maintain more consistent eye contact to appear confident on camera.",
     );
-  if (toPercent(scores.headPose) < 70)
+  if (scores.headPose != null && toPercent(scores.headPose) < 70)
     items.push(
       "Keep your head position more stable and centred during answers.",
     );
-  if (toPercent(scores.answerRelevance ?? 0) < 70)
+  if (scores.answerRelevance != null && toPercent(scores.answerRelevance) < 70)
     items.push("Focus answers more tightly on the keywords in each question.");
   if (items.length === 0)
     items.push("Continue practising structured answers using the STAR method.");

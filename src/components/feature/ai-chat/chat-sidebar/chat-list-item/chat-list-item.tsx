@@ -1,13 +1,21 @@
 import { MessageSquareIcon } from "lucide-react";
 import type { ChatListItemProps } from "./chat-list-item.types";
 
+function getMessage(message: string | { en: string; ar: string }): string {
+  if (typeof message === "string") return message;
+  return message.en || message.ar || "";
+}
+
 export default function ChatListItem({
   chat,
   isActive,
   onClick,
 }: ChatListItemProps) {
   const lastMessage = chat.messages?.[chat.messages.length - 1];
-  const preview = lastMessage?.message ?? "No messages yet";
+  const preview = lastMessage?.message
+    ? getMessage(lastMessage.message) // ✅ was: lastMessage?.message (raw object)
+    : "No messages yet";
+
   const formattedDate = new Date(chat.createdAt).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",

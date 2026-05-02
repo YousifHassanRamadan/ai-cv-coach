@@ -13,9 +13,20 @@ export default function ChatWindow({
   const { data: chat, isLoading } = useChatDetails(chatId);
   const bottomRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  const [pendingMessage, setPendingMessage] = useState<string | null>(null);
+
+  const scrollToBottom = () => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    if (!chat?.messages) return;
+
+    scrollToBottom(); // لما الرد ييجي
+    setPendingMessage(null); // شيل الـ pending
   }, [chat?.messages]);
+
+  console.log("chat?.messages", chat?.messages);
 
   return (
     <div className="flex flex-col h-full">
@@ -30,28 +41,69 @@ export default function ChatWindow({
         <div className="max-w-3xl mx-auto px-4 py-6 space-y-1">
           {isLoading ? (
             <MessagesSkeleton />
-          ) : chat?.messages.length === 0 ? (
+          ) : chat?.messages.length === 0 && !pendingMessage ? (
             <EmptyMessages />
           ) : (
-            chat?.messages.map((msg, idx) => (
-              <MessageBubble
-                key={msg.id}
-                message={msg}
-                isFirst={
-                  idx === 0 || chat.messages[idx - 1]?.sender !== msg.sender
-                }
-                isLast={
-                  idx === chat.messages.length - 1 ||
-                  chat.messages[idx + 1]?.sender !== msg.sender
-                }
-              />
-            ))
+            <>
+              {chat?.messages.map((msg, idx) => (
+                <MessageBubble
+                  key={msg.id}
+                  message={msg}
+                  isFirst={
+                    idx === 0 || chat.messages[idx - 1]?.sender !== msg.sender
+                  }
+                  isLast={
+                    idx === chat.messages.length - 1 ||
+                    chat.messages[idx + 1]?.sender !== msg.sender
+                  }
+                />
+              ))}
+
+              {/* 🟢 رسالة اليوزر المؤقتة */}
+              {pendingMessage && (
+                <MessageBubble
+                  key="pending-user"
+                  message={{
+                    id: "pending-user",
+                    sender: "user",
+                    message: { en: pendingMessage, ar: "" },
+                    createdAt: new Date().toISOString(),
+                  }}
+                  isFirst
+                  isLast
+                />
+              )}
+
+              {/* 🤖 AI typing */}
+              {pendingMessage && (
+                <MessageBubble
+                  key="pending-ai"
+                  message={{
+                    id: "pending-ai",
+                    sender: "assistant",
+                    message: { en: "...", ar: "" },
+                    createdAt: new Date().toISOString(),
+                  }}
+                  isFirst
+                  isLast
+                  isTyping
+                />
+              )}
+            </>
           )}
           <div ref={bottomRef} />
         </div>
       </div>
 
-      <ChatInput chatId={chatId} />
+      <ChatInput
+        chatId={chatId}
+        onSendStart={(msg) => {
+          setPendingMessage(msg);
+          requestAnimationFrame(() => {
+            scrollToBottom();
+          });
+        }}
+      />
     </div>
   );
 }

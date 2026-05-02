@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MessageSquare } from "lucide-react";
 import type { AIAvatarProps } from "./aI-avatar.types";
 
@@ -6,15 +6,24 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
   isListening,
   cameraEnabled,
   videoRef,
+  stream,
 }) => {
   const mode = localStorage.getItem("interview-mode");
+
+  useEffect(() => {
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream, cameraEnabled, videoRef]);
+
   return (
-    <div className="flex flex-col items-center gap-4 sm:gap-6">
+    <div className="flex flex-col items-center gap-2 sm:gap-6">
       {cameraEnabled && mode === "video" ? (
         <video
           ref={videoRef}
           autoPlay
           playsInline
+          muted
           className="w-full max-w-lg rounded mb-4 border border-border-active"
         />
       ) : (
@@ -28,26 +37,25 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
           </div>
 
           {/* Avatar with ripple rings */}
-          <div className="relative flex items-center justify-center">
+          <div className="relative flex items-center justify-center w-40 h-40 sm:w-60 sm:h-60 lg:w-72 lg:h-72 overflow-hidden">
             {/* Ripple rings — only when listening */}
             {isListening && (
               <>
                 <div
-                  className="absolute w-44 h-44 sm:w-52 sm:h-52 rounded-full border border-border-active animate-ping"
+                  className="absolute w-32 h-32 sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-full border border-border-active animate-ping"
                   style={{ animationDuration: "1.5s" }}
                 />
                 <div
-                  className="absolute w-52 h-52 sm:w-60 sm:h-60 rounded-full border border-border-active animate-ping"
+                  className="absolute w-40 h-40 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full border border-border-active animate-ping"
                   style={{ animationDuration: "2s" }}
                 />
               </>
             )}
 
             {/* Main circle */}
-            <div className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-bg-active flex items-center justify-center z-10">
+            <div className="w-20 h-20 sm:w-32 sm:h-32 lg:w-40 lg:h-40 rounded-full bg-bg-active flex items-center justify-center z-10">
               <svg
-                width="52"
-                height="52"
+                className="w-8 h-8 sm:w-12 sm:h-12"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="rgba(255,255,255,0.9)"
@@ -64,7 +72,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
           </div>
 
           {/* Sound bars */}
-          <div className="flex items-center gap-1 h-8">
+          <div className="flex items-center gap-1 h-5 sm:h-8">
             {[0.7, 0.9, 0.6, 0.8, 1].map((duration, i) => (
               <div
                 key={i}
@@ -81,7 +89,7 @@ const AIAvatar: React.FC<AIAvatarProps> = ({
             ))}
           </div>
 
-          <span className="text-text-muted text-xs sm:text-sm">
+          <span className="text-text-muted text-xs sm:text-sm hidden sm:block">
             AI Interviewer
           </span>
         </>

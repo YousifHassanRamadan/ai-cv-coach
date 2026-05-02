@@ -41,7 +41,7 @@ const RoleStep = ({
 }: RoleStepProps) => {
   return (
     <div className="animate-fadeIn">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-2">Choose Your Role</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-2">Choose Your Track</h2>
       <p className="text-text-muted mb-6 sm:mb-8 text-sm sm:text-base">
         Select the position you're interviewing for
       </p>

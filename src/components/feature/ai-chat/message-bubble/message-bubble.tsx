@@ -1,10 +1,17 @@
 import { BotIcon, UserIcon } from "lucide-react";
 import type { MessageBubbleProps } from "./message-bubble.types";
 
+/** Safely extract displayable text from string | {en, ar} */
+function getMessage(message: string | { en: string; ar: string }): string {
+  if (typeof message === "string") return message;
+  return message.en;
+}
+
 export default function MessageBubble({
   message,
   isFirst,
   isLast,
+  isTyping = false,
 }: MessageBubbleProps) {
   const isAssistant = message.sender === "assistant";
   const formattedTime = new Date(message.createdAt).toLocaleTimeString(
@@ -37,12 +44,7 @@ export default function MessageBubble({
         className={`max-w-[75%] sm:max-w-[65%] ${!isAssistant ? "flex flex-col items-end" : ""}`}
       >
         {isFirst && (
-          <p
-            className={`
-              "text-[10px] font-medium mb-1 px-1",
-              ${isAssistant ? "text-text-muted" : "text-text-muted"}
-            `}
-          >
+          <p className="text-[10px] font-medium mb-1 px-1 text-text-muted">
             {isAssistant ? "Assistant" : "You"}
           </p>
         )}
@@ -54,7 +56,15 @@ export default function MessageBubble({
               : `bg-bg-active text-white ${isFirst ? "rounded-2xl rounded-tr-sm" : "rounded-2xl"} ${!isLast ? "rounded-br-sm" : ""}`
           }`}
         >
-          {message.message}
+          {isTyping ? (
+            <span className="flex gap-1 items-center py-1">
+              <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce" />
+              <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce [animation-delay:.15s]" />
+              <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce [animation-delay:.3s]" />
+            </span>
+          ) : (
+            getMessage(message.message)
+          )}
         </div>
 
         {isLast && (

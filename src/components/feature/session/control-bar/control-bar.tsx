@@ -12,7 +12,7 @@ const ControlBar: React.FC<ControlBarProps> = ({
   isLastQuestion,
 }) => {
   return (
-    <div className="flex flex-col items-center gap-4 sm:gap-6">
+    <div className="flex flex-col items-center gap-2 sm:gap-6">
       {/* Icon controls */}
       <div className="flex items-center gap-2 sm:gap-3">
         <button

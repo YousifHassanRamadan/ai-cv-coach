@@ -41,6 +41,8 @@ const InsightsPage = () => {
   const sessionId = getStoredSessionId();
   const { data, isLoading, isError, refetch } = useInterviewResults();
 
+  console.log("Fetched insights data:", data);
+
   // ── derived data (memoised so it's not recalculated on every render) ──
   const emotionData = useMemo(
     () => (data ? buildEmotionData(data.chunks) : []),
@@ -98,7 +100,7 @@ const InsightsPage = () => {
       <MatchedSkills skills={matchedSkills} />
 
       {/* Emotion chart */}
-      <EmotionTimelineChart data={emotionData} />
+      {/* <EmotionTimelineChart data={emotionData} /> */}
 
       {/* Feedback */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">

@@ -21,6 +21,7 @@ export const useStartInterview = () => {
       toast.success("Interview started successfully!");
       localStorage.removeItem("interview-token");
       localStorage.removeItem("session-id");
+      queryClient.removeQueries({ queryKey: ["chunk-response"] });
 
       localStorage.setItem("interview-token", data.interviewToken);
       localStorage.setItem("session-id", data.sessionId);

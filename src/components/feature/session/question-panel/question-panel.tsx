@@ -41,32 +41,51 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
   const question = questionText[currentIndex];
   const diff = question ? getDifficulty(question.difficulty) : null;
 
+  // ── NEW: detect if the current question has an Arabic version ─────────────
+  const hasArabic = Boolean(question?.text_ar?.trim());
+
+  const sessionId = localStorage.getItem("session-id");
+
   const { data: chunkResponse } = useQuery<ChunkProcessResponse>({
-    queryKey: ["chunk-response"],
+    queryKey: ["chunk-response", sessionId],
     enabled: false,
     queryFn: () => Promise.resolve(null as unknown as ChunkProcessResponse),
   });
 
+  // console.log("question", question);
+
   return (
-    <div className="w-full sm:w-[340px] lg:w-[420px] bg-bg-primary border-t sm:border-t-0 sm:border-l border-border-light flex flex-col shrink-0">
-      <div className="p-4 sm:p-6 flex-1 flex flex-col">
+    <div className="w-full sm:w-[340px] lg:w-[420px] bg-bg-primary border-t sm:border-t-0 sm:border-l border-border-light flex flex-col shrink-0 overflow-y-auto sm:overflow-hidden">
+      <div className="p-3 sm:p-6 flex-1 flex flex-col sm:overflow-y-auto">
         {/* Label */}
-        <div className="flex items-center gap-2 text-text-muted mb-3 sm:mb-4">
+        <div className="flex items-center gap-2 text-text-muted mb-2 sm:mb-4">
           <MessageSquare className="w-4 h-4 shrink-0" />
           <span className="uppercase tracking-wider text-[10px] sm:text-xs font-semibold">
             Current Question
           </span>
         </div>
 
-        {/* Question text */}
-        <h2 className="text-base sm:text-xl font-normal leading-relaxed mb-4">
+        {/* English question text */}
+        <h2 className="text-sm sm:text-xl font-normal leading-relaxed mb-2 sm:mb-3">
+          Q{currentIndex + 1}. {""}
           {question?.text}
         </h2>
+
+        {/* ── NEW: Arabic question text (shown only when text_ar exists) ─── */}
+        {hasArabic && (
+          <p
+            className="text-base sm:text-lg font-normal leading-relaxed mb-4 text-text-muted"
+            dir="rtl"
+            lang="ar"
+          >
+            {question.text_ar}
+          </p>
+        )}
 
         {/* Difficulty badge */}
         {diff && (
           <span
-            className={`self-start inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium mb-6 ${diff.bg} ${diff.color}`}
+            className={`self-start inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border text-xs font-medium mb-3 sm:mb-6 ${diff.bg} ${diff.color}`}
           >
             <BarChart2 className="w-3 h-3" />
             {diff.label}
@@ -75,7 +94,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
 
         {/* Keywords */}
         {question?.keywords?.length > 0 && (
-          <div className="mb-6 sm:mb-8">
+          <div className="mb-3 sm:mb-8">
             <div className="flex items-center gap-1.5 text-text-muted text-[10px] uppercase tracking-wider font-semibold mb-2">
               <Hash className="w-3 h-3" />
               Keywords
@@ -94,7 +113,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
         )}
 
         {/* Progress segments */}
-        <div className="mb-6 sm:mb-8">
+        <div className="mb-3 sm:mb-8">
           <div className="flex gap-1.5">
             {Array.from({ length: totalQuestions }).map((_, index) => (
               <div

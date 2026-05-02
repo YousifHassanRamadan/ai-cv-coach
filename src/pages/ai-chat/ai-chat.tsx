@@ -19,7 +19,7 @@ export default function ChatPage() {
   };
 
   return (
-    <div className="flex h-screen bg-bg-primary text-text-primary overflow-hidden font-sans">
+    <div className="relative h-screen bg-bg-primary text-text-primary overflow-hidden font-sans">
       {/* Sidebar */}
       <ChatSidebar
         activeChatId={activeChatId}
@@ -31,7 +31,7 @@ export default function ChatPage() {
       />
 
       {/* Main Area */}
-      <main className="flex-1 flex flex-col overflow-hidden">
+      <main className="h-full flex flex-col overflow-hidden">
         {activeChatId ? (
           <ChatWindow
             chatId={activeChatId}

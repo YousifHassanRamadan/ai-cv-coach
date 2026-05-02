@@ -58,6 +58,24 @@ const SCORE_CARDS: Array<{
     subtitle: "Delivery & Presence",
     color: "#10b981",
   },
+  {
+    key: "eyeContact",
+    label: "Eye Contact",
+    subtitle: "Engagement & Confidence",
+    color: "#10b981",
+  },
+  {
+    key: "headPose",
+    label: "Head Pose",
+    subtitle: "Engagement & Confidence",
+    color: "#10b981",
+  },
+  {
+    key: "answerRelevance",
+    label: "Answer Relevance",
+    subtitle: "Content & Context",
+    color: "#10b981",
+  },
 ];
 
 const ScoreGrid = ({ finalScores }: ScoreGridProps) => (

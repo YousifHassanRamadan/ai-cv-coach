@@ -4,4 +4,5 @@ export interface ChatInputProps {
   chatId: string;
   onSend?: (chatId: string, message: string) => void;
   isSending?: boolean;
+  onSendStart?: (message: string) => void;
 }

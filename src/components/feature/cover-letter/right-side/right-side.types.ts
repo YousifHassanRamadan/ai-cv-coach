@@ -1,3 +1,6 @@
+import type { ListCoverLettersResponse } from "../../../../api/cover-letter";
+
 export type TRightSideProps = {
-  generatedLetter: string;
+  generatedLetter: ListCoverLettersResponse[];
+  isGeneratedLettersLoading: boolean;
 };

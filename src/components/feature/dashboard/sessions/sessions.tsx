@@ -1,6 +1,7 @@
 import { Clock, Video, CheckCircle2, Circle } from "lucide-react";
 import React from "react";
 import type { TSessionItem } from "./sessions.types";
+import { useNavigate } from "react-router-dom";
 
 const formatDate = (iso: string) => {
   const d = new Date(iso);
@@ -33,6 +34,8 @@ const Sessions: React.FC<TSessionItem> = ({
   status,
   totalScore,
   track,
+  index,
+  id,
 }) => {
   const score = totalScore !== null ? Math.round(totalScore * 100) : 0;
   const scoreColor = getScoreColor(score ?? 0);
@@ -43,10 +46,32 @@ const Sessions: React.FC<TSessionItem> = ({
   const isCompleted = status?.toLowerCase() === "completed";
   const diffStyle = difficultyStyles[difficulty] ?? difficultyStyles.custom;
 
+  const formatDuration = (duration: number) => {
+    const hours = Math.floor(duration / 60);
+    const minutes = duration % 60;
+
+    if (hours > 0) {
+      return `${hours}h ${minutes.toString().padStart(2, "0")}m`;
+    }
+
+    return `${minutes}m`;
+  };
+
+  const navigation = useNavigate();
+
+  const reviewSession = () => {
+    localStorage.setItem("session-id", id);
+    navigation(`/insights`);
+  };
+
   return (
-    <div className="flex items-center justify-between group bg-bg-subcard hover:bg-bg-active/20 rounded-xl px-4 py-3.5 transition-colors cursor-pointer">
+    <div
+      onClick={reviewSession}
+      className="flex items-center justify-between group bg-bg-subcard hover:bg-bg-active/20 rounded-xl px-4 py-3.5 transition-colors cursor-pointer"
+    >
       {/* Left */}
       <div className="flex items-center gap-3">
+        <span className="text-text-muted text-sm ">{index + 1}.</span>
         <div className="w-9 h-9 bg-gradient-to-br from-bg-active/10 to-bg-primary/10 border border-border-light rounded-lg flex items-center justify-center shrink-0">
           <Video size={15} className="text-text-active" />
         </div>
@@ -63,26 +88,28 @@ const Sessions: React.FC<TSessionItem> = ({
             <span className="text-text-muted text-[10px]">
               {questionCount} questions
             </span>
+            <div className="flex flex-nowrap items-center gap-1 text-xs">
+              <Circle size={12} className="text-gray-600" />
+              <span
+                className={isCompleted ? "text-emerald-400" : "text-gray-500"}
+              >
+                {status}
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Right */}
-      <div className="flex items-center gap-4">
+      <div className="block sm:flex items-center gap-4">
         {/* Status */}
-        <div className="hidden sm:flex items-center gap-1 text-xs">
-          <Circle size={12} className="text-gray-600" />
-          <span className={isCompleted ? "text-emerald-400" : "text-gray-500"}>
-            {status}
-          </span>
-        </div>
 
         {/* Duration */}
 
         {endedAt && (
           <div className="hidden sm:flex items-center gap-1 text-[11px] text-gray-600">
             <Clock size={11} />
-            {duration}m
+            {formatDuration(duration)}
           </div>
         )}
 

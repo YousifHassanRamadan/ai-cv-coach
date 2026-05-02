@@ -4,4 +4,5 @@ export interface MessageBubbleProps {
   message: ChatMessageItem;
   isFirst: boolean;
   isLast: boolean;
+  isTyping?: boolean;
 }

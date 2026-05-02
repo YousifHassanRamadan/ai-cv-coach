@@ -11,4 +11,5 @@ export type TSessionItem = {
     name: string;
     slug: string;
   };
+  index: number; // Added index to track the session's position in the list
 };

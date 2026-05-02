@@ -13,7 +13,7 @@ export const processChunk = async ({
   formData.append("chunk_id", chunk_id.toString());
   formData.append("video_file", video_file);
 
-  console.log("formData=>>", formData);
+  // console.log("formData=>>", formData);
 
   // 👇 Log before sending
   for (const [key, value] of formData.entries()) {

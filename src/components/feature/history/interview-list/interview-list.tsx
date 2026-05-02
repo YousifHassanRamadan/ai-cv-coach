@@ -13,8 +13,12 @@ const InterviewList: React.FC<InterviewListProps> = ({ interviews }) => {
 
   return (
     <div className="space-y-2 sm:space-y-3">
-      {interviews.map((interview) => (
-        <Sessions key={interview.id} {...interview} />
+      {interviews.map((interview, i) => (
+        <Sessions
+          key={interview.id}
+          {...interview}
+          index={interviews.length - 1 - i}
+        />
       ))}
     </div>
   );

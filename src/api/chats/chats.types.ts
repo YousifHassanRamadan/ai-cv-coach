@@ -12,7 +12,7 @@ export type ChatSender = "assistant" | "user";
 
 export interface ChatMessage {
   sender: ChatSender;
-  message: string;
+  message: { en: string; ar: string } | string;
   createdAt: string;
 }
 
@@ -33,7 +33,7 @@ export interface ChatsResponse {
 export interface ChatMessageItem {
   id: string;
   sender: ChatSender;
-  message: string;
+  message: string | { en: string; ar: string };
   createdAt: string;
 }
 

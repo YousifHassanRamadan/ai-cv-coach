@@ -9,10 +9,10 @@ import {
 } from "lucide-react";
 
 export const steps = [
-  { number: 1, label: "Role" },
+  { number: 1, label: "Tracks" },
   { number: 2, label: "Difficulty" },
-  { number: 3, label: "Style" },
-  { number: 4, label: "Setup" },
+  { number: 3, label: "Interviewer" },
+  { number: 4, label: "Equipments" },
 ];
 
 export const roles = [

@@ -1,32 +1,31 @@
 import React from "react";
 import type { TRightSideProps } from "./right-side.types";
 import { FileText } from "lucide-react";
+import LoadingText from "../../../common/loading/loading";
+import CvCard from "../cv-card/cv-card";
 
-const RightSide: React.FC<TRightSideProps> = ({ generatedLetter }) => {
+const RightSide: React.FC<TRightSideProps> = ({
+  generatedLetter,
+  isGeneratedLettersLoading,
+}) => {
   return (
-    <div className="bg-bg-card rounded-lg p-6 border border-border-card h-fit  ">
+    <div className="bg-bg-card rounded-lg p-6 border border-border-card h-fit ">
       <div className="flex items-center gap-2 mb-6">
         <FileText className="w-5 h-5 text-purple-500" />
         <h2 className="text-lg font-semibold">Generated Letter</h2>
       </div>
 
       {/* Empty State or Generated Content */}
-      <div className="min-h-[400px] flex items-center justify-center">
-        {generatedLetter ? (
+      <div className="max-h-[400px] overflow-y-auto flex items-center justify-center">
+        {isGeneratedLettersLoading ? (
+          <div className="text-center">
+            <LoadingText text="Generating your cover letter..." />
+          </div>
+        ) : generatedLetter.length > 0 ? (
           <div className="w-full">
-            <div className="bg-[#0f1419] rounded-lg p-6 border border-gray-700">
-              <p className="text-gray-300 whitespace-pre-wrap leading-relaxed">
-                {generatedLetter}
-              </p>
-            </div>
-            <div className="mt-4 flex gap-3">
-              <button className="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-lg transition font-medium">
-                Copy to Clipboard
-              </button>
-              <button className="flex-1 bg-transparent border border-gray-700 hover:border-purple-500 text-white py-3 rounded-lg transition font-medium">
-                Download PDF
-              </button>
-            </div>
+            {generatedLetter.map((letter) => (
+              <CvCard {...letter} key={letter.id} />
+            ))}
           </div>
         ) : (
           <div className="text-center">

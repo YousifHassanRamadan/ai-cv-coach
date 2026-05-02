@@ -12,7 +12,7 @@ const HintsPanel: React.FC<HintPanalProps> = ({ hints }) => {
   if (!hints?.length) return null;
 
   return (
-    <div className="mt-auto overflow-y-auto max-h-[400px] pt-4 border-t border-gray-800/50">
+    <div className="mt-auto overflow-y-auto max-h-[300px] pt-4 border-t border-gray-800/50 ">
       <div className="flex items-center gap-1.5 text-gray-500 text-[10px] uppercase tracking-wider font-semibold mb-3">
         <Info className="w-3 h-3" />
         Hints

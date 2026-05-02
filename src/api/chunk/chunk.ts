@@ -9,12 +9,15 @@ import { toast } from "sonner";
 
 export const useProcessChunk = () => {
   const queryClient = useQueryClient();
+
+  const sessionId = localStorage.getItem("session-id") || null;
+
   return useMutation<ChunkProcessResponse, Error, ProcessChunkPayload>({
     mutationFn: processChunk,
     onSuccess: (data) => {
       console.log("✅ Chunk success:", data); // 👈 see full response
       // toast.success("Chunk processed successfully!");
-      queryClient.setQueryData(["chunk-response"], data);
+      queryClient.setQueryData(["chunk-response", sessionId], data);
     },
     onError: (error) => {
       toast.error(`Failed to process chunk: ${error.message}`);
@@ -24,12 +27,16 @@ export const useProcessChunk = () => {
 };
 
 export const useProcessAudioChunk = () => {
+  const queryClient = useQueryClient();
+
+  const sessionId = localStorage.getItem("session-id") || null;
   return useMutation<ChunkProcessResponse, Error, ProcessAudioChunkPayload>({
     mutationFn: processAudioChunk,
 
     onSuccess: (data) => {
       toast.success("Audio processed successfully!");
       console.log("Processed audio chunk:", data);
+      queryClient.setQueryData(["chunk-response", sessionId], data);
     },
 
     onError: (error) => {

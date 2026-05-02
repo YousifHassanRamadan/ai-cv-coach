@@ -154,7 +154,7 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data, isLoading }) => {
         />
         <StatItem
           icon={Upload}
-          label="CV Uploads"
+          label="Uploaded Resumes"
           value={data.totalUploads ?? "—"}
           accent="sky"
         />
