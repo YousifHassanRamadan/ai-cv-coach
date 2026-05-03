@@ -23,9 +23,10 @@ const RoleCard = ({ icon, label, selected, onClick }: RoleCardProps) => {
 
       {/* Label */}
       <span
-        className={`font-medium transition-colors duration-300 text-sm sm:text-base ${
-          selected ? "text-white" : "text-text-muted"
-        }`}
+        className={`font-medium transition-colors duration-300
+  text-xs sm:text-sm md:text-base
+  min-w-0 break-words whitespace-normal text-center
+  ${selected ? "text-white" : "text-text-muted"}`}
       >
         {label}
       </span>

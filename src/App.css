@@ -170,11 +170,11 @@ body {
   min-height: 100vh;
 }
 
-/* Smooth theme transitions */
 *,
 *::before,
 *::after {
-  transition-property: background-color, border-color, color, box-shadow;
+  transition-property:
+    background-color, border-color, color, box-shadow, width, transform, opacity;
   transition-duration: 200ms;
   transition-timing-function: ease;
 }

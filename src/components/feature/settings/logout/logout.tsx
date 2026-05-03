@@ -13,7 +13,7 @@ const Logout = () => {
         <h2 className="text-text-primary font-semibold text-base">Session</h2>
       </div>
 
-      <div className="rounded-lg border border-white/10 bg-white/5 px-5 py-4 flex items-center justify-between">
+      <div className="rounded-lg border border-white/10 bg-white/5 px-5 py-4 flex items-center justify-between sm:flex-row flex-col gap-4">
         <div>
           <p className="text-yellow-400 font-medium text-sm">Sign Out</p>
           <p className="text-gray-400 text-sm mt-0.5">

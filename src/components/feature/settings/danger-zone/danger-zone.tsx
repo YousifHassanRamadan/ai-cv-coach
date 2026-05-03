@@ -10,7 +10,7 @@ const DangerZoneSection: React.FC<DangerZoneSectionProps> = ({
     <div className="bg-bg-subcard rounded-xl border border-border-light/30 p-5">
       <SectionHeader icon="⚠️" title="Danger Zone" variant="danger" />
 
-      <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-3.5 flex items-center justify-between">
+      <div className="bg-red-950/20 border border-red-900/30 rounded-lg p-3.5 flex items-center sm:flex-row flex-col gap-4 justify-between">
         <div>
           <div className="font-medium text-sm text-text-muted">
             Delete Account

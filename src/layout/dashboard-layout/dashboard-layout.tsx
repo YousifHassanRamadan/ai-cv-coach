@@ -51,12 +51,12 @@ const DashboardLayout = () => {
         <div className="flex-shrink-0">
           <Header />
         </div>
-        <div className="flex-1 overflow-y-auto pb-16 md:pb-0">
+        <div className="flex-1 overflow-y-auto   md:pb-0">
           <Outlet />
         </div>
       </div>
 
-      <BottomTabs navItems={navItems} />
+      {/* <BottomTabs navItems={navItems} /> */}
     </div>
   );
 };
