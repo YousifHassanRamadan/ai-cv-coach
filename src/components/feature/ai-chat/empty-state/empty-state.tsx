@@ -8,30 +8,33 @@ import {
 } from "lucide-react";
 import type { EmptyStateProps } from "./empty-state.types";
 import { Link } from "react-router-dom";
-
-const SUGGESTIONS = [
-  {
-    icon: <SparklesIcon size={14} />,
-    label: "Summarize a document",
-    prompt: "Can you help me summarize a document?",
-  },
-  {
-    icon: <ZapIcon size={14} />,
-    label: "Write some code",
-    prompt: "Help me write a function in TypeScript.",
-  },
-  {
-    icon: <ShieldIcon size={14} />,
-    label: "Answer a question",
-    prompt: "I have a question about…",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export default function EmptyState({
   onNewChat,
   isCreating,
   onToggleSidebar,
 }: EmptyStateProps) {
+  const { t } = useTranslation();
+
+  const SUGGESTIONS = [
+    {
+      icon: <SparklesIcon size={14} />,
+      label: t("emptyState2.suggestions.summarize.label"),
+      prompt: t("emptyState2.suggestions.summarize.prompt"),
+    },
+    {
+      icon: <ZapIcon size={14} />,
+      label: t("emptyState2.suggestions.code.label"),
+      prompt: t("emptyState2.suggestions.code.prompt"),
+    },
+    {
+      icon: <ShieldIcon size={14} />,
+      label: t("emptyState2.suggestions.question.label"),
+      prompt: t("emptyState2.suggestions.question.prompt"),
+    },
+  ];
+
   return (
     <div className="flex flex-col h-full ">
       {/* Header bar */}
@@ -46,7 +49,7 @@ export default function EmptyState({
           to="/"
           className="px-4 py-2 bg-bg-subcard text-text-primary rounded-lg hover:bg-bg-active/15 transition"
         >
-          Go Home
+          {t("emptyState2.header.goHome")}
         </Link>
       </header>
 
@@ -58,11 +61,10 @@ export default function EmptyState({
         </div>
 
         <h1 className="text-xl font-bold text-text-primary mb-2">
-          How can I help you?
+          {t("emptyState2.title")}
         </h1>
         <p className="text-text-secondary text-sm text-center max-w-xs mb-8">
-          Start a new chat and I'll assist you with anything — writing, coding,
-          analysis, and more.
+          {t("emptyState2.description")}
         </p>
 
         {/* Suggestion Cards */}
@@ -90,7 +92,9 @@ export default function EmptyState({
           className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-bg-active hover:opacity-90 text-white text-sm font-medium transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         >
           <PlusIcon size={16} />
-          {isCreating ? "Starting chat…" : "New Chat"}
+          {isCreating
+            ? t("emptyState2.buttons.starting")
+            : t("emptyState2.buttons.newChat")}
         </button>
       </div>
     </div>

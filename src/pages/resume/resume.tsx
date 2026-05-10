@@ -9,8 +9,11 @@ import { useTracks } from "../../api/tracks";
 import { useQuery } from "@tanstack/react-query";
 import type { EvaluateCvResponse } from "../../api/cv";
 import OptimizationTips from "../../components/feature/resume/optimization-tips/optimization-tips";
+import { useTranslation } from "react-i18next";
 
 const ResumePage = () => {
+  const { t } = useTranslation();
+
   const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
     queryKey: ["cv-evaluate"],
     enabled: false,
@@ -20,10 +23,7 @@ const ResumePage = () => {
   return (
     <div className="min-h-full bg-bg-primary  p-8">
       {/* Header */}
-      <PageHeader
-        title="Resume Intelligence"
-        subtitle="Upload your CV for AI-powered analysis and optimization"
-      />
+      <PageHeader title={t("resumeTitle")} subtitle={t("resumeSubtitle")} />
 
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
@@ -35,13 +35,9 @@ const ResumePage = () => {
           score={
             cvEvaluation ? cvEvaluation?.evaluation?.overall_score * 100 : 0
           }
-          title="ATS Score"
+          title={t("atsScore")}
           gradientColors={["#f59f0a", "#f59f0a"]}
-          description={
-            cvEvaluation
-              ? "Your ATS score systems"
-              : "you need to select a track and upload a CV to get an ATS score"
-          }
+          description={cvEvaluation ? t("atsScoreDesc") : t("atsScoreEmpty")}
           size={180}
           icon={TargetIcon}
         />
@@ -55,12 +51,12 @@ const ResumePage = () => {
                 100
               : 0
           }
-          title="Job Match"
+          title={t("jobMatch")}
           gradientColors={["#8b5cf6", "#8b5cf6"]}
           description={
             cvEvaluation
               ? cvEvaluation?.evaluation?.category_scores?.skills_match?.details
-              : "you need to select a track and upload a CV to get a job match score"
+              : t("jobMatchEmpty")
           }
           size={180}
           icon={DotSquare}

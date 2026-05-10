@@ -1,13 +1,15 @@
 import { Mail, MapPin } from "lucide-react";
 import type { ProfileInfoProps } from "./profile-info.types";
+import { useTranslation } from "react-i18next";
 
 const ProfileInfo = ({ name, role, email }: ProfileInfoProps) => {
+  const { t } = useTranslation();
   return (
     <div className="min-w-0">
       <h2 className="text-lg sm:text-xl font-semibold flex items-center gap-2 flex-wrap">
         <span className="truncate text-text-primary">{name}</span>
         <span className="bg-bg-active text-text-primary text-xs px-2 py-0.5 rounded font-medium shrink-0">
-          Pro
+          {t("profile.badge")}
         </span>
       </h2>
       <p className="text-text-muted text-sm mt-1 truncate">{role}</p>

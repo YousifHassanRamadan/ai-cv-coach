@@ -7,6 +7,7 @@ import {
 import type { ChatSidebarProps } from "./chat-sidebar.types";
 import { useChats } from "../../../../api/chats";
 import ChatListItem from "./chat-list-item/chat-list-item";
+import { useTranslation } from "react-i18next";
 
 export default function ChatSidebar({
   activeChatId,
@@ -17,6 +18,8 @@ export default function ChatSidebar({
   onToggle,
 }: ChatSidebarProps) {
   const { data, isLoading } = useChats();
+
+  const { t } = useTranslation();
 
   return (
     <>
@@ -37,7 +40,7 @@ flex flex-col
               <BotIcon size={15} className="text-text-primary" />
             </div>
             <span className="text-sm font-semibold tracking-wide text-text-primary">
-              AI Assistant
+              {t("chat.sidebar.title")}
             </span>
           </div>
           <button
@@ -56,7 +59,9 @@ flex flex-col
             className="w-full flex items-center gap-2 px-3 py-2.5 rounded-lg bg-bg-active hover:opacity-90 text-white text-sm font-medium transition-all disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <PlusIcon size={15} />
-            {isCreating ? "Starting..." : "New Chat"}
+            {isCreating
+              ? t("chat.sidebar.creating")
+              : t("chat.sidebar.newChat")}
           </button>
         </div>
 
@@ -66,12 +71,12 @@ flex flex-col
             <ChatListSkeleton />
           ) : data?.chats.length === 0 ? (
             <p className="text-center text-text-muted text-xs mt-8 px-4">
-              No chats yet. Start a new one!
+              {t("chat.sidebar.empty")}
             </p>
           ) : (
             <>
               <p className="text-text-muted text-[10px] uppercase tracking-widest px-2 py-2 font-semibold">
-                Recent
+                {t("chat.sidebar.recent")}
               </p>
               {data?.chats.map((chat) => (
                 <ChatListItem

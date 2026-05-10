@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { DeviceStatus, EquipmentStepProps } from "./equipment-step.types";
 import { Video } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const EquipmentStep = ({
   cameraEnabled,
@@ -19,6 +20,8 @@ const EquipmentStep = ({
   handleStartInterview,
   isStartingInterview,
 }: EquipmentStepProps) => {
+  const { t } = useTranslation();
+
   const [cameraStatus, setCameraStatus] = useState<DeviceStatus>("idle");
   const [micStatus, setMicStatus] = useState<DeviceStatus>("idle");
   const [micLevel, setMicLevel] = useState(0);
@@ -146,11 +149,11 @@ const EquipmentStep = ({
   };
 
   const statusLabel: Record<DeviceStatus, string> = {
-    idle: "Click to test",
-    requesting: "Waiting for permission…",
-    granted: "Connected",
-    denied: "Access denied — check browser settings",
-    error: "Device error — try again",
+    idle: t("equipment.status.idle"),
+    requesting: t("equipment.status.requesting"),
+    granted: t("equipment.status.granted"),
+    denied: t("equipment.status.denied"),
+    error: t("equipment.status.error"),
   };
 
   const cardBorder: Record<DeviceStatus, string> = {
@@ -163,9 +166,11 @@ const EquipmentStep = ({
 
   return (
     <div className="animate-fadeIn">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-2">Equipment Check</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+        {t("equipment.title")}
+      </h2>
       <p className="text-text-muted mb-8 sm:mb-10 text-sm sm:text-base">
-        Test your devices before the interview starts
+        {t("equipment.subtitle")}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
@@ -190,7 +195,7 @@ const EquipmentStep = ({
               </div>
               <div>
                 <p className="text-sm font-semibold text-text-primary">
-                  Camera
+                  {t("equipment.camera")}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <StatusIcon status={cameraStatus} />
@@ -211,10 +216,10 @@ const EquipmentStep = ({
                 }`}
             >
               {cameraStatus === "granted"
-                ? "Disable"
+                ? t("equipment.disable")
                 : cameraStatus === "requesting"
                   ? "…"
-                  : "Test"}
+                  : t("equipment.test")}
             </button>
           </div>
 
@@ -241,8 +246,7 @@ const EquipmentStep = ({
           {/* Denied help text */}
           {cameraStatus === "denied" && (
             <p className="text-xs text-red-400/80 leading-relaxed">
-              Click the <strong className="text-red-300">lock icon</strong> in
-              your browser's address bar → allow Camera → refresh.
+              {t("equipment.cameraHelp")}
             </p>
           )}
         </div>
@@ -268,7 +272,7 @@ const EquipmentStep = ({
               </div>
               <div>
                 <p className="text-sm font-semibold text-text-primary">
-                  Microphone
+                  {t("equipment.microphone")}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
                   <StatusIcon status={micStatus} />
@@ -289,10 +293,10 @@ const EquipmentStep = ({
                 }`}
             >
               {micStatus === "granted"
-                ? "Disable"
+                ? t("equipment.disable")
                 : micStatus === "requesting"
                   ? "…"
-                  : "Test"}
+                  : t("equipment.test")}
             </button>
           </div>
 
@@ -325,7 +329,7 @@ const EquipmentStep = ({
             </div>
             {micLevel < 5 && (
               <p className="text-[10px] text-gray-600">
-                Speak to test your mic…
+                {t("equipment.micHint")}
               </p>
             )}
           </div>
@@ -333,8 +337,7 @@ const EquipmentStep = ({
           {/* Denied help text */}
           {micStatus === "denied" && (
             <p className="text-xs text-red-400/80 leading-relaxed">
-              Click the <strong className="text-red-300">lock icon</strong> in
-              your browser's address bar → allow Microphone → refresh.
+              {t("equipment.micHelp")}
             </p>
           )}
         </div>
@@ -351,14 +354,13 @@ const EquipmentStep = ({
             </div>
             <div>
               <h3 className="font-semibold text-base sm:text-lg text-teal-400">
-                All systems ready!
+                {t("equipment.readyTitle")}
               </h3>
               <p className="text-xs sm:text-sm text-gray-400">
-                {cameraEnabled && micEnabled
-                  ? "Camera and microphone are active"
-                  : cameraEnabled
-                    ? "Camera is active — microphone only mode"
-                    : "Microphone is active — audio only mode"}
+                {t("equipment.readyMessage", {
+                  camera: cameraEnabled,
+                  mic: micEnabled,
+                })}
               </p>
             </div>
           </div>
@@ -371,7 +373,7 @@ const EquipmentStep = ({
           onClick={onBack}
           className="px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 order-2 sm:order-1 text-sm sm:text-base"
         >
-          Back
+          {t("common.back")}
         </button>
         <button
           disabled={!allReady || isStartingInterview}
@@ -379,7 +381,7 @@ const EquipmentStep = ({
           className="group relative overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 hover:shadow-2xl hover:shadow-purple-500/50 disabled:from-gray-700 disabled:to-gray-700 disabled:cursor-not-allowed px-8 sm:px-10 py-3 sm:py-4 rounded-xl font-bold text-base sm:text-lg flex items-center justify-center gap-2 sm:gap-3 transition-all duration-300 disabled:shadow-none order-1 sm:order-2"
         >
           <Video size={18} className="sm:w-5 sm:h-5" />
-          {isStartingInterview ? "Starting..." : "Start Interview"}
+          {isStartingInterview ? t("equipment.starting") : t("equipment.start")}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
         </button>
       </div>

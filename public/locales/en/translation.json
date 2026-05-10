@@ -1,0 +1,531 @@
+{
+  "greeting": {
+    "morning": "Good Morning ☀️",
+    "afternoon": "Good Afternoon 🌤️",
+    "evening": "Good Evening 🌙",
+    "night": "Good Night 🌌"
+  },
+  "welcome": "Welcome back",
+  "readyMessage": "Ready to succeed in your next interview? Let's practice!",
+  "startInterview": "Start Interview",
+  "uploadCV": "Upload CV",
+  "recentSessions": "Recent Sessions",
+  "viewAll": "View all",
+  "loading": "Loading...",
+  "loadingHistory": "Loading interview history...",
+  "user": "User",
+  "totalInterviews": "Total Interviews",
+  "avgScore": "Avg Score",
+  "uploadedResumes": "Uploaded Resumes",
+  "lastActivity": "Last Activity",
+  "keepPracticing": "Keep practicing!",
+  "greatJob": "Great job!",
+  "sessionBreakdown": "Session Breakdown",
+  "total": "total",
+  "completed": "Completed",
+  "inProgress": "In Progress",
+  "other": "Other",
+  "questions": "questions",
+  "resumeTitle": "Resume Intelligence",
+  "resumeSubtitle": "Upload your CV for AI-powered analysis and optimization",
+  "atsScore": "ATS Score",
+  "atsScoreDesc": "Your ATS score systems",
+  "atsScoreEmpty": "You need to select a track and upload a CV to get an ATS score",
+  "jobMatch": "Job Match",
+  "jobMatchEmpty": "You need to select a track and upload a CV to get a job match score",
+  "uploadCvTitle": "Upload CV",
+  "selectTrack": "Select track",
+  "addJobDescription": "Add job description",
+  "uploadNew": "Upload new",
+  "dragDrop": "Drag & drop your CV here",
+  "browseFile": "Browse file",
+  "uploading": "Uploading...",
+  "evaluate": "Evaluate",
+  "delete": "Delete",
+  "noDocuments": "No CVs uploaded yet",
+  "loadingTracks": "Loading tracks...",
+  "chooseTrack": "Choose a track...",
+  "noTracks": "No tracks available",
+  "hide": "Hide",
+  "optional": "optional",
+  "jobDescriptionPlaceholder": "Paste job description here to improve match analysis...",
+  "uploadComplete": "Upload Complete!",
+  "uploadNewCv": "Upload New CV",
+  "dropCv": "Drop your CV here",
+  "browseFiles": "or click to browse (PDF, DOCX)",
+  "selectTrackFirst": "Select a track first",
+  "yourCVs": "Your CVs",
+  "noCVs": "No CVs uploaded yet",
+  "analyze": "Analyze",
+  "jd": "JD",
+  "selectTrackToEvaluate": "Select a track to evaluate",
+  "analyzeWithAI": "Analyze with AI",
+  "topSkills": "Top Skills",
+  "experienceRelevance": "Experience relevance",
+  "formatting": "Formatting",
+  "keywordCoverage": "Keyword coverage",
+  "skillsMatch": "Skills match",
+  "keywordAnalysis": "Keyword Analysis",
+  "matchedKeywords": "Matched Keywords",
+  "noMatchedKeywords": "No matched keywords found.",
+  "strengths": "Strengths",
+  "noStrengths": "No strengths detected.",
+  "missingKeywords": "Missing Keywords",
+  "noMissingKeywords": "No missing keywords found.",
+  "areasToImprove": "Areas to Improve",
+  "noAreasToImprove": "No areas to improve.",
+  "optimizationTips": "Optimization Tips",
+  "noOptimizationTips": "No optimization tips available.",
+  "coverLetterTitle": "Cover Letter AI",
+  "coverLetterSubtitle": "Generate a tailored cover letter optimized for ATS systems",
+  "companyJobDetails": "Company & Job Details",
+  "jobTitle": "Job title",
+  "jobTitlePlaceholder": "e.g., TechCorp",
+  "writingTone": "Writing Tone",
+  "tracksLoading": "Tracks Loading",
+  "generateCoverLetter": "Generate Cover Letter",
+  "generating": "Generating...",
+  "generatedLetter": "Generated Letter",
+  "generatingCoverLetter": "Generating your cover letter...",
+  "emptyState": "Your generated cover letter will appear here",
+  "interviewTitle": "AI Interview Practice",
+  "interviewSubtitle": "Set up your personalized interview session",
+  "difficulty": {
+    "1": {
+      "title": "Easy Mode",
+      "desc": "Basic foundational questions for those just starting out"
+    },
+    "2": {
+      "title": "Medium Mode",
+      "desc": "Standard industry questions for mid-level roles"
+    },
+    "3": {
+      "title": "Hard Mode",
+      "desc": "Advanced challenges for experienced professionals"
+    },
+    "4": {
+      "title": "Custom Mode",
+      "desc": "Tailored questions for your specific needs"
+    }
+  },
+  "roleStep": {
+    "title": "Choose Your Track",
+    "subtitle": "Select the position you're interviewing for",
+    "customPlaceholder": "e.g., DevOps Engineer",
+    "customLabel": "Or enter a custom role"
+  },
+  "stepper": {
+    "step": "Step"
+  },
+  "steps": {
+    "tracks": "Tracks",
+    "difficulty": "Difficulty",
+    "interviewer": "Interviewer",
+    "equipments": "Equipments"
+  },
+  "roles": {
+    "frontend": "Frontend Developer",
+    "backend": "Backend Developer",
+    "fullstack": "Full Stack Engineer",
+    "product": "Product Manager",
+    "ux": "UX Designer",
+    "data": "Data Scientist"
+  },
+  "styles": {
+    "friendly": {
+      "label": "Friendly Coach",
+      "description": "Supportive and encouraging"
+    },
+    "tough": {
+      "label": "Tough Interviewer",
+      "description": "Challenging and rigorous"
+    },
+    "technical": {
+      "label": "Technical Expert",
+      "description": "Deep technical focus"
+    }
+  },
+  "difficulty2": {
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "custom": "Custom"
+  },
+  "interview": {
+    "difficultyHeader": {
+      "title": "Set Difficulty Level",
+      "subtitle": "Adjust the complexity of interview questions"
+    },
+    "questions": {
+      "title": "Number of Questions",
+      "subtitle": "Choose how many questions you want in your session"
+    },
+    "experience": {
+      "title": "Experience Level",
+      "subtitle": "Tailor questions to your seniority",
+      "junior": "Junior",
+      "mid": "Mid",
+      "senior": "Senior",
+      "lead": "Lead"
+    },
+    "sessions": {
+      "quick": {
+        "title": "Quick Session",
+        "desc": "A short focused practice to warm up or test a specific topic fast."
+      },
+      "standard": {
+        "title": "Standard Session",
+        "desc": "A balanced interview simulation covering key areas comfortably."
+      },
+      "extended": {
+        "title": "Extended Session",
+        "desc": "A thorough practice round that digs deeper into your knowledge."
+      },
+      "full": {
+        "title": "Full Interview",
+        "desc": "A comprehensive mock interview close to a real-world experience."
+      },
+      "marathon": {
+        "title": "Marathon Session",
+        "desc": "An intensive deep-dive to rigorously stress-test your skills."
+      }
+    }
+  },
+
+  "styleStep": {
+    "title": "Choose Interviewer Style",
+    "subtitle": "Select the personality of your AI interviewer",
+    "weightProfile": {
+      "title": "Question Weight Profile",
+      "description": "How questions are distributed across categories"
+    },
+    "cv": {
+      "title": "Select Your CV",
+      "description": "Choose which CV to base your interview on",
+      "loading": "Loading your CVs...",
+      "empty": "No CVs uploaded yet",
+      "uploadCta": "Upload one to get started"
+    }
+  },
+  "common": {
+    "back": "Back"
+  },
+  "weightProfiles": {
+    "balanced": {
+      "label": "Balanced",
+      "description": "General interviews",
+      "tag": "General"
+    },
+    "technical": {
+      "label": "Technical",
+      "description": "Engineering roles",
+      "tag": "Engineering"
+    },
+    "behavioral": {
+      "label": "Behavioral",
+      "description": "Customer-facing",
+      "tag": "Customer"
+    },
+    "presentation": {
+      "label": "Presentation",
+      "description": "Public speaking",
+      "tag": "Speaking"
+    },
+    "audioOnly": {
+      "label": "Audio Only",
+      "description": "Audio-only mode",
+      "tag": "Audio"
+    },
+    "testing": {
+      "label": "Testing/Dev",
+      "description": "Testing & dev",
+      "tag": "Dev"
+    }
+  },
+  "equipment": {
+    "title": "Equipment Check",
+    "subtitle": "Test your devices before the interview starts",
+    "camera": "Camera",
+    "microphone": "Microphone",
+    "test": "Test",
+    "disable": "Disable",
+    "cameraHelp": "Click the lock icon in your browser and allow camera access.",
+    "micHelp": "Click the lock icon in your browser and allow microphone access.",
+    "status": {
+      "idle": "Click to test",
+      "requesting": "Waiting for permission...",
+      "granted": "Connected",
+      "denied": "Access denied",
+      "error": "Device error"
+    },
+    "readyTitle": "All systems ready!",
+    "readyMessage": "Camera and microphone are active",
+    "start": "Start Interview",
+    "starting": "Starting...",
+    "micHint": "Speak to test your mic…"
+  },
+  "profile": {
+    "title": "Profile",
+    "subtitle": "Manage your profile information and preferences",
+    "defaultName": "John Doe",
+    "defaultEmail": "john.doe@example.com",
+    "badge": "Pro",
+    "stats": {
+      "interviews": "Interviews",
+      "avgScore": "Avg Score",
+      "totalUploads": "Total Uploads"
+    },
+    "form": {
+      "saving": "Saving...",
+      "saveChanges": "Save Changes"
+    },
+    "fields": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email"
+    }
+  },
+  "feedback": {
+    "title": "Feedback",
+    "subtitle": "Share your thoughts to help us improve",
+    "form": {
+      "title": "Submit Feedback",
+      "success": "✓ Thank you! Your feedback has been submitted.",
+      "rating": "Rating",
+      "message": "Message",
+      "placeholder": "Tell us what you think...",
+      "submit": "Submit Feedback",
+      "submitting": "Submitting...",
+      "backHome": "Back to home"
+    },
+    "list": {
+      "title": "All Feedback",
+      "total": "total",
+      "emptyTitle": "No feedback submitted yet",
+      "emptySubtitle": "Be the first to share your thoughts"
+    }
+  },
+  "pagination": {
+    "page": "Page",
+    "of": "of"
+  },
+  "questions2": {
+    "empty": {
+      "search": "No questions match your search.",
+      "track": "No questions in this track.",
+      "default": "No questions available."
+    },
+    "detail": {
+      "selectTitle": "Select a question",
+      "selectSubtitle": "Click any card to see details"
+    },
+    "filter": {
+      "search": "Search questions...",
+      "difficulty": {
+        "All": "All",
+        "Easy": "Easy",
+        "Medium": "Medium",
+        "Hard": "Hard"
+      }
+    }
+  },
+  "tracks": {
+    "loading": "Loading...",
+    "all": "All Tracks",
+    "empty": "No tracks available"
+  },
+  "questionDetails": {
+    "trackCategory": "Track & Category",
+    "modelAnswer": "Model Answer",
+    "answerKeywords": "Answer Keywords",
+    "questionKeywords": "Question Keywords",
+    "added": "Added"
+  },
+  "chat": {
+    "sidebar": {
+      "title": "AI Assistant",
+      "newChat": "New Chat",
+      "creating": "Starting...",
+      "empty": "No chats yet. Start a new one!",
+      "recent": "Recent"
+    },
+    "list": {
+      "title": "Chat {{id}}…",
+      "emptyMessages": "No messages yet"
+    },
+    "empty": {
+      "title": "Start the conversation",
+      "subtitle": "Type a message below to begin"
+    },
+    "header": {
+      "title": "AI Assistant",
+      "status": "Online",
+      "messages": "{{count}} messages",
+      "goHome": "Go Home"
+    }
+  },
+  "placeholder": "Message AI Assistant…",
+  "enterHint": {
+    "part1": "Press",
+    "enter": "Enter",
+    "part2": "to send,",
+    "shiftEnter": "Shift+Enter",
+    "part3": "for new line"
+  },
+  "emptyState2": {
+    "header": {
+      "goHome": "Go Home"
+    },
+    "title": "How can I help you?",
+    "description": "Start a new chat and I'll assist you with anything — writing, coding, analysis, and more.",
+    "suggestions": {
+      "summarize": {
+        "label": "Summarize a document",
+        "prompt": "Can you help me summarize a document?"
+      },
+      "code": {
+        "label": "Write some code",
+        "prompt": "Help me write a function in TypeScript."
+      },
+      "question": {
+        "label": "Answer a question",
+        "prompt": "I have a question about…"
+      }
+    },
+    "buttons": {
+      "newChat": "New Chat",
+      "starting": "Starting chat…"
+    }
+  },
+  "history": {
+    "header": {
+      "title": "Interview History",
+      "subtitle": "Track your progress and review past interviews",
+      "newInterview": "New Interview"
+    },
+    "search": {
+      "loading": "Loading interview history..."
+    },
+    "filters": {
+      "searchPlaceholder": "Search interviews...",
+      "filterLabel": "Date"
+    },
+    "pageTitle": "Interview History",
+    "pageSubtitle": "Track your progress and review past interviews",
+    "newInterview": "New Interview",
+    "searchPlaceholder": "Search by role or company...",
+    "filterLabel": "Date",
+    "loading": "Loading interview history..."
+  },
+  "settings": {
+    "title": "Privacy & Settings",
+    "subtitle": "Manage your privacy preferences and data"
+  },
+  "dangerZone": {
+    "title": "Danger Zone",
+    "deleteTitle": "Delete Account",
+    "deleteSubtitle": "Permanently delete your account and all associated data",
+    "deleteButton": "Delete Account"
+  },
+  "deleteModal": {
+    "title": "Delete Account?",
+    "description": "This action cannot be undone. All your interview data, settings, and progress will be permanently deleted.",
+    "cancel": "Cancel",
+    "confirm": "Delete Account"
+  },
+  "logout": {
+    "session": "Session",
+    "title": "Sign Out",
+    "description": "End your current session and return to the login page",
+    "button": "Sign Out",
+    "loading": "Signing out..."
+  },
+  "languageSwitcher": {
+    "label": "Language"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "resume": "Resume",
+    "coverLetter": "Cover Letter",
+    "interview": "Interview",
+    "insights": "Insights",
+    "profile": "Profile",
+    "feedback": "Feedback",
+    "questions": "Questions",
+    "aiChat": "AI Chat",
+    "history": "History"
+  },
+  "sidebar": {
+    "settings": "Settings",
+    "collapse": "Collapse",
+    "expand": "Expand"
+  },
+  "nav2": {
+    "menu": "Menu",
+    "dashboard": "Dashboard",
+    "resume": "Resume",
+    "coverLetter": "Cover Letter",
+    "interview": "Interview",
+    "insights": "Insights",
+    "profile": "Profile",
+    "feedback": "Feedback",
+    "questions": "Questions",
+    "aiChat": "AI Chat",
+    "history": "History",
+    "settings": "Settings"
+  },
+  "continue-btn": "Continue",
+  "auth": {
+    "title": {
+      "signin": "Welcome back",
+      "signup": "Create account"
+    },
+    "subtitle": {
+      "signin": "Sign in to continue your interview prep.",
+      "signup": "Start your AI-powered interview journey."
+    },
+    "signin": {
+      "submit": "Sign In",
+      "submitting": "Signing In...",
+      "noAccount": "No account?",
+      "createOne": "Create one"
+    },
+    "signup": {
+      "submit": "Create Account",
+      "submitting": "Creating...",
+      "alreadyHaveAccount": "Already have an account?",
+      "signIn": "Sign in"
+    },
+    "fields": {
+      "email": {
+        "label": "Email",
+        "placeholder": "Enter your email"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "Enter your password"
+      },
+      "firstName": {
+        "label": "First Name",
+        "placeholder": "John"
+      },
+      "lastName": {
+        "label": "Last Name",
+        "placeholder": "Doe"
+      }
+    }
+  },
+  "processing": {
+    "title": "Processing Your Interview",
+    "steps": [
+      "Processing emotional cues",
+      "Analyzing your responses",
+      "Generating feedback",
+      "Preparing your report"
+    ]
+  },
+  "session": {
+    "noSessionTitle": "No Interview Found",
+    "noSessionDesc": "Complete an interview session first to view your insights and performance results here."
+  }
+}

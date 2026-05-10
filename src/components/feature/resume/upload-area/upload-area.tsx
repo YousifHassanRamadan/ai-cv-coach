@@ -3,6 +3,7 @@ import React from "react";
 import { CheckCircle, Upload, FileText } from "lucide-react";
 import OutlinedButton from "../../../common/outlined-button/outlined-button";
 import type { UploadAreaProps } from "./upload-area.types";
+import { useTranslation } from "react-i18next";
 
 const UploadArea: React.FC<UploadAreaProps> = ({
   uploadedFile,
@@ -14,6 +15,8 @@ const UploadArea: React.FC<UploadAreaProps> = ({
   onDragOver,
   onUploadNew,
 }) => {
+  const { t } = useTranslation();
+
   if (uploadedFile && !isUploading) {
     return (
       <div className="text-center py-6">
@@ -22,10 +25,10 @@ const UploadArea: React.FC<UploadAreaProps> = ({
             <CheckCircle className="w-7 h-7 text-green-500" strokeWidth={2} />
           </div>
         </div>
-        <p className="text-green-500 font-medium mb-1">Upload Complete!</p>
+        <p className="text-green-500 font-medium mb-1">{t("uploadComplete")}</p>
         <p className="text-xs text-gray-500 mb-4">{uploadedFile.name}</p>
         <div className="flex justify-center">
-          <OutlinedButton text="Upload New CV" onClick={onUploadNew} />
+          <OutlinedButton text={t("uploadNewCv")} onClick={onUploadNew} />
         </div>
       </div>
     );
@@ -39,7 +42,7 @@ const UploadArea: React.FC<UploadAreaProps> = ({
             <FileText className="w-7 h-7 text-text-active" strokeWidth={2} />
           </div>
         </div>
-        <p className="text-text-muted font-medium mb-4">Uploading...</p>
+        <p className="text-text-muted font-medium mb-4">{t("uploading")}</p>
         <div className="max-w-xs mx-auto">
           <div className="h-2 bg-bg-secondary rounded-full overflow-hidden">
             <div
@@ -70,13 +73,9 @@ const UploadArea: React.FC<UploadAreaProps> = ({
           <Upload className="w-6 h-6 text-text-active" strokeWidth={2} />
         </div>
       </div>
-      <p className="text-text-muted font-medium mb-1 text-sm">
-        Drop your CV here
-      </p>
+      <p className="text-text-muted font-medium mb-1 text-sm">{t("dropCv")}</p>
       <p className="text-xs text-text-muted">
-        {selectedTrackId
-          ? "or click to browse (PDF, DOCX)"
-          : "Select a track first"}
+        {selectedTrackId ? t("browseFiles") : t("selectTrackFirst")}
       </p>
       <input
         id="cv-upload-input"

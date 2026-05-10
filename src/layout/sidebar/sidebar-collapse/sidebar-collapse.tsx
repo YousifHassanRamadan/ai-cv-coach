@@ -2,14 +2,21 @@ import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { TSidebarCollapseProps } from "./sidebar-collapse.types";
 import Link from "../../../components/common/link/link";
+import { useTranslation } from "react-i18next";
 
 const SidebarCollapse: React.FC<TSidebarCollapseProps> = ({
   collapsed,
   setCollapsed,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col flex-shrink-0 border-t-2 border-border-light pt-3 overflow-hidden">
-      <Link text="Settings" link="/settings" collapsed={collapsed} />
+      <Link
+        text={t("sidebar.settings")}
+        link="/settings"
+        collapsed={collapsed}
+        textForTooltip={"settings"} // Pass the translated text for tooltip
+      />
 
       <button
         onClick={() => setCollapsed(!collapsed)}

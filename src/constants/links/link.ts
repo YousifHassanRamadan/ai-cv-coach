@@ -13,16 +13,28 @@ import {
 } from "lucide-react";
 
 export const LINKS = [
-  { text: "Dashboard", link: "/" },
-  { text: "Resume", link: "/resume" },
-  { text: "Cover Letter", link: "/cover-letter" },
-  { text: "Interview", link: "/interview" },
-  { text: "Insights", link: "/insights" },
-  { text: "Profile", link: "/profile" },
-  { text: "Feedback", link: "/feedback" },
-  { text: "Questions", link: "/question-bank" },
-  { text: "Ai Chat", link: "/ai-chat" },
-  { text: "History", link: "/history" },
+  { text: "nav.dashboard", link: "/", textForTooltip: "Dashboard" },
+  { text: "nav.resume", link: "/resume", textForTooltip: "Resume" },
+  {
+    text: "nav.coverLetter",
+    link: "/cover-letter",
+    textForTooltip: "Cover Letter",
+  },
+  {
+    text: "nav.interview",
+    link: "/interview",
+    textForTooltip: "Interview",
+  },
+  { text: "nav.insights", link: "/insights", textForTooltip: "Insights" },
+  { text: "nav.profile", link: "/profile", textForTooltip: "Profile" },
+  { text: "nav.feedback", link: "/feedback", textForTooltip: "Feedback" },
+  {
+    text: "nav.questions",
+    link: "/question-bank",
+    textForTooltip: "Questions",
+  },
+  { text: "nav.aiChat", link: "/ai-chat", textForTooltip: "AI Chat" },
+  { text: "nav.history", link: "/history", textForTooltip: "History" },
 ];
 
 export const ICON_MAP = {

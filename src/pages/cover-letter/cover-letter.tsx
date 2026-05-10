@@ -9,6 +9,7 @@ import {
   type CvResponse,
 } from "../../api/cover-letter";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 const CoverLetterPage = () => {
   const [jobTitle, setJobTitle] = useState("");
@@ -42,13 +43,15 @@ const CoverLetterPage = () => {
 
   console.log("Generated Letters List:", generatedLetters);
 
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-full bg-bg-primary text-text-primary p-8">
       {/* Header */}
 
       <PageHeader
-        title="Cover Letter AI"
-        subtitle="Generate a tailored cover letter optimized for ATS systems"
+        title={t("coverLetterTitle")}
+        subtitle={t("coverLetterSubtitle")}
       />
 
       {/* Main Grid */}

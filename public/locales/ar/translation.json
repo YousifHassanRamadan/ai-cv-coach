@@ -1,0 +1,559 @@
+{
+  "greeting": {
+    "morning": "صباح الخير ☀️",
+    "afternoon": "مساء الخير 🌤️",
+    "evening": "مساء الخير 🌙",
+    "night": "تصبح على خير 🌌"
+  },
+  "welcome": "مرحباً بعودتك",
+  "readyMessage": "مستعد تنجح في المقابلة الجاية؟ يلا نتدرب!",
+  "startInterview": "ابدأ المقابلة",
+  "uploadCV": "ارفع السيرة الذاتية",
+  "recentSessions": "أحدث الجلسات",
+  "viewAll": "عرض الكل",
+  "loading": "جاري التحميل...",
+  "loadingHistory": "جاري تحميل سجل المقابلات...",
+  "user": "مستخدم",
+  "totalInterviews": "إجمالي المقابلات",
+  "avgScore": "متوسط التقييم",
+  "uploadedResumes": "السير الذاتية المرفوعة",
+  "lastActivity": "آخر نشاط",
+  "keepPracticing": "استمر في التدريب!",
+  "greatJob": "عمل رائع!",
+  "sessionBreakdown": "تفصيل الجلسات",
+  "total": "الإجمالي",
+  "completed": "مكتمل",
+  "inProgress": "قيد التنفيذ",
+  "other": "أخرى",
+  "questions": "أسئلة",
+  "resumeTitle": "تحليل السيرة الذاتية",
+  "resumeSubtitle": "ارفع سيرتك الذاتية لتحليلها وتحسينها بالذكاء الاصطناعي",
+  "atsScore": "درجة ATS",
+  "atsScoreDesc": "هذه هي درجة نظام تتبع المتقدمين الخاصة بك",
+  "atsScoreEmpty": "يجب اختيار المسار ورفع السيرة الذاتية للحصول على درجة ATS",
+  "jobMatch": "مدى توافق الوظيفة",
+  "jobMatchEmpty": "يجب اختيار المسار ورفع السيرة الذاتية للحصول على درجة توافق الوظيفة",
+  "uploadCvTitle": "رفع السيرة الذاتية",
+  "selectTrack": "اختر المسار",
+  "addJobDescription": "إضافة وصف الوظيفة",
+  "uploadNew": "رفع ملف جديد",
+  "dragDrop": "اسحب وأفلت السيرة الذاتية هنا",
+  "browseFile": "اختر ملف",
+  "uploading": "جاري الرفع...",
+  "evaluate": "تقييم",
+  "delete": "حذف",
+  "noDocuments": "لا توجد سير ذاتية مرفوعة بعد",
+  "loadingTracks": "جاري تحميل المسارات...",
+  "chooseTrack": "اختر مسار...",
+  "noTracks": "لا توجد مسارات متاحة",
+  "hide": "إخفاء",
+  "optional": "اختياري",
+  "jobDescriptionPlaceholder": "الصق وصف الوظيفة هنا لتحسين تحليل التوافق...",
+  "uploadComplete": "تم الرفع بنجاح!",
+  "uploadNewCv": "رفع سيرة ذاتية جديدة",
+  "dropCv": "اسحب السيرة الذاتية هنا",
+  "browseFiles": "أو اضغط للاختيار (PDF, DOCX)",
+  "selectTrackFirst": "اختر مسار أولاً",
+  "yourCVs": "سيرك الذاتية",
+  "noCVs": "لا توجد سير ذاتية مرفوعة بعد",
+  "analyze": "تحليل",
+  "jd": "وصف وظيفة",
+  "selectTrackToEvaluate": "اختر مسار للتقييم",
+  "analyzeWithAI": "تحليل بالذكاء الاصطناعي",
+  "topSkills": "أهم المهارات",
+  "experienceRelevance": "مدى صلة الخبرة",
+  "formatting": "التنسيق",
+  "keywordCoverage": "تغطية الكلمات المفتاحية",
+  "skillsMatch": "تطابق المهارات",
+  "keywordAnalysis": "تحليل الكلمات المفتاحية",
+  "matchedKeywords": "الكلمات المتطابقة",
+  "noMatchedKeywords": "لا توجد كلمات مطابقة.",
+  "strengths": "نقاط القوة",
+  "noStrengths": "لا توجد نقاط قوة مكتشفة.",
+  "missingKeywords": "الكلمات المفقودة",
+  "noMissingKeywords": "لا توجد كلمات مفقودة.",
+  "areasToImprove": "نقاط تحتاج تحسين",
+  "noAreasToImprove": "لا توجد نقاط تحتاج تحسين.",
+  "optimizationTips": "نصائح التحسين",
+  "noOptimizationTips": "لا توجد نصائح تحسين متاحة.",
+  "coverLetterTitle": "خطاب التغطية بالذكاء الاصطناعي",
+  "coverLetterSubtitle": "إنشاء خطاب تغطية مخصص ومحسن لأنظمة تتبع المتقدمين (ATS)",
+  "companyJobDetails": "تفاصيل الشركة والوظيفة",
+  "jobTitle": "المسمى الوظيفي",
+  "jobTitlePlaceholder": "مثال: شركة تقنية",
+  "writingTone": "نبرة الكتابة",
+  "tracksLoading": "جاري تحميل المسارات",
+  "generateCoverLetter": "إنشاء خطاب التغطية",
+  "generating": "جاري الإنشاء...",
+  "generatedLetter": "الخطاب المُنشأ",
+  "generatingCoverLetter": "جاري إنشاء خطاب التغطية...",
+  "emptyState": "سيظهر خطاب التغطية هنا بعد الإنشاء",
+  "interviewTitle": "تدريب المقابلة بالذكاء الاصطناعي",
+  "interviewSubtitle": "قم بإعداد جلسة مقابلة مخصصة لك",
+  "difficulty": {
+    "1": {
+      "title": "سهل",
+      "desc": "أسئلة أساسية للمبتدئين"
+    },
+    "2": {
+      "title": "متوسط",
+      "desc": "أسئلة قياسية لمستوى متوسط في المجال"
+    },
+    "3": {
+      "title": "صعب",
+      "desc": "تحديات متقدمة للمحترفين ذوي الخبرة"
+    },
+    "4": {
+      "title": "مخصص",
+      "desc": "أسئلة مخصصة حسب احتياجك"
+    }
+  },
+  "roleStep": {
+    "title": "اختر المسار الخاص بك",
+    "subtitle": "اختر الوظيفة التي ستجري المقابلة عليها",
+    "customPlaceholder": "مثال: مهندس DevOps",
+    "customLabel": "أو أدخل وظيفة مخصصة"
+  },
+  "stepper": {
+    "step": "خطوة"
+  },
+  "steps": {
+    "tracks": "المسارات",
+    "difficulty": "الصعوبة",
+    "interviewer": "المحاور",
+    "equipments": "المعدات"
+  },
+  "steps": {
+    "tracks": "المسارات",
+    "difficulty": "الصعوبة",
+    "interviewer": "المحاور",
+    "equipments": "المعدات"
+  },
+  "roles": {
+    "frontend": "مطور واجهات أمامية",
+    "backend": "مطور خلفية",
+    "fullstack": "مطور متكامل",
+    "product": "مدير منتج",
+    "ux": "مصمم تجربة مستخدم",
+    "data": "عالم بيانات"
+  },
+  "styles": {
+    "friendly": {
+      "label": "مدرب ودود",
+      "description": "داعم ومحفّز"
+    },
+    "tough": {
+      "label": "مقابل صارم",
+      "description": "تحدي عالي ودقيق"
+    },
+    "technical": {
+      "label": "خبير تقني",
+      "description": "تركيز عميق على الجانب التقني"
+    }
+  },
+  "difficulty2": {
+    "easy": "سهل",
+    "medium": "متوسط",
+    "hard": "صعب",
+    "custom": "مخصص"
+  },
+  "interview": {
+    "difficultyHeader": {
+      "title": "تحديد مستوى الصعوبة",
+      "subtitle": "اضبط مستوى تعقيد أسئلة المقابلة"
+    },
+    "questions": {
+      "title": "عدد الأسئلة",
+      "subtitle": "اختر عدد الأسئلة التي تريدها في الجلسة"
+    },
+    "sessions": {
+      "quick": {
+        "title": "جلسة سريعة",
+        "desc": "تدريب قصير ومركّز للإحماء أو اختبار موضوع محدد بسرعة."
+      },
+      "standard": {
+        "title": "جلسة قياسية",
+        "desc": "محاكاة متوازنة تغطي أهم الجوانب بشكل مريح."
+      },
+      "extended": {
+        "title": "جلسة موسعة",
+        "desc": "تدريب أعمق يغوص في تفاصيل معرفتك بشكل أكبر."
+      },
+      "full": {
+        "title": "مقابلة كاملة",
+        "desc": "محاكاة شاملة قريبة من المقابلات الواقعية."
+      },
+      "marathon": {
+        "title": "جلسة مكثفة",
+        "desc": "تحدي عميق لاختبار مهاراتك بشكل صارم."
+      }
+    },
+    "experience": {
+      "title": "مستوى الخبرة",
+      "subtitle": "خصص الأسئلة حسب مستواك الوظيفي",
+      "junior": "مبتدئ",
+      "mid": "متوسط",
+      "senior": "متقدم",
+      "lead": "قائد"
+    }
+  },
+  "styleStep": {
+    "title": "اختر أسلوب المقابلة",
+    "subtitle": "حدد شخصية المقابلة الذكية",
+    "weightProfile": {
+      "title": "توزيع أسئلة المقابلة",
+      "description": "كيف يتم توزيع الأسئلة بين الفئات"
+    },
+    "cv": {
+      "title": "اختر السيرة الذاتية",
+      "description": "اختر السيرة التي ستُبنى عليها المقابلة",
+      "loading": "جاري تحميل السير الذاتية...",
+      "empty": "لا توجد سير ذاتية مرفوعة بعد",
+      "uploadCta": "ارفع واحدة للبدء"
+    }
+  },
+  "common": {
+    "back": "رجوع"
+  },
+  "weightProfiles": {
+    "balanced": {
+      "label": "متوازن",
+      "description": "مقابلات عامة",
+      "tag": "عام"
+    },
+    "technical": {
+      "label": "تقني",
+      "description": "وظائف هندسية",
+      "tag": "هندسة"
+    },
+    "behavioral": {
+      "label": "سلوكي",
+      "description": "وظائف تعامل مع العملاء",
+      "tag": "عملاء"
+    },
+    "presentation": {
+      "label": "عرض تقديمي",
+      "description": "التحدث أمام الجمهور",
+      "tag": "تحدث"
+    },
+    "audioOnly": {
+      "label": "صوت فقط",
+      "description": "وضع الصوت فقط",
+      "tag": "صوت"
+    },
+    "testing": {
+      "label": "اختبار/تطوير",
+      "description": "اختبار وتطوير",
+      "tag": "تطوير"
+    }
+  },
+  "equipment": {
+    "title": "فحص الأجهزة",
+    "subtitle": "اختبر أجهزتك قبل بدء المقابلة",
+    "camera": "الكاميرا",
+    "microphone": "الميكروفون",
+    "test": "اختبار",
+    "disable": "إيقاف",
+    "cameraHelp": "اضغط على علامة القفل في المتصفح واسمح بالكاميرا",
+    "micHelp": "اضغط على علامة القفل واسمح بالميكروفون",
+    "status": {
+      "idle": "اضغط للاختبار",
+      "requesting": "طلب إذن...",
+      "granted": "متصل",
+      "denied": "تم الرفض",
+      "error": "خطأ في الجهاز"
+    },
+    "readyTitle": "كل شيء جاهز!",
+    "readyMessage": "الكاميرا والميكروفون يعملان بشكل طبيعي",
+    "start": "ابدأ المقابلة",
+    "starting": "جاري البدء...",
+    "micHint": "تحدث لاختبار الميكروفون..."
+  },
+  "profile": {
+    "title": "الملف الشخصي",
+    "subtitle": "إدارة بياناتك وتفضيلاتك",
+    "defaultName": "جون دو",
+    "defaultEmail": "john.doe@example.com",
+    "badge": "محترف",
+    "stats": {
+      "interviews": "المقابلات",
+      "avgScore": "متوسط التقييم",
+      "totalUploads": "عدد الملفات المرفوعة"
+    },
+    "form": {
+      "saving": "جاري الحفظ...",
+      "saveChanges": "حفظ التغييرات"
+    },
+    "fields": {
+      "firstName": "الاسم الأول",
+      "lastName": "الاسم الأخير",
+      "email": "البريد الإلكتروني"
+    }
+  },
+  "feedback": {
+    "title": "التعليقات",
+    "subtitle": "شارك رأيك لمساعدتنا في التحسين",
+    "form": {
+      "title": "إرسال تعليق",
+      "success": "✓ شكراً لك! تم إرسال تعليقك.",
+      "rating": "التقييم",
+      "message": "الرسالة",
+      "placeholder": "اكتب رأيك هنا...",
+      "submit": "إرسال التعليق",
+      "submitting": "جاري الإرسال...",
+      "backHome": "العودة للرئيسية"
+    },
+    "list": {
+      "title": "كل التعليقات",
+      "total": "إجمالي",
+      "emptyTitle": "لا توجد تعليقات بعد",
+      "emptySubtitle": "كن أول من يشارك رأيه"
+    }
+  },
+  "pagination": {
+    "page": "صفحة",
+    "of": "من"
+  },
+  "questions2": {
+    "empty": {
+      "search": "لا توجد أسئلة تطابق البحث.",
+      "track": "لا توجد أسئلة في هذا المسار.",
+      "default": "لا توجد أسئلة متاحة."
+    },
+    "detail": {
+      "selectTitle": "اختر سؤالاً",
+      "selectSubtitle": "اضغط على أي بطاقة لعرض التفاصيل"
+    },
+    "filter": {
+      "search": "ابحث في الأسئلة...",
+      "difficulty": {
+        "All": "الكل",
+        "Easy": "سهل",
+        "Medium": "متوسط",
+        "Hard": "صعب"
+      }
+    }
+  },
+  "tracks": {
+    "loading": "جاري التحميل...",
+    "all": "كل المسارات",
+    "empty": "لا توجد مسارات متاحة"
+  },
+  "questionDetails": {
+    "trackCategory": "المسار والتصنيف",
+    "modelAnswer": "الإجابة النموذجية",
+    "answerKeywords": "كلمات مفتاحية للإجابة",
+    "questionKeywords": "كلمات مفتاحية للسؤال",
+    "added": "تمت الإضافة"
+  },
+  "chat": {
+    "sidebar": {
+      "title": "المساعد الذكي",
+      "newChat": "محادثة جديدة",
+      "creating": "جاري البدء...",
+      "empty": "لا توجد محادثات بعد. ابدأ واحدة!",
+      "recent": "الأحدث"
+    },
+    "list": {
+      "title": "محادثة {{id}}…",
+      "emptyMessages": "لا توجد رسائل بعد"
+    },
+    "empty": {
+      "title": "ابدأ المحادثة",
+      "subtitle": "اكتب رسالة بالأسفل للبدء"
+    },
+    "header": {
+      "title": "المساعد الذكي",
+      "status": "متصل",
+      "messages": "{{count}} رسائل",
+      "goHome": "الصفحة الرئيسية"
+    }
+  },
+  "placeholder": "اكتب رسالة للمساعد الذكي…",
+  "enterHint": {
+    "part1": "اضغط",
+    "enter": "Enter",
+    "part2": "للإرسال،",
+    "shiftEnter": "Shift+Enter",
+    "part3": "لسطر جديد"
+  },
+  "header": {
+    "goHome": "الصفحة الرئيسية"
+  },
+  "title": "كيف يمكنني مساعدتك؟",
+  "description": "ابدأ محادثة جديدة وسأساعدك في كل شيء — كتابة، برمجة، تحليل، والمزيد.",
+  "suggestions": [
+    {
+      "label": "تلخيص مستند",
+      "prompt": "هل يمكنك مساعدتي في تلخيص مستند؟"
+    },
+    {
+      "label": "كتابة كود",
+      "prompt": "ساعدني في كتابة دالة بـ TypeScript."
+    },
+    {
+      "label": "الإجابة على سؤال",
+      "prompt": "لدي سؤال حول…"
+    }
+  ],
+  "buttons": {
+    "newChat": "محادثة جديدة",
+    "starting": "جاري بدء المحادثة…"
+  },
+  "emptyState2": {
+    "header": {
+      "goHome": "الصفحة الرئيسية"
+    },
+    "title": "كيف يمكنني مساعدتك؟",
+    "description": "ابدأ محادثة جديدة وسأساعدك في كل شيء — كتابة، برمجة، تحليل، والمزيد.",
+    "suggestions": {
+      "summarize": {
+        "label": "تلخيص مستند",
+        "prompt": "هل يمكنك مساعدتي في تلخيص مستند؟"
+      },
+      "code": {
+        "label": "كتابة كود",
+        "prompt": "ساعدني في كتابة دالة بـ TypeScript."
+      },
+      "question": {
+        "label": "الإجابة على سؤال",
+        "prompt": "لدي سؤال حول…"
+      }
+    },
+    "buttons": {
+      "newChat": "محادثة جديدة",
+      "starting": "جاري بدء المحادثة…"
+    }
+  },
+  "history": {
+    "header": {
+      "title": "سجل المقابلات",
+      "subtitle": "تابع تقدمك وراجع المقابلات السابقة",
+      "newInterview": "مقابلة جديدة"
+    },
+    "search": {
+      "loading": "جاري تحميل سجل المقابلات..."
+    },
+    "filters": {
+      "searchPlaceholder": "ابحث في المقابلات...",
+      "filterLabel": "التاريخ"
+    },
+    "pageTitle": "سجل المقابلات",
+    "pageSubtitle": "تابع تقدمك وراجع المقابلات السابقة",
+    "newInterview": "مقابلة جديدة",
+    "searchPlaceholder": "ابحث حسب الوظيفة أو الشركة...",
+    "filterLabel": "التاريخ",
+    "loading": "جارٍ تحميل سجل المقابلات..."
+  },
+  "settings": {
+    "title": "الخصوصية والإعدادات",
+    "subtitle": "إدارة إعدادات الخصوصية والبيانات الخاصة بك"
+  },
+  "dangerZone": {
+    "title": "منطقة الخطر",
+    "deleteTitle": "حذف الحساب",
+    "deleteSubtitle": "حذف حسابك وكل البيانات المرتبطة به بشكل نهائي",
+    "deleteButton": "حذف الحساب"
+  },
+  "deleteModal": {
+    "title": "حذف الحساب؟",
+    "description": "لا يمكن التراجع عن هذا الإجراء. سيتم حذف جميع بيانات المقابلات والإعدادات والتقدم بشكل نهائي.",
+    "cancel": "إلغاء",
+    "confirm": "حذف الحساب"
+  },
+  "logout": {
+    "session": "الجلسة",
+    "title": "تسجيل الخروج",
+    "description": "إنهاء الجلسة الحالية والعودة إلى صفحة تسجيل الدخول",
+    "button": "تسجيل الخروج",
+    "loading": "جاري تسجيل الخروج..."
+  },
+  "languageSwitcher": {
+    "label": "اللغة"
+  },
+  "nav": {
+    "dashboard": "لوحة التحكم",
+    "resume": "السيرة الذاتية",
+    "coverLetter": "خطاب التغطية",
+    "interview": "المقابلة",
+    "insights": "الرؤى",
+    "profile": "الملف الشخصي",
+    "feedback": "التعليقات",
+    "questions": "بنك الأسئلة",
+    "aiChat": "الدردشة الذكية",
+    "history": "السجل"
+  },
+  "sidebar": {
+    "settings": "الإعدادات",
+    "collapse": "تصغير",
+    "expand": "توسيع"
+  },
+  "nav2": {
+    "menu": "القائمة",
+    "dashboard": "لوحة التحكم",
+    "resume": "السيرة الذاتية",
+    "coverLetter": "خطاب التغطية",
+    "interview": "المقابلة",
+    "insights": "الرؤى",
+    "profile": "الملف الشخصي",
+    "feedback": "التعليقات",
+    "questions": "الأسئلة",
+    "aiChat": "المحادثة الذكية",
+    "history": "السجل",
+    "settings": "الإعدادات"
+  },
+  "continue-btn": "الاستمرار",
+  "auth": {
+    "title": {
+      "signin": "مرحباً بعودتك",
+      "signup": "إنشاء حساب"
+    },
+    "subtitle": {
+      "signin": "سجّل الدخول لمتابعة التحضير للمقابلات.",
+      "signup": "ابدأ رحلتك في التحضير للمقابلات بالذكاء الاصطناعي."
+    },
+    "signin": {
+      "submit": "تسجيل الدخول",
+      "submitting": "جاري تسجيل الدخول...",
+      "noAccount": "ليس لديك حساب؟",
+      "createOne": "إنشاء حساب"
+    },
+    "signup": {
+      "submit": "إنشاء حساب",
+      "submitting": "جاري إنشاء الحساب...",
+      "alreadyHaveAccount": "لديك حساب بالفعل؟",
+      "signIn": "تسجيل الدخول"
+    },
+    "fields": {
+      "email": {
+        "label": "البريد الإلكتروني",
+        "placeholder": "أدخل بريدك الإلكتروني"
+      },
+      "password": {
+        "label": "كلمة المرور",
+        "placeholder": "أدخل كلمة المرور"
+      },
+      "firstName": {
+        "label": "الاسم الأول",
+        "placeholder": "محمد"
+      },
+      "lastName": {
+        "label": "اسم العائلة",
+        "placeholder": "أحمد"
+      }
+    }
+  },
+  "processing": {
+    "title": "جاري معالجة المقابلة",
+    "steps": [
+      "تحليل الإشارات العاطفية",
+      "تحليل إجاباتك",
+      "إنشاء التقييم",
+      "إعداد التقرير"
+    ]
+  },
+  "session": {
+    "noSessionTitle": "لا توجد مقابلة",
+    "noSessionDesc": "أكمل جلسة مقابلة أولاً لعرض التحليلات ونتائج الأداء هنا."
+  }
+}

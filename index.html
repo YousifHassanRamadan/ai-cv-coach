@@ -2,12 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/public/dark-icon.jpeg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ai-cv-coaching</title>
+    <title>ai-coach</title>
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      const lng = localStorage.getItem("i18nextLng");
+      if (lng === "ar") {
+        document.documentElement.dir = "rtl";
+        document.documentElement.lang = "ar";
+      }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

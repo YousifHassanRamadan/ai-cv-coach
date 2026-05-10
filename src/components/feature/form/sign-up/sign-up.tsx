@@ -8,6 +8,7 @@ import { SignUpSchema } from "../../../../schema/sign-up.schema";
 import { SignUpFields } from "../../../../constants/form/form";
 import { useRegister } from "../../../../hooks/useAuth";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSwitch }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,13 +39,15 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSwitch }) => {
     },
   });
 
+  const { t } = useTranslation();
+
   return (
     <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit}>
       {SignUpFields.map((field) => (
         <InputField
           key={field.name}
           name={field.name} // important for Formik
-          label={field.label}
+          label={t(field.label)}
           type={
             field.type === "password" && field.toggle
               ? showPassword
@@ -52,7 +55,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSwitch }) => {
                 : "password"
               : field.type
           }
-          placeholder={field.placeholder}
+          placeholder={t(field.placeholder)}
           icon={field.icon}
           value={formik.values[field.name]}
           onChange={formik.handleChange}
@@ -72,12 +75,14 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSwitch }) => {
 
       <SubmitButton
         type="submit"
-        label={signinLoading ? "Creating..." : "Create Account"}
+        label={
+          signinLoading ? t("auth.signup.submitting") : t("auth.signup.submit")
+        }
         disabled={formik.isSubmitting}
       />
 
       <AuthSwitchPrompt
-        message="Already have an account?"
+        message={t("auth.signup.alreadyHaveAccount")}
         linkLabel="Sign in"
         onSwitch={onSwitch}
       />

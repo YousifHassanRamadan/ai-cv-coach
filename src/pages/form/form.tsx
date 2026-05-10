@@ -5,9 +5,12 @@ import AuthToggle from "../../components/feature/form/auth-toggle/auth-toggle";
 import SignInForm from "../../components/feature/form/sign-in/sign-in";
 import SignUpForm from "../../components/feature/form/sign-up/sign-up";
 import type { AuthMode } from "./form.types";
+import { useTranslation } from "react-i18next";
 
 const AuthForm: React.FC = () => {
   const [mode, setMode] = useState<AuthMode>("signin");
+
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-bg-primary flex items-center justify-center p-4 relative overflow-hidden">
@@ -20,12 +23,10 @@ const AuthForm: React.FC = () => {
 
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-text-primary mb-1">
-            {mode === "signin" ? "Welcome back" : "Create account"}
+            {t(`auth.title.${mode}`)}
           </h1>
           <p className="text-sm text-text-muted">
-            {mode === "signin"
-              ? "Sign in to continue your interview prep."
-              : "Start your AI-powered interview journey."}
+            {t(`auth.subtitle.${mode}`)}
           </p>
         </div>
 

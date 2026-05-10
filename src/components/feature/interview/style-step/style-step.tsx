@@ -7,63 +7,7 @@ import CvDocumentItem from "./cv-document-item/cv-document-item";
 import WeightProfilesCard from "./weight-profiles-card/weight-profiles-card";
 import ContinueButton from "../../../common/continue-button/continue-button";
 import { Link } from "react-router-dom";
-
-const weightProfiles: WeightProfile[] = [
-  {
-    id: "balanced",
-    label: "Balanced",
-    description: "General interviews",
-    technical: 45,
-    behavioral: 30,
-    situational: 25,
-    tag: "General",
-  },
-  {
-    id: "technical",
-    label: "Technical",
-    description: "Engineering roles",
-    technical: 60,
-    behavioral: 25,
-    situational: 15,
-    tag: "Engineering",
-  },
-  {
-    id: "behavioral",
-    label: "Behavioral",
-    description: "Customer-facing",
-    technical: 20,
-    behavioral: 40,
-    situational: 40,
-    tag: "Customer",
-  },
-  {
-    id: "presentation",
-    label: "Presentation",
-    description: "Public speaking",
-    technical: 25,
-    behavioral: 35,
-    situational: 40,
-    tag: "Speaking",
-  },
-  {
-    id: "audio_only",
-    label: "Audio Only",
-    description: "Audio-only mode",
-    technical: 55,
-    behavioral: 45,
-    situational: 0,
-    tag: "Audio",
-  },
-  {
-    id: "testing_no_cv",
-    label: "Testing/Dev",
-    description: "Testing & dev",
-    technical: 0,
-    behavioral: 50,
-    situational: 50,
-    tag: "Dev",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const StyleStep = ({
   selectedWeightProfile,
@@ -76,20 +20,81 @@ const StyleStep = ({
   const { data: cvDocuments = [], isLoading: isCvDocumentsLoading } =
     useCvDocuments();
 
+  const { t } = useTranslation();
+
+  const weightProfiles: WeightProfile[] = [
+    {
+      id: "balanced",
+      label: t("weightProfiles.balanced.label"),
+      description: t("weightProfiles.balanced.description"),
+      technical: 45,
+      behavioral: 30,
+      situational: 25,
+      tag: t("weightProfiles.balanced.tag"),
+    },
+    {
+      id: "technical",
+      label: t("weightProfiles.technical.label"),
+      description: t("weightProfiles.technical.description"),
+      technical: 60,
+      behavioral: 25,
+      situational: 15,
+      tag: t("weightProfiles.technical.tag"),
+    },
+    {
+      id: "behavioral",
+      label: t("weightProfiles.behavioral.label"),
+      description: t("weightProfiles.behavioral.description"),
+      technical: 20,
+      behavioral: 40,
+      situational: 40,
+      tag: t("weightProfiles.behavioral.tag"),
+    },
+    {
+      id: "presentation",
+      label: t("weightProfiles.presentation.label"),
+      description: t("weightProfiles.presentation.description"),
+      technical: 25,
+      behavioral: 35,
+      situational: 40,
+      tag: t("weightProfiles.presentation.tag"),
+    },
+    {
+      id: "audio_only",
+      label: t("weightProfiles.audioOnly.label"),
+      description: t("weightProfiles.audioOnly.description"),
+      technical: 55,
+      behavioral: 45,
+      situational: 0,
+      tag: t("weightProfiles.audioOnly.tag"),
+    },
+    {
+      id: "testing_no_cv",
+      label: t("weightProfiles.testing.label"),
+      description: t("weightProfiles.testing.description"),
+      technical: 0,
+      behavioral: 50,
+      situational: 50,
+      tag: t("weightProfiles.testing.tag"),
+    },
+  ];
+
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-        Choose Interviewer Style
+        {t("styleStep.title")}
       </h2>
       <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
-        Select the personality of your AI interviewer
+        {t("styleStep.subtitle")}
       </p>
 
       {/* Weight Profile */}
       <div className="mb-10">
-        <h3 className="text-lg font-bold mb-1">Question Weight Profile</h3>
+        <h3 className="text-lg font-bold mb-1">
+          {t("styleStep.weightProfile.title")}
+        </h3>
         <p className="text-text-muted text-sm mb-4">
-          How questions are distributed across categories
+          {t("styleStep.weightProfile.description")}
         </p>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-4">
@@ -105,9 +110,9 @@ const StyleStep = ({
 
       {/* CV Selector */}
       <div className="mb-8 sm:mb-10">
-        <h3 className="text-lg font-bold mb-1">Select Your CV</h3>
+        <h3 className="text-lg font-bold mb-1">{t("styleStep.cv.title")}</h3>
         <p className="text-text-muted text-sm mb-4">
-          Choose which CV to base your interview on
+          {t("styleStep.cv.description")}
         </p>
 
         {isCvDocumentsLoading ? (
@@ -131,17 +136,17 @@ const StyleStep = ({
                 d="M4 12a8 8 0 018-8v8z"
               />
             </svg>
-            Loading your CVs…
+            {t("styleStep.cv.loading")}
           </div>
         ) : cvDocuments.length === 0 ? (
           <div className="bg-bg-card border-2 border-dashed border-border-light rounded-xl p-8 text-center text-text-muted text-sm">
-            <p>No CVs uploaded yet.</p>
+            <p>{t("styleStep.cv.empty")}</p>
 
             <Link
               to="/resume"
               className="mt-2 inline-block text-blue-500 font-semibold underline underline-offset-4 hover:text-text-active transition-colors duration-200"
             >
-              Upload one to get started
+              {t("styleStep.cv.uploadCta")}
             </Link>
           </div>
         ) : (
@@ -163,7 +168,7 @@ const StyleStep = ({
           onClick={onBack}
           className="px-6 py-2.5 sm:py-3 rounded-xl font-semibold text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-300 order-2 sm:order-1 text-sm sm:text-base"
         >
-          Back
+          {t("common.back")}
         </button>
 
         <ContinueButton

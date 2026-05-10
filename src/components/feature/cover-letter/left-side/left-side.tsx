@@ -21,6 +21,7 @@ import RoleCard from "../../interview/role-card/role-card";
 import { useTracks } from "../../../../api/tracks";
 import LoadingText from "../../../common/loading/loading";
 import { useCoverLetter } from "../../../../api/cover-letter";
+import { useTranslation } from "react-i18next";
 
 const LeftSide: React.FC<TLeftSideProps> = ({
   jobTitle,
@@ -31,6 +32,7 @@ const LeftSide: React.FC<TLeftSideProps> = ({
   selectedRole,
   setSelectedRole,
 }) => {
+  const { t } = useTranslation();
   const iconMap: Record<string, React.ReactNode> = {
     "git-branch": <GitBranch size={20} />,
     server: <Server size={20} />,
@@ -72,16 +74,19 @@ const LeftSide: React.FC<TLeftSideProps> = ({
       <div className="bg-bg-card rounded-lg p-6 border border-border-card">
         <div className="flex items-center gap-2 mb-6">
           <FileText className="w-5 h-5 text-purple-500" />
-          <h2 className="text-lg font-semibold">Company & Job Details</h2>
+          <h2 className="text-lg font-semibold"> {t("companyJobDetails")}</h2>
         </div>
 
         <div className="space-y-4">
           {/* job title */}
           <div>
-            <label className="block text-sm font-medium mb-2">Job title</label>
+            <label className="block text-sm font-medium mb-2">
+              {" "}
+              {t("jobTitle")}{" "}
+            </label>
             <input
               type="text"
-              placeholder="e.g., TechCorp"
+              placeholder={t("jobTitlePlaceholder")}
               value={jobTitle}
               onChange={(e) => setJobTitle(e.target.value)}
               className="w-full bg-bg-input 0 rounded-lg px-4 py-3 text-white placeholder-gray-500 border-3 border-border-card focus:outline-none focus:border-border-active transition"
@@ -108,11 +113,11 @@ const LeftSide: React.FC<TLeftSideProps> = ({
       <div className="bg-bg-card rounded-lg p-6 border border-border-card">
         <div className="flex items-center gap-2 mb-6">
           <Sparkles className="w-5 h-5 text-purple-500" />
-          <h2 className="text-lg font-semibold">Writing Tone</h2>
+          <h2 className="text-lg font-semibold"> {t("writingTone")} </h2>
         </div>
 
         {isTracksLoading ? (
-          <LoadingText text="Tracks Loading" />
+          <LoadingText text={t("tracksLoading")} />
         ) : (
           <div className="grid grid-cols-2 gap-3">
             {tracks?.map((track) => (
@@ -137,7 +142,9 @@ const LeftSide: React.FC<TLeftSideProps> = ({
         className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white font-semibold py-4 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         <Sparkles className="w-5 h-5" />
-        {isCoverLetterMutatePending ? "Generating..." : "Generate Cover Letter"}
+        {isCoverLetterMutatePending
+          ? t("generating")
+          : t("generateCoverLetter")}
       </button>
     </div>
   );

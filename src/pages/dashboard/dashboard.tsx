@@ -17,11 +17,14 @@ import { useMe } from "../../api/profile";
 import { useInterviewHistory } from "../../api/interviews";
 import DashboardStats from "../../components/feature/dashboard/dashboard-stats/dashboard-stats";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const DashboardPage = () => {
   const navigation = useNavigate();
 
   const [greeting, setGreeting] = useState("");
+
+  const { t } = useTranslation();
 
   const {
     data: dashboardStats,
@@ -58,13 +61,13 @@ const DashboardPage = () => {
       const now = new Date();
       const hour = now.getHours();
       if (hour >= 5 && hour < 12) {
-        setGreeting("Good Morning ☀️");
+        setGreeting(t("greeting.morning"));
       } else if (hour >= 12 && hour < 18) {
-        setGreeting("Good Afternoon 🌤️");
+        setGreeting(t("greeting.afternoon"));
       } else if (hour >= 18 && hour < 24) {
-        setGreeting("Good Evening 🌙");
+        setGreeting(t("greeting.evening"));
       } else {
-        setGreeting("Good Night 🌌");
+        setGreeting(t("greeting.night"));
       }
     };
 
@@ -88,24 +91,25 @@ const DashboardPage = () => {
             {greeting},{" "}
             <span className="text-text-active">
               {isUserLoading
-                ? "Loading..."
+                ? t("loading")
                 : userData
                   ? userData.fName + " " + userData.lName
-                  : "User"}
+                  : t("user")}
             </span>
             👋
+            <h2 className="text-2xl font-bold mb-2">{t("welcome")}</h2>
           </h1>
           <p className="text-text-muted mt-1 text-sm sm:text-base">
-            Ready to succeed in your next interview? Let's practice!
+            {t("readyMessage")}
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
           <Button
-            text="Start Interview"
+            text={t("startInterview")}
             icon={<Video size={18} />}
             onClick={handleStartInterview}
           />
-          <OutlinedButton text="Upload CV" onClick={handleResume} />
+          <OutlinedButton text={t("uploadCV")} onClick={handleResume} />
         </div>
       </div>
 
@@ -123,21 +127,19 @@ const DashboardPage = () => {
         <div className="lg:col-span-2 bg-bg-card border border-border-light rounded-2xl p-4 sm:p-6">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
             <h2 className="text-base sm:text-lg font-semibold text-text-primary">
-              Recent Sessions
+              {t("recentSessions")}
             </h2>
             <Link
               to="/history"
               className="text-text-active text-xs sm:text-sm hover:text-text-active/30 flex items-center gap-1 transition-colors"
             >
-              View all <ChevronRight size={16} />
+              {t("viewAll")} <ChevronRight size={16} />
             </Link>
           </div>
           <div className="space-y-2 overflow-y-auto max-h-[400px]">
             {isInterviewHistoryLoading ? (
               <>
-                <p className="text-text-muted text-sm">
-                  Loading interview history...
-                </p>
+                <p className="text-text-muted text-sm">{t("loadingHistory")}</p>
               </>
             ) : (
               <>

@@ -3,8 +3,13 @@ import { NavLink } from "react-router-dom";
 import type { TLinkProps } from "./link.types";
 import { ICON_MAP } from "../../../constants/links/link";
 
-const Link: React.FC<TLinkProps> = ({ text, link, collapsed }) => {
-  const key = text.toLowerCase();
+const Link: React.FC<TLinkProps> = ({
+  text,
+  link,
+  collapsed,
+  textForTooltip,
+}) => {
+  const key = textForTooltip?.toLowerCase();
   const Icon = ICON_MAP[key as keyof typeof ICON_MAP];
 
   return (

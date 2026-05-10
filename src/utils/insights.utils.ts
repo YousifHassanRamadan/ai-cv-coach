@@ -37,16 +37,26 @@ export const buildEmotionData = (chunks: Chunk[]): EmotionDataPoint[] =>
     time: `Q${i + 1}`,
     confident: toPercent(chunk.energyScore),
     engaged: toPercent(chunk.answerRelevance ?? chunk.nlpScore),
+    // FIX: chunk.fluencyScore can be null for video interviews — toPercent already handles null → 0
     nervous: Math.max(0, 100 - toPercent(chunk.fluencyScore)),
   }));
 
 /** Derive strength bullet points from final scores. */
-export const deriveStrengths = (scores: {
-  fluency: number;
-  energy: number;
-  eyeContact: number;
-  nlp: number;
-}): string[] => {
+export const deriveStrengths = (
+  scores:
+    | {
+        fluency?: number | null; // FIX: was `number` (non-nullable) — video interviews send null
+        energy?: number | null;
+        eyeContact?: number | null;
+        nlp?: number | null;
+      }
+    | null
+    | undefined,
+): string[] => {
+  // FIX: whole scores object can be null/undefined
+  // FIX: guard the entire scores object before reading any field
+  if (!scores) return ["You completed the full interview — great commitment!"];
+
   const items: string[] = [];
   if (toPercent(scores.fluency) >= 75)
     items.push(
@@ -66,12 +76,19 @@ export const deriveStrengths = (scores: {
 };
 
 /** Derive improvement bullet points from final scores. */
-export const deriveImprovements = (scores: {
-  fluency: number;
-  eyeContact: number;
-  headPose: number;
-  answerRelevance: number | null;
-}): string[] => {
+export const deriveImprovements = (
+  scores:
+    | {
+        fluency?: number | null;
+        eyeContact?: number | null;
+        headPose?: number | null;
+        answerRelevance?: number | null;
+      }
+    | null
+    | undefined,
+): string[] => {
+  // FIX: whole scores object can be null/undefined
+  // FIX: was `if (!scores)` but the parameter type didn't allow null — now it does
   if (!scores) {
     return ["You completed the full interview — great commitment!"];
   }

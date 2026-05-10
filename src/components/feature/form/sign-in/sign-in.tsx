@@ -10,6 +10,7 @@ import { useSignIn } from "../../../../hooks/useAuth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../../../store/auth";
+import { useTranslation } from "react-i18next";
 
 const SignInForm: React.FC<SignInFormProps> = ({ onSwitch }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,13 +49,15 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSwitch }) => {
     },
   });
 
+  const { t } = useTranslation();
+
   return (
     <form className="flex flex-col gap-5" onSubmit={formik.handleSubmit}>
       {SignInFields.map((field) => (
         <InputField
           key={field.name}
           name={field.name}
-          label={field.label}
+          label={t(field.label)}
           type={
             field.type === "password" && field.toggle
               ? showPassword
@@ -62,7 +65,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSwitch }) => {
                 : "password"
               : field.type
           }
-          placeholder={field.placeholder}
+          placeholder={t(field.placeholder)}
           icon={field.icon}
           value={formik.values[field.name]}
           onChange={formik.handleChange}
@@ -80,19 +83,23 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSwitch }) => {
         />
       ))}
 
-      <div className="flex justify-end -mt-2">
+      {/* <div className="flex justify-end -mt-2">
         <button
           type="button"
           className="text-xs text-text-active hover:opacity-80 transition-opacity"
         >
           Forgot password?
         </button>
-      </div>
+      </div> */}
 
-      <SubmitButton label={signInLoading ? "Signing In..." : "Sign In"} />
+      <SubmitButton
+        label={
+          signInLoading ? t("auth.signin.submitting") : t("auth.signin.submit")
+        }
+      />
       <AuthSwitchPrompt
-        message="No account?"
-        linkLabel="Create one"
+        message={t("auth.signin.noAccount")}
+        linkLabel={t("auth.signin.createOne")}
         onSwitch={onSwitch}
       />
     </form>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { QuestionDifficulty } from "../../../../api/questions";
 import { useTracks } from "../../../../api/tracks";
 import { TrackDropdown } from "../track-dropdown";
@@ -20,6 +21,8 @@ export const FilterBar = ({
 }: FilterBarProps) => {
   const { data: tracks = [], isLoading: tracksLoading } = useTracks();
 
+  const { t } = useTranslation();
+
   return (
     <div className="flex flex-col gap-3">
       {/* Row 1: Search */}
@@ -41,7 +44,7 @@ export const FilterBar = ({
           type="text"
           value={search}
           onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search questions..."
+          placeholder={t("questions2.filter.search")}
           className="w-full pl-9 pr-4 py-2 rounded-lg bg-bg-subcard border border-border-light text-sm text-text-muted placeholder:text-text-muted focus:outline-none focus:border-text-active transition-colors"
         />
       </div>
@@ -60,7 +63,7 @@ export const FilterBar = ({
                   : "bg-bg-subcard text-text-muted border border-border-light hover:border-border-active hover:text-text-primary"
               }`}
             >
-              {label}
+              {t(`questions2.filter.difficulty.${label}`)}
             </button>
           ))}
         </div>

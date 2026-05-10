@@ -4,4 +4,5 @@ export type TLinkProps = {
   collapsed?: boolean;
   icon?: React.ReactNode;
   onClick?: () => void;
+  textForTooltip?: string; // Optional text for tooltip when collapsed
 };

@@ -13,6 +13,7 @@ import JobDescriptionInput from "../job-description-input/job-description-input"
 import UploadArea from "../upload-area/upload-area";
 import CvDocumentsList from "../cv-documents-list/cv-documents-list";
 import { useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 const UploadCvSection: React.FC = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -24,6 +25,8 @@ const UploadCvSection: React.FC = () => {
   const [showJdInput, setShowJdInput] = useState(false);
   const [evaluatingCvId, setEvaluatingCvId] = useState<string | null>(null);
   const queryClient = useQueryClient();
+
+  const { t } = useTranslation();
 
   const { data: tracks = [], isLoading: isTracksLoading } = useTracks();
   const { data: cvDocuments = [], isLoading: isCvDocumentsLoading } =
@@ -120,7 +123,7 @@ const UploadCvSection: React.FC = () => {
 
   return (
     <div className="bg-bg-card rounded-lg p-6 border border-border-light space-y-5">
-      <h2 className="text-lg font-semibold">Upload CV</h2>
+      <h2 className="text-lg font-semibold">{t("uploadCvTitle")}</h2>
 
       <TrackSelector
         tracks={tracks}

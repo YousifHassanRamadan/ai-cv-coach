@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BarChart2, Hash, MessageSquare } from "lucide-react";
 import type { QuestionPanelProps } from "./question-panel.types";
 import type { ChunkProcessResponse } from "../../../../api/chunk";
 import { useQuery } from "@tanstack/react-query";
 import HintsPanel from "../hints-panel/hints-panel";
+import i18n from "i18next";
 
 const difficultyConfig: Record<
   string,
@@ -41,8 +42,10 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
   const question = questionText[currentIndex];
   const diff = question ? getDifficulty(question.difficulty) : null;
 
+  const [isArabic, setIsArabic] = React.useState(false);
+
   // ── NEW: detect if the current question has an Arabic version ─────────────
-  const hasArabic = Boolean(question?.text_ar?.trim());
+  const hasArabic = i18n.language === "ar";
 
   const sessionId = localStorage.getItem("session-id");
 
@@ -51,6 +54,14 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
     enabled: false,
     queryFn: () => Promise.resolve(null as unknown as ChunkProcessResponse),
   });
+
+  useEffect(() => {
+    if (i18n.language === "ar") {
+      setIsArabic(true);
+    } else {
+      setIsArabic(false);
+    }
+  }, [i18n.language]);
 
   // console.log("question", question);
 
@@ -66,21 +77,13 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
         </div>
 
         {/* English question text */}
+
+        {/* ── NEW: Arabic question text (shown only when text_ar exists) ─── */}
+
         <h2 className="text-sm sm:text-xl font-normal leading-relaxed mb-2 sm:mb-3">
           Q{currentIndex + 1}. {""}
           {question?.text}
         </h2>
-
-        {/* ── NEW: Arabic question text (shown only when text_ar exists) ─── */}
-        {hasArabic && (
-          <p
-            className="text-base sm:text-lg font-normal leading-relaxed mb-4 text-text-muted"
-            dir="rtl"
-            lang="ar"
-          >
-            {question.text_ar}
-          </p>
-        )}
 
         {/* Difficulty badge */}
         {diff && (

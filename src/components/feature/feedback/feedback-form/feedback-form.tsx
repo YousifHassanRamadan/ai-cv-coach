@@ -8,8 +8,11 @@ import StarRating from "../star-rating/star-rating";
 import { feedbackValidationSchema } from "../../../../schema/feedback.schema";
 import { useSendFeedback } from "../../../../api/feedback";
 import { useNavigate, useNavigation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
+  const { t } = useTranslation();
+
   const [submitted, setSubmitted] = useState(false);
 
   const navigate = useNavigate();
@@ -45,12 +48,12 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
   return (
     <div className="bg-bg-card border border-border rounded-xl p-6">
       <h2 className="text-lg font-semibold text-text-primary mb-5">
-        Submit Feedback
+        {t("feedback.form.title")}
       </h2>
 
       {submitted && (
         <div className="mb-4 px-4 py-3 rounded-lg bg-green-900/40 border border-green-800 text-green-400 text-sm">
-          ✓ Thank you! Your feedback has been submitted.
+          {t("feedback.form.success")}
         </div>
       )}
 
@@ -58,7 +61,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
         {/* Rating */}
         <div>
           <label className="block text-xs text-text-muted uppercase tracking-wider mb-1.5">
-            Rating
+            {t("feedback.form.rating")}
           </label>
           <StarRating
             value={formik.values.rating}
@@ -75,11 +78,11 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
         {/* Message */}
         <div>
           <label className="block text-xs text-text-muted uppercase tracking-wider mb-1.5">
-            Message
+            {t("feedback.form.message")}
           </label>
           <textarea
             {...formik.getFieldProps("message")}
-            placeholder="Tell us what you think..."
+            placeholder={t("feedback.form.placeholder")}
             rows={4}
             className={`${fieldClass("message")} resize-none text-text-muted`}
           />
@@ -98,7 +101,9 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
           ) : (
             <Send className="w-4 h-4" />
           )}
-          {sendFeedbackLoading ? "Submitting..." : "Submit Feedback"}
+          {sendFeedbackLoading
+            ? t("feedback.form.submitting")
+            : t("feedback.form.submit")}
         </button>
       </form>
       <div className="my-3 w-full">
@@ -107,7 +112,7 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({}) => {
           className="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-bg-active hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white text-sm font-medium rounded-lg transition-opacity"
         >
           <Home className="w-4 h-4" />
-          Back to home
+          {t("feedback.form.backHome")}
         </button>
       </div>
     </div>

@@ -1,5 +1,6 @@
 import { BotIcon, UserIcon } from "lucide-react";
 import type { MessageBubbleProps } from "./message-bubble.types";
+import i18next from "i18next";
 
 /** Safely extract displayable text from string | {en, ar} */
 function getMessage(message: string | { en: string; ar: string }): string {
@@ -21,6 +22,19 @@ export default function MessageBubble({
       minute: "2-digit",
     },
   );
+
+  const getMessage = (message: {
+    message: string | { en: string; ar: string };
+  }) => {
+    if (typeof message.message === "string") return message.message;
+    if (typeof message.message === "object") {
+      if (i18next.language === "ar") {
+        return message.message.ar;
+      } else {
+        return message.message.en;
+      }
+    }
+  };
 
   return (
     <div
@@ -63,7 +77,7 @@ export default function MessageBubble({
               <span className="w-1.5 h-1.5 bg-current rounded-full animate-bounce [animation-delay:.3s]" />
             </span>
           ) : (
-            getMessage(message.message)
+            getMessage(message)
           )}
         </div>
 

@@ -13,6 +13,7 @@ import type {
   SessionBreakdownProps,
   StatItemProps,
 } from "./dashboard-stats.types";
+import { useTranslation } from "react-i18next";
 
 // ================= COMPONENTS =================
 
@@ -55,21 +56,23 @@ const SessionBreakdown: React.FC<SessionBreakdownProps> = ({ sessions }) => {
   const inProgress = sessions?.inProgress || 0;
   const other = total - completed - inProgress;
 
+  const { t } = useTranslation();
+
   const bars = [
     {
-      label: "Completed",
+      label: t("completed"),
       count: completed,
       color: "bg-emerald-500",
       pct: (completed / total) * 100,
     },
     {
-      label: "In Progress",
+      label: t("inProgress"),
       count: inProgress,
       color: "bg-indigo-500",
       pct: (inProgress / total) * 100,
     },
     {
-      label: "Other",
+      label: t("other"),
       count: other,
       color: "bg-gray-600",
       pct: (other / total) * 100,
@@ -79,9 +82,9 @@ const SessionBreakdown: React.FC<SessionBreakdownProps> = ({ sessions }) => {
   return (
     <div className="p-4 bg-bg-card border border-border-light rounded-xl">
       <div className="flex items-center justify-between mb-3">
-        <p className="text-xs text-gray-500">Session Breakdown</p>
+        <p className="text-xs text-gray-500">{t("sessionBreakdown")}</p>
         <span className="text-xs font-semibold text-text-muted">
-          {total} total
+          {total} {t("total")}
         </span>
       </div>
 
@@ -121,6 +124,8 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data, isLoading }) => {
     );
   }
 
+  const { t } = useTranslation();
+
   if (!data) return null;
 
   const avgScorePct = Math.round((data.avgScore || 0) * 100);
@@ -141,26 +146,26 @@ const DashboardStats: React.FC<DashboardStatsProps> = ({ data, isLoading }) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
         <StatItem
           icon={BarChart2}
-          label="Total Interviews"
+          label={t("totalInterviews")}
           value={data.totalInterviews ?? "—"}
           accent="indigo"
         />
         <StatItem
           icon={TrendingUp}
-          label="Avg Score"
+          label={t("avgScore")}
           value={`${avgScorePct}%`}
           accent="emerald"
-          sub={avgScorePct < 50 ? "Keep practicing!" : "Great job!"}
+          sub={avgScorePct < 50 ? t("keepPracticing") : t("greatJob")}
         />
         <StatItem
           icon={Upload}
-          label="Uploaded Resumes"
+          label={t("uploadedResumes")}
           value={data.totalUploads ?? "—"}
           accent="sky"
         />
         <StatItem
           icon={Activity}
-          label="Last Activity"
+          label={t("lastActivity")}
           value={formatLastActivity(data.lastActivity)}
           accent="amber"
         />

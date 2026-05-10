@@ -3,6 +3,7 @@ import type { DifficultyStepProps } from "./difficulty-step.types";
 import NumberOfQuestionsStep from "../number-of-question-step/number-of-question-step";
 import ExperienceLevel from "../experience-level/experience-level";
 import ContinueButton from "../../../common/continue-button/continue-button";
+import { useTranslation } from "react-i18next";
 
 const DifficultyStep = ({
   difficultyLevel,
@@ -29,13 +30,15 @@ const DifficultyStep = ({
 
   const description = getDifficultyDescription();
 
+  const { t } = useTranslation();
+
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-        Set Difficulty Level
+        {t("interview.difficultyHeader.title")}
       </h2>
       <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
-        Adjust the complexity of interview questions
+        {t("interview.difficultyHeader.subtitle")}
       </p>
 
       {/* Custom Slider */}

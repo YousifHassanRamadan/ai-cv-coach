@@ -2,12 +2,15 @@ import { useState, useRef, useEffect } from "react";
 import { SendHorizonalIcon, PaperclipIcon } from "lucide-react";
 import type { ChatInputProps } from "./chat-input.types";
 import { useSendMessage } from "../../../../api/chats";
+import { useTranslation } from "react-i18next";
 
 export default function ChatInput({
   chatId,
   isSending = false,
   onSendStart,
 }: ChatInputProps) {
+  const { t } = useTranslation();
+
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -47,7 +50,7 @@ export default function ChatInput({
             value={value}
             onChange={(e) => setValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Message AI Assistant…"
+            placeholder={t("placeholder")}
             rows={1}
             className="flex-1 bg-transparent text-text-primary text-sm placeholder:text-text-muted resize-none outline-none leading-relaxed min-h-[24px] max-h-[160px] overflow-y-auto"
           />
@@ -72,15 +75,13 @@ export default function ChatInput({
         </div>
 
         <p className="text-center text-[10px] text-text-muted mt-2">
-          Press{" "}
-          <kbd className="font-mono bg-bg-tertiary px-1 py-0.5 rounded text-[10px] border border-border">
-            Enter
+          {t("chatInput.enterHint.part1")}{" "}
+          <kbd className="kbd-style">{t("chatInput.enterHint.enterKey")}</kbd>{" "}
+          {t("chatInput.enterHint.part2")}{" "}
+          <kbd className="kbd-style">
+            {t("chatInput.enterHint.shiftEnterKey")}
           </kbd>{" "}
-          to send,{" "}
-          <kbd className="font-mono bg-bg-tertiary px-1 py-0.5 rounded text-[10px] border border-border">
-            Shift+Enter
-          </kbd>{" "}
-          for new line
+          {t("chatInput.enterHint.part3")}
         </p>
       </div>
     </div>

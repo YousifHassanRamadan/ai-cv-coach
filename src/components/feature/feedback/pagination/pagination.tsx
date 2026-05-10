@@ -2,11 +2,14 @@
 import React from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import type { PaginationProps } from "./pagination.types";
+import { useTranslation } from "react-i18next";
 
 const Pagination: React.FC<PaginationProps> = ({
   pagination,
   onPageChange,
 }) => {
+  const { t } = useTranslation();
+
   const { currentPage, totalPages } = pagination;
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1).filter(
@@ -22,7 +25,7 @@ const Pagination: React.FC<PaginationProps> = ({
   return (
     <div className="flex items-center justify-between">
       <p className="text-xs text-gray-600">
-        Page {currentPage} of {totalPages}
+        {t("pagination.page")} {currentPage} {t("pagination.of")} {totalPages}
       </p>
       <div className="flex items-center gap-1">
         <button

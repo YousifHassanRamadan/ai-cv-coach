@@ -9,13 +9,20 @@ import DangerZoneSection from "../../components/feature/settings/danger-zone/dan
 import EthicalAISection from "../../components/feature/settings/ethical-ai-section/ethical-ai-section";
 import DeleteAccountModal from "../../components/feature/settings/delete-account-model/delete-account-model";
 import Logout from "../../components/feature/settings/logout/logout";
+import { useLanguage } from "../../hooks/useLanguage";
+import LanguageSwitcher from "../../components/feature/settings/language-switcher/language-switcher";
+import { useTranslation } from "react-i18next";
 
 const SettingsPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [privacySettings, setPrivacySettings] = useState<PrivacySettings>({
     biometricDataProcessing: true,
     endToEndEncryption: true,
     localProcessing: false,
   });
+
+  const { currentLanguage, changeLanguage } = useLanguage();
 
   const [dataRetentionPeriod, setDataRetentionPeriod] =
     useState<DataRetentionPeriod>("90 days");
@@ -50,8 +57,8 @@ const SettingsPage: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6 py-5 space-y-4">
         {/* Header */}
         <PageHeader
-          title="Privacy & Settings"
-          subtitle="Manage your privacy preferences and data"
+          title={t("settings.title")}
+          subtitle={t("settings.subtitle")}
         />
         {/* Privacy Controls */}
         {/* <PrivacyControlsSection
@@ -86,6 +93,7 @@ const SettingsPage: React.FC = () => {
           onClose={() => setShowDeleteModal(false)}
           onConfirm={handleConfirmDelete}
         />
+        <LanguageSwitcher />
       </div>
     </div>
   );

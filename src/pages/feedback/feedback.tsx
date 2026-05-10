@@ -8,8 +8,11 @@ import FeedbackForm from "../../components/feature/feedback/feedback-form/feedba
 import FeedbackList from "../../components/feature/feedback/feedback-list/feedback-list";
 import { useFeedbacks, type FeedbackResponse } from "../../api/feedback";
 import PageHeader from "../../components/common/page-header/page-header";
+import { useTranslation } from "react-i18next";
 
 const FeedbackPage: React.FC = () => {
+  const { t } = useTranslation();
+
   const [currentPage, setCurrentPage] = useState(1);
 
   const { data: feedbacks, isLoading: isFeedbacksLoading } = useFeedbacks(
@@ -32,8 +35,8 @@ const FeedbackPage: React.FC = () => {
         {/* Header */}
 
         <PageHeader
-          title="Feedback"
-          subtitle="Share your thoughts to help us improve"
+          title={t("feedback.title")}
+          subtitle={t("feedback.subtitle")}
         />
 
         {/* Two-column layout on large screens */}

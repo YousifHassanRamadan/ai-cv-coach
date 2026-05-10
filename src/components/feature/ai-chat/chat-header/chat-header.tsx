@@ -1,12 +1,14 @@
 import { MenuIcon, BotIcon, CircleDotIcon } from "lucide-react";
 import type { ChatHeaderProps } from "./chat-header.types";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function ChatHeader({
   chatId,
   messageCount,
   onToggleSidebar,
 }: ChatHeaderProps) {
+  const { t } = useTranslation();
   return (
     <header className="flex items-center justify-between px-4 py-3 border-b border-l-0 border-border-light bg-bg-header shrink-0  border-r-0 h-[61px]">
       <div className="flex items-center gap-3">
@@ -27,11 +29,12 @@ export default function ChatHeader({
 
           <div>
             <p className="text-sm font-semibold text-text-primary leading-tight">
-              AI Assistant
+              {t("chat.header.title")}
             </p>
             <p className="text-[10px] text-success leading-tight flex items-center gap-1">
               <CircleDotIcon size={8} />
-              Online · {messageCount} messages
+              {t("chat.header.status")} ·{" "}
+              {t("chat.header.messages", { count: messageCount })}
             </p>
           </div>
         </div>
@@ -42,7 +45,7 @@ export default function ChatHeader({
           to="/"
           className="px-4 py-1 text-xs bg-bg-subcard text-text-primary rounded-lg hover:bg-bg-active/15 transition"
         >
-          Go Home
+          {t("chat.header.goHome")}
         </Link>
         <span className="text-[10px] text-text-muted bg-bg-subcard px-2 py-1 rounded-md border border-border font-mono">
           #{chatId.slice(0, 8)}

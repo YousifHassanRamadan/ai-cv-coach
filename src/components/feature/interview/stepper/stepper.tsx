@@ -1,7 +1,9 @@
 import { Check } from "lucide-react";
 import type { StepperProps } from "./stepper.types";
+import { useTranslation } from "react-i18next";
 
 const Stepper = ({ steps, currentStep }: StepperProps) => {
+  const { t } = useTranslation();
   return (
     <div className="mb-8 sm:mb-12 md:mb-16">
       <div className="flex items-center justify-center max-w-3xl mx-auto">
@@ -21,13 +23,17 @@ const Stepper = ({ steps, currentStep }: StepperProps) => {
                 {step.number < currentStep ? (
                   <Check size={16} className="text-white sm:w-5 sm:h-5" />
                 ) : (
-                  <span className="text-xs sm:text-sm">{step.number}</span>
+                  <span className="text-xs sm:text-sm">
+                    {step.number} {t("stepper.step")}
+                  </span>
                 )}
               </div>
               {/* Step label */}
               <span
                 className={`text-[10px] sm:text-xs md:text-sm font-medium transition-colors duration-300 text-center ${
-                  step.number <= currentStep ? "text-white" : "text-gray-500"
+                  step.number <= currentStep
+                    ? "text-text-primary"
+                    : "text-gray-500"
                 }`}
               >
                 {step.label}

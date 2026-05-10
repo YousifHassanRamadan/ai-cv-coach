@@ -2,6 +2,7 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
 import type { TrackSelectorProps } from "./track-selector.types";
+import { useTranslation } from "react-i18next";
 
 const TrackSelector: React.FC<TrackSelectorProps> = ({
   tracks,
@@ -13,10 +14,12 @@ const TrackSelector: React.FC<TrackSelectorProps> = ({
 }) => {
   const selectedTrack = tracks.find((t) => t.id === selectedTrackId);
 
+  const { t } = useTranslation();
+
   return (
     <div className="relative">
       <label className="block text-xs text-text-muted mb-1.5 uppercase tracking-wider">
-        Select Track
+        {t("selectTrack")}
       </label>
       <button
         onClick={onToggle}
@@ -26,8 +29,8 @@ const TrackSelector: React.FC<TrackSelectorProps> = ({
           className={selectedTrack ? "text-text-secondary" : "text-text-muted"}
         >
           {isLoading
-            ? "Loading tracks..."
-            : (selectedTrack?.name ?? "Choose a track...")}
+            ? t("loadingTracks")
+            : (selectedTrack?.name ?? t("chooseTrack"))}
         </span>
         <ChevronDown
           className={`w-4 h-4 text-text-muted transition-transform ${isOpen ? "rotate-180" : ""}`}
@@ -38,7 +41,7 @@ const TrackSelector: React.FC<TrackSelectorProps> = ({
         <div className="absolute z-20 top-full mt-1 w-full bg-bg-tertiary border border-border-light rounded-lg shadow-xl overflow-hidden">
           {tracks.length === 0 ? (
             <div className="px-4 py-3 text-sm text-text-primary">
-              No tracks available
+              {t("noTracks")}
             </div>
           ) : (
             tracks.map((track) => (

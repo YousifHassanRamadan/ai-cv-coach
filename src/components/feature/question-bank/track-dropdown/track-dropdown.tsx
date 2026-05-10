@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import type { TrackDropdownProps } from "./track-dropdown.types";
+import { useTranslation } from "react-i18next";
 
 export const TrackDropdown = ({
   tracks,
@@ -7,6 +8,8 @@ export const TrackDropdown = ({
   isLoading,
   onTrackChange,
 }: TrackDropdownProps) => {
+  const { t } = useTranslation();
+
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -41,7 +44,11 @@ export const TrackDropdown = ({
           } ${isLoading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
       >
         <span className="max-w-[120px] truncate">
-          {isLoading ? "Loading..." : active ? active.name : "All Tracks"}
+          {isLoading
+            ? t("tracks.loading")
+            : active
+              ? active.name
+              : t("tracks.all")}
         </span>
         <svg
           className={`w-3 h-3 shrink-0 transition-transform duration-200 ${open ? "rotate-180" : ""}`}
@@ -71,7 +78,7 @@ export const TrackDropdown = ({
                   : "text-text-muted hover:bg-bg-subcard hover:text-text-primary"
               }`}
           >
-            All Tracks
+            {t("tracks.all")}
             {!selectedTrack && (
               <svg
                 className="w-3 h-3 shrink-0 text-text-primary"
@@ -91,7 +98,7 @@ export const TrackDropdown = ({
           <div className="max-h-52 overflow-y-auto overscroll-contain">
             {tracks.length === 0 ? (
               <p className="px-3 py-3 text-xs text-text-muted">
-                No tracks available
+                {t("tracks.empty")}
               </p>
             ) : (
               tracks.map((track) => {

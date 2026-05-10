@@ -12,8 +12,11 @@ import FormInput from "../form-input/form-input";
 import SubmitButton from "../../form/submit-button/submit-button";
 import { FIELDS } from "../../../../constants/profile/profile";
 import { useUpdateMe } from "../../../../api/profile";
+import { useTranslation } from "react-i18next";
 
 const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
+  const { t } = useTranslation();
+
   const { mutate: updateProfile, isPending: isUpdating } = useUpdateMe();
 
   const formik = useFormik<PersonalInfoData>({
@@ -38,7 +41,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
         <FormInput
           key={name}
           name={name}
-          label={label}
+          label={t(label)}
           type={type}
           value={formik.values[name]}
           onChange={formik.handleChange}
@@ -48,7 +51,9 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
 
       <SubmitButton
         type="submit"
-        label={isUpdating ? "Saving..." : "Save Changes"}
+        label={
+          isUpdating ? t("profile.form.saving") : t("profile.form.saveChanges")
+        }
       />
     </form>
   );

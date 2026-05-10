@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { TrendingUp } from "lucide-react";
 import type { EvaluateCvResponse } from "../../../../api/cv";
+import { useTranslation } from "react-i18next";
 
 const TopSkills = () => {
   const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
@@ -8,16 +9,20 @@ const TopSkills = () => {
     enabled: false,
   });
 
+  const { t } = useTranslation();
+
   return (
     <div className="bg-bg-card rounded-lg p-6 border border-border-light">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-text-primary">Top Skills</h2>
+        <h2 className="text-lg font-semibold text-text-primary">
+          {t("topSkills")}
+        </h2>
         <TrendingUp className="w-5 h-5 text-text-muted" />
       </div>
       <div className="space-y-4">
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Experience relevance</span>
+            <span className="text-sm">{t("experienceRelevance")}</span>
             <span className="text-sm text-text-active">
               {cvEvaluation
                 ? cvEvaluation?.evaluation.category_scores.experience_relevance
@@ -37,7 +42,7 @@ const TopSkills = () => {
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Formatting</span>
+            <span className="text-sm">{t("formatting")}</span>
             <span className="text-sm text-indigo-400">
               {cvEvaluation
                 ? cvEvaluation?.evaluation.category_scores.formatting.score *
@@ -57,7 +62,7 @@ const TopSkills = () => {
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Keyword coverage</span>
+            <span className="text-sm">{t("keywordCoverage")}</span>
             <span className="text-sm text-cyan-400">
               {cvEvaluation
                 ? cvEvaluation?.evaluation.category_scores.keyword_coverage
@@ -77,7 +82,7 @@ const TopSkills = () => {
         </div>
         <div>
           <div className="flex justify-between mb-2">
-            <span className="text-sm">Skills match</span>
+            <span className="text-sm">{t("skillsMatch")}</span>
             <span className="text-sm text-cyan-400">
               {cvEvaluation
                 ? cvEvaluation?.evaluation.category_scores.skills_match.score *

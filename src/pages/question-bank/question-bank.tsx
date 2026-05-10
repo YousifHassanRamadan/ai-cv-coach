@@ -15,8 +15,11 @@ import {
 import { QuestionCard } from "../../components/feature/question-bank/question-card";
 import { Pagination } from "../../components/feature/question-bank/pagination";
 import { QuestionDetailPanel } from "../../components/feature/question-bank/question-detail-panel";
+import { useTranslation } from "react-i18next";
 
 export const QuestionsBankPage = () => {
+  const { t } = useTranslation();
+
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [difficulty, setDifficulty] = useState<QuestionDifficulty | "all">(
@@ -117,10 +120,10 @@ export const QuestionsBankPage = () => {
               <EmptyState
                 message={
                   search
-                    ? "No questions match your search."
+                    ? t("questions2.empty.search")
                     : selectedTrack
-                      ? "No questions in this track."
-                      : "No questions available."
+                      ? t("questions2.empty.track")
+                      : t("questions2.empty.default")
                 }
               />
             )}
@@ -166,10 +169,10 @@ export const QuestionsBankPage = () => {
               </div>
               <div>
                 <p className="text-sm font-medium text-text-muted">
-                  Select a question
+                  {t("questions2.detail.selectTitle")}
                 </p>
                 <p className="text-xs text-text-muted mt-1">
-                  Click any card to see details
+                  {t("questions2.detail.selectSubtitle")}
                 </p>
               </div>
             </div>

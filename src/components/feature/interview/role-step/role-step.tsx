@@ -16,6 +16,7 @@ import {
   ClipboardList,
 } from "lucide-react";
 import ContinueButton from "../../../common/continue-button/continue-button";
+import { useTranslation } from "react-i18next";
 
 const iconMap: Record<string, React.ReactNode> = {
   "git-branch": <GitBranch size={20} />,
@@ -39,11 +40,15 @@ const RoleStep = ({
   setCustomRole,
   onContinue,
 }: RoleStepProps) => {
+  const { t } = useTranslation();
   return (
     <div className="animate-fadeIn">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-2">Choose Your Track</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+        {" "}
+        {t("roleStep.title")}
+      </h2>
       <p className="text-text-muted mb-6 sm:mb-8 text-sm sm:text-base">
-        Select the position you're interviewing for
+        {t("roleStep.subtitle")}
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">

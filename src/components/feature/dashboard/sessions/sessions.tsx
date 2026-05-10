@@ -2,6 +2,7 @@ import { Clock, Video, CheckCircle2, Circle } from "lucide-react";
 import React from "react";
 import type { TSessionItem } from "./sessions.types";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const formatDate = (iso: string) => {
   const d = new Date(iso);
@@ -37,6 +38,8 @@ const Sessions: React.FC<TSessionItem> = ({
   index,
   id,
 }) => {
+  const { t } = useTranslation();
+
   const score = totalScore !== null ? Math.round(totalScore * 100) : 0;
   const scoreColor = getScoreColor(score ?? 0);
   const duration = getDurationMinutes(
@@ -86,7 +89,7 @@ const Sessions: React.FC<TSessionItem> = ({
               {difficulty}
             </span>
             <span className="text-text-muted text-[10px]">
-              {questionCount} questions
+              {questionCount} {t("questions")}
             </span>
             <div className="flex flex-nowrap items-center gap-1 text-xs">
               <Circle size={12} className="text-gray-600" />

@@ -15,6 +15,7 @@ import {
   History,
   Settings,
 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -33,17 +34,17 @@ interface NavDrawerProps {
 // ─── Default nav items ────────────────────────────────────────────────────────
 
 export const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { path: "/", icon: LayoutDashboard, label: "Dashboard" },
-  { path: "/resume", icon: FileText, label: "Resume" },
-  { path: "/cover-letter", icon: Mail, label: "Cover Letter" },
-  { path: "/interview", icon: Video, label: "Interview" },
-  { path: "/insights", icon: BarChart2, label: "Insights" },
-  { path: "/profile", icon: User, label: "Profile" },
-  { path: "/feedback", icon: MessageSquare, label: "Feedback" },
-  { path: "/question-bank", icon: HelpCircle, label: "Questions" },
-  { path: "/ai-chat", icon: Bot, label: "AI Chat" },
-  { path: "/history", icon: History, label: "History" },
-  { path: "/settings", icon: Settings, label: "Settings" },
+  { path: "/", icon: LayoutDashboard, label: "nav2.dashboard" },
+  { path: "/resume", icon: FileText, label: "nav2.resume" },
+  { path: "/cover-letter", icon: Mail, label: "nav2.coverLetter" },
+  { path: "/interview", icon: Video, label: "nav2.interview" },
+  { path: "/insights", icon: BarChart2, label: "nav2.insights" },
+  { path: "/profile", icon: User, label: "nav2.profile" },
+  { path: "/feedback", icon: MessageSquare, label: "nav2.feedback" },
+  { path: "/question-bank", icon: HelpCircle, label: "nav2.questions" },
+  { path: "/ai-chat", icon: Bot, label: "nav2.aiChat" },
+  { path: "/history", icon: History, label: "nav2.history" },
+  { path: "/settings", icon: Settings, label: "nav2.settings" },
 ];
 
 // ─── NavDrawerTrigger ─────────────────────────────────────────────────────────
@@ -70,6 +71,7 @@ const NavDrawer = ({
   open,
   onClose,
 }: NavDrawerProps) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const drawerRef = useRef<HTMLDivElement>(null);
 
@@ -132,7 +134,7 @@ const NavDrawer = ({
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <span className="text-xs font-semibold uppercase tracking-widest text-text-muted">
-            Menu
+            {t("nav2.menu")}
           </span>
           <button
             onClick={onClose}
@@ -178,7 +180,7 @@ const NavDrawer = ({
                       : "text-text-secondary group-hover:text-text-primary"
                   }`}
                 >
-                  {item.label}
+                  {t(item.label)}
                 </span>
                 {active && (
                   <span className="ml-auto h-1.5 w-1.5 shrink-0 rounded-full bg-text-primary/60" />

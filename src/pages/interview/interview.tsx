@@ -6,12 +6,7 @@ import RoleStep from "../../components/feature/interview/role-step/role-step";
 import DifficultyStep from "../../components/feature/interview/difficulty-step/difficulty-step";
 import StyleStep from "../../components/feature/interview/style-step/style-step";
 import EquipmentStep from "../../components/feature/interview/equipment-step/equipment-step";
-import {
-  difficultyLabels,
-  interviewStyles,
-  roles,
-  steps,
-} from "../../constants/interview/interview";
+import { useInterviewConstants } from "../../constants/interview/interview";
 import { useTracks } from "../../api/tracks";
 import {
   useStartInterview,
@@ -21,6 +16,7 @@ import {
 } from "../../api/interviews";
 import { useNavigate, useNavigation } from "react-router-dom";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const InterviewPage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -71,33 +67,22 @@ const InterviewPage = () => {
   };
 
   const getDifficultyDescription = () => {
-    const descriptions = {
-      1: {
-        title: "Easy Mode",
-        desc: "Basic foundational questions for those just starting out",
-      },
-      2: {
-        title: "Medium Mode",
-        desc: "Standard industry questions for mid-level roles",
-      },
-      3: {
-        title: "Hard Mode",
-        desc: "Advanced challenges for experienced professionals",
-      },
-      4: {
-        title: "Custom Mode",
-        desc: "Tailored questions for your specific needs",
-      },
+    return {
+      title: t(`difficulty.${difficultyLevel}.title`),
+      desc: t(`difficulty.${difficultyLevel}.desc`),
     };
-    return descriptions[difficultyLevel as keyof typeof descriptions];
   };
+
+  const { t } = useTranslation();
+
+  const { steps, difficultyLabels, interviewStyles } = useInterviewConstants();
 
   return (
     <div className="min-h-screen bg-bg-primary text-text-primary p-4 sm:p-6 md:p-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 sm:py-5 space-y-4">
         <PageHeader
-          title="AI Interview Practice"
-          subtitle="Set up your personalized interview session"
+          title={t("interviewTitle")}
+          subtitle={t("interviewSubtitle")}
         />
         <Stepper steps={steps} currentStep={currentStep} />
       </div>

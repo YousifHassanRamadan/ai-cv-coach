@@ -6,6 +6,7 @@ import SearchFilterBar from "../../components/feature/history/search-filter-bar/
 import InterviewList from "../../components/feature/history/interview-list/interview-list";
 import { useInterviewHistory } from "../../api/interviews";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HistoryPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -28,16 +29,21 @@ const HistoryPage: React.FC = () => {
     });
   }, [interviewHistory, searchTerm]);
 
+  const { t } = useTranslation();
+
   return (
     <div className="flex-1 h-full p-4 sm:p-6 bg-bg-primary">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-4 sm:mb-6">
         <PageHeader
-          title="Interview History"
-          subtitle="Track your progress and review past interviews"
+          title={t("history.header.title")}
+          subtitle={t("history.header.subtitle")}
         />
         <Link to="/interview">
-          <Button text="New Interview" icon={<PlusIcon size={15} />} />
+          <Button
+            text={t("history.header.newInterview")}
+            icon={<PlusIcon size={15} />}
+          />
         </Link>
       </div>
 
@@ -87,7 +93,7 @@ const HistoryPage: React.FC = () => {
 
       {isInterviewHistoryLoading ? (
         <>
-          <p> Loading interview history...</p>
+          <p> {t("history.search.loading")} </p>
         </>
       ) : (
         <>

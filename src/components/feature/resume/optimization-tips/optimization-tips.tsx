@@ -2,12 +2,15 @@ import React from "react";
 import type { EvaluateCvResponse } from "../../../../api/cv";
 import { useQuery } from "@tanstack/react-query";
 import OptimizationItem from "./optimization-item/optimization-item";
+import { useTranslation } from "react-i18next";
 
 const OptimizationTips = () => {
   const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
     queryKey: ["cv-evaluate"],
     enabled: false,
   });
+
+  const { t } = useTranslation();
 
   return (
     <div className="bg-bg-card rounded-lg p-6 border border-border-light">
@@ -26,14 +29,12 @@ const OptimizationTips = () => {
           />
         </svg>
         <h2 className="text-lg font-semibold text-text-primary">
-          Optimization Tips
+          {t("optimizationTips")}
         </h2>
       </div>
       <div className="space-y-3">
         {(cvEvaluation?.evaluation?.suggestions ?? []).length === 0 ? (
-          <p className="text-sm text-gray-400">
-            No optimization tips available.
-          </p>
+          <p className="text-sm text-gray-400">{t("noOptimizationTips")}</p>
         ) : (
           (cvEvaluation?.evaluation?.suggestions ?? []).map(
             (suggest, index) => (

@@ -5,11 +5,14 @@ import ChatHeader from "../chat-header/chat-header";
 import MessageBubble from "../message-bubble/message-bubble";
 import ChatInput from "../chat-input/chat-input";
 import MessagesSkeleton from "../messages-skeleton/messages-skeleton";
+import { useTranslation } from "react-i18next";
 
 export default function ChatWindow({
   chatId,
   onToggleSidebar,
 }: ChatWindowProps) {
+  const { t } = useTranslation();
+
   const { data: chat, isLoading } = useChatDetails(chatId);
   const bottomRef = useRef<HTMLDivElement>(null);
 
@@ -109,17 +112,16 @@ export default function ChatWindow({
 }
 
 function EmptyMessages() {
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <div className="w-12 h-12 rounded-2xl bg-bg-subcard border border-border flex items-center justify-center mb-4">
         <span className="text-2xl">💬</span>
       </div>
       <p className="text-text-secondary text-sm font-medium">
-        Start the conversation
+        {t("chat.empty.title")}
       </p>
-      <p className="text-text-muted text-xs mt-1">
-        Type a message below to begin
-      </p>
+      <p className="text-text-muted text-xs mt-1">{t("chat.empty.subtitle")}</p>
     </div>
   );
 }

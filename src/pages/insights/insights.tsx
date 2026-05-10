@@ -50,11 +50,14 @@ const InsightsPage = () => {
   );
 
   const strengths = useMemo(
+    // FIX: pass data.finalScores which may be null for video interviews.
+    // deriveStrengths now accepts null and returns a fallback string safely.
     () => (data ? deriveStrengths(data.finalScores) : []),
     [data],
   );
 
   const improvements = useMemo(
+    // FIX: same — deriveImprovements now accepts null safely.
     () => (data ? deriveImprovements(data.finalScores) : []),
     [data],
   );
@@ -79,6 +82,14 @@ const InsightsPage = () => {
     mode,
   } = data;
 
+  // FIX: video interviews don't have speech scores — only show MetaStats speech
+  // section when at least one speech field is present and non-null.
+  const hasSpeechScores =
+    finalScores != null &&
+    (finalScores.fluency != null ||
+      finalScores.energy != null ||
+      finalScores.eyeContact != null);
+
   return (
     <div className="min-h-full bg-bg-primary text-text-primary p-8">
       {/* Header */}
@@ -93,8 +104,12 @@ const InsightsPage = () => {
       {/* Scores */}
       <ScoreGrid finalScores={finalScores} />
 
-      {/* Meta info */}
-      <MetaStats data={{ difficulty, experienceLevel, mode, questionCount }} />
+      {/* Meta info — FIX: only render speech-related stats when available */}
+      {hasSpeechScores && (
+        <MetaStats
+          data={{ difficulty, experienceLevel, mode, questionCount }}
+        />
+      )}
 
       {/* Matched skills */}
       <MatchedSkills skills={matchedSkills} />

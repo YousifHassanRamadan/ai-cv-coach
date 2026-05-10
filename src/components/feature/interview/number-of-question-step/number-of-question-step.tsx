@@ -1,35 +1,38 @@
 import { ChevronRight } from "lucide-react";
 import type { NumberOfQuestionsStepProps } from "./number-of-question-step.types";
+import { useTranslation } from "react-i18next";
 
 // Replace fixed cards with a slider (1–50 range)
 const NumberOfQuestionsStep = ({
   numberOfQuestions,
   setNumberOfQuestions,
 }: NumberOfQuestionsStepProps) => {
+  const { t } = useTranslation();
+
   const getDescription = () => {
     if (numberOfQuestions <= 5)
       return {
-        title: "Quick Session",
-        desc: "A short focused practice to warm up or test a specific topic fast.",
+        title: t("interview.sessions.quick.title"),
+        desc: t("interview.sessions.quick.desc"),
       };
     if (numberOfQuestions <= 15)
       return {
-        title: "Standard Session",
-        desc: "A balanced interview simulation covering key areas comfortably.",
+        title: t("interview.sessions.standard.title"),
+        desc: t("interview.sessions.standard.desc"),
       };
     if (numberOfQuestions <= 25)
       return {
-        title: "Extended Session",
-        desc: "A thorough practice round that digs deeper into your knowledge.",
+        title: t("interview.sessions.extended.title"),
+        desc: t("interview.sessions.extended.desc"),
       };
     if (numberOfQuestions <= 35)
       return {
-        title: "Full Interview",
-        desc: "A comprehensive mock interview close to a real-world experience.",
+        title: t("interview.sessions.full.title"),
+        desc: t("interview.sessions.full.desc"),
       };
     return {
-      title: "Marathon Session",
-      desc: "An intensive deep-dive to rigorously stress-test your skills.",
+      title: t("interview.sessions.marathon.title"),
+      desc: t("interview.sessions.marathon.desc"),
     };
   };
 
@@ -50,10 +53,10 @@ const NumberOfQuestionsStep = ({
   return (
     <div className="animate-fadeIn">
       <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-        Number of Questions
+        {t("interview.questions.title")}
       </h2>
       <p className="text-text-muted mb-8 sm:mb-12 text-sm sm:text-base">
-        Choose how many questions you want in your session
+        {t("interview.questions.subtitle")}
       </p>
 
       {/* Big number display */}

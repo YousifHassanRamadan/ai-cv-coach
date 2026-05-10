@@ -5,9 +5,12 @@ import NotificationPreferencesSection from "../../components/feature/profile/not
 import PageHeader from "../../components/common/page-header/page-header";
 import type { NotificationPreferences, ProfileData } from "./profile.type";
 import { useMe } from "../../api/profile";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage: React.FC = () => {
   const { data, isLoading, isError } = useMe();
+
+  const { t } = useTranslation();
 
   console.log("User data:", data, "Loading:", isLoading, "Error:", isError);
 
@@ -26,17 +29,17 @@ const ProfilePage: React.FC = () => {
     <div className="min-h-screen bg-bg-primary text-white p-8">
       <div className="max-w-5xl mx-auto">
         <PageHeader
-          title="Profile"
-          subtitle="Manage your profile information and preferences"
+          title={t("profile.title")}
+          subtitle={t("profile.subtitle")}
         />
 
         <ProfileCard
           fullName={
             data?.fName && data.lName
               ? `${data.fName} ${data.lName}`
-              : "John Doe"
+              : t("profile.defaultName")
           }
-          email={data?.email || "john.doe@example.com"}
+          email={data?.email || t("profile.defaultEmail")}
           interviews={data?.userStats?.totalInterviews || 0}
           avgScore={data?.userStats?.avgScore || 0}
           totalUploads={data?.userStats?.totalUploads || 0}

@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const STEPS = [
-  "Processing emotional cues",
-  "Analyzing your responses",
-  "Generating feedback",
-  "Preparing your report",
-];
-
-const STEP_DURATION = 3000; // ms per step
-const REDIRECT_TO = "/insights"; // where to go after processing
+const STEP_DURATION = 1500;
+const REDIRECT_TO = "/insights";
 
 const ProcessingScreen: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const STEPS = t("processing.steps", { returnObjects: true }) as string[];
+
   const [currentStep, setCurrentStep] = useState(0);
   const [dots, setDots] = useState(0);
 
-  // Advance steps — redirect when all steps are done
   useEffect(() => {
     const stepInterval = setInterval(() => {
       setCurrentStep((prev) => {
@@ -30,31 +27,24 @@ const ProcessingScreen: React.FC = () => {
     }, STEP_DURATION);
 
     return () => clearInterval(stepInterval);
-  }, [navigate]);
+  }, [navigate, STEPS.length]);
 
-  // Animated dots
   useEffect(() => {
     const dotInterval = setInterval(() => {
       setDots((prev) => (prev + 1) % 4);
     }, 500);
+
     return () => clearInterval(dotInterval);
   }, []);
 
   return (
     <div className="min-h-screen bg-bg-primary flex items-center justify-center">
       <div className="flex flex-col items-center">
-        {/* Animated Spinner */}
+        {/* Spinner */}
         <div className="relative mb-12">
-          {/* Outer arc - cyan */}
           <svg className="w-32 h-32 animate-spin-slow" viewBox="0 0 100 100">
             <defs>
-              <linearGradient
-                id="gradient1"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
+              <linearGradient id="gradient1">
                 <stop offset="0%" stopColor="#06b6d4" />
                 <stop offset="100%" stopColor="#0891b2" />
               </linearGradient>
@@ -71,19 +61,12 @@ const ProcessingScreen: React.FC = () => {
             />
           </svg>
 
-          {/* Inner arc - purple */}
           <svg
             className="absolute top-0 left-0 w-32 h-32 animate-spin-reverse"
             viewBox="0 0 100 100"
           >
             <defs>
-              <linearGradient
-                id="gradient2"
-                x1="0%"
-                y1="0%"
-                x2="100%"
-                y2="100%"
-              >
+              <linearGradient id="gradient2">
                 <stop offset="0%" stopColor="#a855f7" />
                 <stop offset="100%" stopColor="#7c3aed" />
               </linearGradient>
@@ -100,7 +83,6 @@ const ProcessingScreen: React.FC = () => {
             />
           </svg>
 
-          {/* Center pulse dot */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <div className="w-4 h-4 bg-purple-500 rounded-full animate-pulse shadow-lg shadow-purple-500/50" />
           </div>
@@ -108,16 +90,16 @@ const ProcessingScreen: React.FC = () => {
 
         {/* Title */}
         <h1 className="text-3xl font-semibold text-text-muted mb-3">
-          Processing Your Interview
+          {t("processing.title")}
         </h1>
 
-        {/* Current step text */}
+        {/* Step */}
         <p className="text-text-muted text-base mb-8">
           {STEPS[currentStep]}
           {".".repeat(dots)}
         </p>
 
-        {/* Step progress dots */}
+        {/* Progress */}
         <div className="flex gap-2">
           {STEPS.map((_, index) => (
             <div
@@ -133,7 +115,6 @@ const ProcessingScreen: React.FC = () => {
           ))}
         </div>
       </div>
-
       <style>{`
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
@@ -146,6 +127,7 @@ const ProcessingScreen: React.FC = () => {
         .animate-spin-slow    { animation: spin-slow    3s linear infinite; }
         .animate-spin-reverse { animation: spin-reverse 2s linear infinite; }
       `}</style>
+      ;
     </div>
   );
 };

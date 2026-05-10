@@ -4,6 +4,7 @@ import KeywordItem from "../../../../common/keyword-item/keyword-item";
 import KeywordPoint from "../../../../common/keyword-point/keyword-point";
 import type { EvaluateCvResponse } from "../../../../../api/cv";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 const MissingKeyword: React.FC = () => {
   const { data: cvEvaluation } = useQuery<EvaluateCvResponse>({
@@ -14,19 +15,21 @@ const MissingKeyword: React.FC = () => {
   const missingSkills = cvEvaluation?.evaluation?.missing_skills ?? [];
   const weaknesses = cvEvaluation?.evaluation?.weaknesses ?? [];
 
+  const { t } = useTranslation();
+
   return (
     <div>
       {/* Header */}
       <div className="flex items-center gap-2 mb-3">
         <AlertCircle className="w-5 h-5 text-orange-500" />
         <span className="text-sm font-semibold text-orange-500">
-          MISSING KEYWORDS
+          {t("missingKeywords")}
         </span>
       </div>
 
       <div className="flex flex-wrap gap-2 mb-4">
         {missingSkills.length === 0 ? (
-          <p className="text-sm text-text-muted">No missing keywords found.</p>
+          <p className="text-sm text-text-muted"> {t("noMissingKeywords")}</p>
         ) : (
           missingSkills.map((item) => (
             <KeywordItem key={item} keyword={item} matched={false} />
@@ -37,12 +40,12 @@ const MissingKeyword: React.FC = () => {
       {/* Areas to Improve */}
       <div className="bg-bg-card rounded-lg p-4">
         <h3 className="text-sm font-semibold text-orange-400 mb-2">
-          Areas to Improve
+          {t("areasToImprove")}
         </h3>
 
         <ul className="space-y-1 text-sm text-gray-400">
           {weaknesses.length === 0 ? (
-            <p className="text-sm text-text-muted">No areas to improve.</p>
+            <p className="text-sm text-text-muted">{t("noAreasToImprove")}</p>
           ) : (
             weaknesses.map((str, idx) => (
               <KeywordPoint str={str} key={idx} color="orange" />

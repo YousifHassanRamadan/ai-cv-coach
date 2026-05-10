@@ -78,19 +78,31 @@ const SCORE_CARDS: Array<{
   },
 ];
 
-const ScoreGrid = ({ finalScores }: ScoreGridProps) => (
-  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-    {SCORE_CARDS.map(({ key, label, subtitle, color, isOverall }) => (
-      <ScoreCard
-        key={key}
-        label={label}
-        subtitle={subtitle}
-        percentage={toPercent(finalScores[key] as number)}
-        color={color}
-        isOverall={isOverall}
-      />
-    ))}
-  </div>
-);
+const ScoreGrid = ({ finalScores }: ScoreGridProps) => {
+  // FIX: finalScores is null for video interviews — show nothing if no scores
+  if (!finalScores) return null;
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+      {SCORE_CARDS.map(({ key, label, subtitle, color, isOverall }) => {
+        // FIX: individual scores (fluency, eyeContact, etc.) can also be null
+        // — only render cards that actually have a value
+        const value = finalScores[key];
+        if (value == null) return null;
+
+        return (
+          <ScoreCard
+            key={key}
+            label={label}
+            subtitle={subtitle}
+            percentage={toPercent(value as number)}
+            color={color}
+            isOverall={isOverall}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 export default ScoreGrid;

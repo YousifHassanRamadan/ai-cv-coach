@@ -1,5 +1,6 @@
 import { MessageSquareIcon } from "lucide-react";
 import type { ChatListItemProps } from "./chat-list-item.types";
+import { useTranslation } from "react-i18next";
 
 function getMessage(message: string | { en: string; ar: string }): string {
   if (typeof message === "string") return message;
@@ -11,10 +12,12 @@ export default function ChatListItem({
   isActive,
   onClick,
 }: ChatListItemProps) {
+  const { t } = useTranslation();
+
   const lastMessage = chat.messages?.[chat.messages.length - 1];
   const preview = lastMessage?.message
     ? getMessage(lastMessage.message) // ✅ was: lastMessage?.message (raw object)
-    : "No messages yet";
+    : t("chat.list.emptyMessages");
 
   const formattedDate = new Date(chat.createdAt).toLocaleDateString("en-US", {
     month: "short",
@@ -37,9 +40,9 @@ export default function ChatListItem({
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-xs font-medium truncate">
-              Chat {chat.id.slice(0, 6)}…
-            </span>
+            {t("chat.list.title", {
+              id: chat.id.slice(0, 6),
+            })}
             <span
               className={`text-[10px] shrink-0 ${isActive ? "text-white/60" : "text-text-muted"}`}
             >
