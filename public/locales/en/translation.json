@@ -527,5 +527,82 @@
   "session": {
     "noSessionTitle": "No Interview Found",
     "noSessionDesc": "Complete an interview session first to view your insights and performance results here."
+  },
+  "insights": {
+    "pageTitle": "Interview Insights",
+    "subtitle": "{{track}} · {{date}} · {{duration}}",
+
+    "noSession": {
+      "title": "No Session Found",
+      "description": "No interview session was found."
+    },
+
+    "loading": {
+      "title": "Loading Insights"
+    },
+
+    "error": {
+      "title": "Something went wrong",
+      "retry": "Retry"
+    }
+  },
+  "scoreGrid": {
+    "overallScore": "Overall Score",
+    "scoreBreakdown": "Score Breakdown",
+
+    "overall": {
+      "label": "Overall",
+      "subtitle": "Combined score"
+    },
+
+    "communication": {
+      "label": "Communication",
+      "subtitle": "Clarity & Structure"
+    },
+
+    "technical": {
+      "label": "Technical",
+      "subtitle": "Knowledge & Accuracy"
+    },
+
+    "confidence": {
+      "label": "Confidence",
+      "subtitle": "Delivery & Presence"
+    },
+
+    "eyeContact": {
+      "label": "Eye Contact",
+      "subtitle": "Engagement & Confidence"
+    },
+
+    "headPose": {
+      "label": "Head Pose",
+      "subtitle": "Engagement & Confidence"
+    },
+
+    "answerRelevance": {
+      "label": "Answer Relevance",
+      "subtitle": "Content & Context"
+    }
+  },
+  "metaStats": {
+    "difficulty": "Difficulty",
+    "experience": "Experience",
+    "mode": "Mode",
+    "questions": "Questions",
+    "questionsAsked": "{{count}} asked"
+  },
+  "matchedSkills": "Matched Skills",
+  "Strengths": "Strengths",
+  "areaToImporve": "Areas to Improve",
+  "questionsAsked": "Questions Asked",
+  "profile2": {
+    "form": {
+      "noChanges": "No changes detected",
+      "invalidData": "Please fix the form errors",
+      "updated": "Profile updated successfully",
+      "updateFailed": "Failed to update profile",
+      "submit": "Submit"
+    }
   }
 }

@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import ContinueButton from "../../../common/continue-button/continue-button";
 import { useTranslation } from "react-i18next";
+import LoadingText from "../../../common/loading/loading";
 
 const iconMap: Record<string, React.ReactNode> = {
   "git-branch": <GitBranch size={20} />,
@@ -39,6 +40,7 @@ const RoleStep = ({
   customRole,
   setCustomRole,
   onContinue,
+  isTracksLoading,
 }: RoleStepProps) => {
   const { t } = useTranslation();
   return (
@@ -52,18 +54,22 @@ const RoleStep = ({
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
-        {roles.map((role) => (
-          <RoleCard
-            key={role.id}
-            icon={iconMap[role.icon] ?? <Code size={20} />}
-            label={role.name}
-            selected={selectedRole === role.id}
-            onClick={() => {
-              setSelectedRole(role.id);
-              setCustomRole("");
-            }}
-          />
-        ))}
+        {isTracksLoading ? (
+          <LoadingText text="Tracks loading..." />
+        ) : (
+          roles.map((role) => (
+            <RoleCard
+              key={role.id}
+              icon={iconMap[role.icon] ?? <Code size={20} />}
+              label={role.name}
+              selected={selectedRole === role.id}
+              onClick={() => {
+                setSelectedRole(role.id);
+                setCustomRole("");
+              }}
+            />
+          ))
+        )}
       </div>
 
       {/* <div className="mb-8">

@@ -4,6 +4,7 @@ import type {
   QuestionsListProps,
 } from "./questions-list.types";
 import SectionCard from "../section-card/section-card";
+import { useTranslation } from "react-i18next";
 
 const DIFFICULTY_STYLES = {
   easy: "bg-teal-500/20   text-teal-400",
@@ -21,7 +22,11 @@ const QuestionRow = ({ question, index }: QuestionRowProps) => (
         {question.difficulty}
       </span>
     </div>
-    <p className="text-sm text-text-muted mb-3">{question.text}</p>
+    <p className="text-sm text-text-muted mb-3">
+      {localStorage.getItem("i18nextLng") === "en"
+        ? question.text
+        : question.text_ar}
+    </p>
     <div className="flex flex-wrap gap-1">
       {question.keywords.slice(0, 4).map((keyword) => (
         <span
@@ -38,11 +43,13 @@ const QuestionRow = ({ question, index }: QuestionRowProps) => (
 const QuestionsList = ({ questions }: QuestionsListProps) => {
   if (questions.length === 0) return null;
 
+  const { t } = useTranslation();
+
   return (
     <SectionCard
       icon={<Brain className="w-4 h-4 text-text-active" />}
       iconBg="bg-bg-active/20"
-      title="Questions Asked"
+      title={t("questionsAsked")}
       className="mb-8"
       rightSlot={
         <span className="text-xs text-text-muted">

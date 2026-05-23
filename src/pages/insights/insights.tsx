@@ -20,6 +20,8 @@ import ErrorState from "../../components/feature/insights/error-state/error-stat
 import MatchedSkills from "../../components/feature/insights/matched-skills/matched-skills";
 import QuestionsList from "../../components/feature/insights/questions-list/questions-list";
 import { useInterviewResults } from "../../api/insights";
+import PageHeader from "../../components/common/page-header/page-header";
+import { useTranslation } from "react-i18next";
 
 // Hook
 
@@ -38,6 +40,8 @@ const getStoredSessionId = (): string | null => {
 // ─── page ─────────────────────────────────────────────────────────────────────
 
 const InsightsPage = () => {
+  const { t } = useTranslation();
+
   const sessionId = getStoredSessionId();
   const { data, isLoading, isError, refetch } = useInterviewResults();
 
@@ -93,18 +97,20 @@ const InsightsPage = () => {
   return (
     <div className="min-h-full bg-bg-primary text-text-primary p-8">
       {/* Header */}
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold mb-1">Interview Insights</h1>
-        <p className="text-text-muted text-sm">
-          {track.name} · {formatDate(startedAt)} ·{" "}
-          {calcDuration(startedAt, endedAt)}
-        </p>
-      </header>
+
+      <PageHeader
+        title={t("insights.pageTitle")}
+        subtitle={t("insights.subtitle", {
+          track: track.name,
+          date: formatDate(startedAt),
+          duration: calcDuration(startedAt, endedAt),
+        })}
+      />
 
       {/* Scores */}
       <ScoreGrid finalScores={finalScores} />
 
-      {/* Meta info — FIX: only render speech-related stats when available */}
+      {/* Meta info */}
       {hasSpeechScores && (
         <MetaStats
           data={{ difficulty, experienceLevel, mode, questionCount }}

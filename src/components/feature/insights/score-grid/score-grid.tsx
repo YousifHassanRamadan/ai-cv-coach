@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { FinalScores } from "../../../../api/insights";
 import { toPercent } from "../../../../utils/insights.utils";
 import CircularRing from "../circularring/circularring";
@@ -9,22 +10,31 @@ const ScoreCard = ({
   percentage,
   color,
   isOverall = false,
-}: ScoreCardProps) => (
-  <div
-    className={`bg-bg-subcard rounded-lg p-6 border ${isOverall ? "border-border-active" : "border-border-light"}`}
-  >
-    <p className="text-xs text-text-muted uppercase tracking-wider mb-4">
-      {isOverall ? "Overall Score" : "Score Breakdown"}
-    </p>
-    <div className="flex items-center justify-center py-4">
-      <CircularRing percentage={percentage} color={color} size={90} />
+}: ScoreCardProps) => {
+  const { t } = useTranslation();
+  return (
+    <div
+      className={`bg-bg-subcard rounded-lg p-6 border ${
+        isOverall ? "border-border-active" : "border-border-light"
+      }`}
+    >
+      <p className="text-xs text-text-muted uppercase tracking-wider mb-4">
+        {isOverall
+          ? t("scoreGrid.overallScore")
+          : t("scoreGrid.scoreBreakdown")}
+      </p>
+
+      <div className="flex items-center justify-center py-4">
+        <CircularRing percentage={percentage} color={color} size={90} />
+      </div>
+
+      <div className="text-center">
+        <p className="text-sm font-semibold mb-1">{label}</p>
+        <p className="text-xs text-text-muted">{subtitle}</p>
+      </div>
     </div>
-    <div className="text-center">
-      <p className="text-sm font-semibold mb-1">{label}</p>
-      <p className="text-xs text-text-muted">{subtitle}</p>
-    </div>
-  </div>
-);
+  );
+};
 
 const SCORE_CARDS: Array<{
   key: keyof FinalScores;
@@ -35,66 +45,67 @@ const SCORE_CARDS: Array<{
 }> = [
   {
     key: "overall",
-    label: "Overall",
-    subtitle: "Combined score",
+    label: "scoreGrid.overall.label",
+    subtitle: "scoreGrid.overall.subtitle",
     color: "#10b981",
     isOverall: true,
   },
   {
     key: "fluency",
-    label: "Communication",
-    subtitle: "Clarity & Structure",
+    label: "scoreGrid.communication.label",
+    subtitle: "scoreGrid.communication.subtitle",
     color: "#8b5cf6",
   },
   {
     key: "nlp",
-    label: "Technical",
-    subtitle: "Knowledge & Accuracy",
+    label: "scoreGrid.technical.label",
+    subtitle: "scoreGrid.technical.subtitle",
     color: "#06b6d4",
   },
   {
     key: "energy",
-    label: "Confidence",
-    subtitle: "Delivery & Presence",
+    label: "scoreGrid.confidence.label",
+    subtitle: "scoreGrid.confidence.subtitle",
     color: "#10b981",
   },
   {
     key: "eyeContact",
-    label: "Eye Contact",
-    subtitle: "Engagement & Confidence",
+    label: "scoreGrid.eyeContact.label",
+    subtitle: "scoreGrid.eyeContact.subtitle",
     color: "#10b981",
   },
   {
     key: "headPose",
-    label: "Head Pose",
-    subtitle: "Engagement & Confidence",
+    label: "scoreGrid.headPose.label",
+    subtitle: "scoreGrid.headPose.subtitle",
     color: "#10b981",
   },
   {
     key: "answerRelevance",
-    label: "Answer Relevance",
-    subtitle: "Content & Context",
+    label: "scoreGrid.answerRelevance.label",
+    subtitle: "scoreGrid.answerRelevance.subtitle",
     color: "#10b981",
   },
 ];
 
 const ScoreGrid = ({ finalScores }: ScoreGridProps) => {
+  const { t } = useTranslation();
   // FIX: finalScores is null for video interviews — show nothing if no scores
   if (!finalScores) return null;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
       {SCORE_CARDS.map(({ key, label, subtitle, color, isOverall }) => {
-        // FIX: individual scores (fluency, eyeContact, etc.) can also be null
-        // — only render cards that actually have a value
         const value = finalScores[key];
+
+        // render only cards with values
         if (value == null) return null;
 
         return (
           <ScoreCard
             key={key}
-            label={label}
-            subtitle={subtitle}
+            label={t(label)}
+            subtitle={t(subtitle)}
             percentage={toPercent(value as number)}
             color={color}
             isOverall={isOverall}

@@ -96,6 +96,7 @@ const InterviewPage = () => {
             customRole={customRole}
             setCustomRole={setCustomRole}
             onContinue={() => setCurrentStep(2)}
+            isTracksLoading={isTracksLoading}
           />
         )}
 

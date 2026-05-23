@@ -92,6 +92,8 @@ export const QuestionsBankPage = () => {
     ? (trackData?.questions.length ?? 0)
     : (data?.total ?? 0);
 
+  // console.log("data>>", data?.questions);
+
   return (
     <div className="min-h-screen font-sans bg-bg-primary">
       {/* Body */}

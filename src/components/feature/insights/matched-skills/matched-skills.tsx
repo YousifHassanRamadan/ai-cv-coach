@@ -1,15 +1,18 @@
 import { Eye } from "lucide-react";
 import type { MatchedSkillsProps } from "./matched-skills.types";
 import SectionCard from "../section-card/section-card";
+import { useTranslation } from "react-i18next";
 
 const MatchedSkills = ({ skills }: MatchedSkillsProps) => {
   if (skills.length === 0) return null;
+
+  const { t } = useTranslation();
 
   return (
     <SectionCard
       icon={<Eye className="w-4 h-4 text-text-active" />}
       iconBg="bg-bg-active/20"
-      title="Matched Skills"
+      title={t("matchedSkills")}
       className="mb-8"
     >
       <div className="flex flex-wrap gap-2">

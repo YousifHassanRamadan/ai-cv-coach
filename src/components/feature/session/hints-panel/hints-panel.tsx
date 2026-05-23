@@ -25,7 +25,11 @@ const HintsPanel: React.FC<HintPanalProps> = ({ hints }) => {
           >
             <span className="text-sm shrink-0">{hint.icon}</span>
             <div>
-              <p className="mb-0.5">{hint.message}</p>
+              <p className="mb-0.5">
+                {localStorage.getItem("i18nextLng") === "en"
+                  ? hint.message
+                  : hint.message_ar}
+              </p>
               <p className="opacity-60 capitalize">{hint.category}</p>
             </div>
           </div>

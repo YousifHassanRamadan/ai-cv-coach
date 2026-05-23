@@ -4,10 +4,8 @@ import type { InterviewQuestion } from "../api/interviews";
 
 // ── Voice IDs ─────────────────────────────────────────────────────────────────
 const VOICES = {
-  male_en: "auq43ws1oslv0tO4BDa7", // Josh      – English male
   female_en: "EXAVITQu4vr4xnSDxMaL", // Bella     – English female
-  male_ar: "onwK4e9ZLuTAKqWW03F9", // Daniel    – Arabic-capable male
-  female_ar: "XB0fDUnXU5powFXDhCwa", // Charlotte – Arabic-capable female
+  female_ar: "EXAVITQu4vr4xnSDxMaL", // Charlotte – Arabic-capable female
 } as const;
 
 type VoiceKey = keyof typeof VOICES;
@@ -45,12 +43,14 @@ export const useElevenLabsTTS = (): UseElevenLabsTTSReturn => {
       question: InterviewQuestion,
       index: number,
     ): { voiceId: string; text: string } => {
-      const hasArabic = Boolean(question.text_ar?.trim());
+      const hasArabic = Boolean(
+        question.hasTranslation && localStorage.getItem("i18nextLng") === "ar",
+      );
       const text = hasArabic ? (question.text_ar as string) : question.text;
       const lang = hasArabic ? "ar" : "en";
       const key: VoiceKey = `female_${lang}` as VoiceKey;
       return {
-        voiceId: VOICES[key] ?? VOICES.female_en,
+        voiceId: VOICES[key],
         text,
       };
     },

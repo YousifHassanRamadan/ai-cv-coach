@@ -555,5 +555,82 @@
   "session": {
     "noSessionTitle": "لا توجد مقابلة",
     "noSessionDesc": "أكمل جلسة مقابلة أولاً لعرض التحليلات ونتائج الأداء هنا."
+  },
+  "insights": {
+    "pageTitle": "تحليلات المقابلة",
+    "subtitle": "{{track}} · {{date}} · {{duration}}",
+
+    "noSession": {
+      "title": "لا توجد جلسة",
+      "description": "لم يتم العثور على جلسة مقابلة."
+    },
+
+    "loading": {
+      "title": "جارِ تحميل التحليلات"
+    },
+
+    "error": {
+      "title": "حدث خطأ ما",
+      "retry": "إعادة المحاولة"
+    }
+  },
+  "scoreGrid": {
+    "overallScore": "النتيجة النهائية",
+    "scoreBreakdown": "تفاصيل التقييم",
+
+    "overall": {
+      "label": "الإجمالي",
+      "subtitle": "النتيجة الكاملة"
+    },
+
+    "communication": {
+      "label": "التواصل",
+      "subtitle": "الوضوح والتنظيم"
+    },
+
+    "technical": {
+      "label": "تقني",
+      "subtitle": "المعرفة والدقة"
+    },
+
+    "confidence": {
+      "label": "الثقة",
+      "subtitle": "طريقة التقديم والحضور"
+    },
+
+    "eyeContact": {
+      "label": "التواصل البصري",
+      "subtitle": "التفاعل والثقة"
+    },
+
+    "headPose": {
+      "label": "وضعية الرأس",
+      "subtitle": "التفاعل والثقة"
+    },
+
+    "answerRelevance": {
+      "label": "صلة الإجابة",
+      "subtitle": "المحتوى والسياق"
+    }
+  },
+  "metaStats": {
+    "difficulty": "الصعوبة",
+    "experience": "الخبرة",
+    "mode": "الوضع",
+    "questions": "الأسئلة",
+    "questionsAsked": "تم طرح {{count}} سؤال"
+  },
+  "matchedSkills": "المهارات المتوافقة",
+  "Strengths": "القوة",
+  "areaToImporve": "نقاط يجب التركيز عليها",
+  "questionsAsked": "الاسئلة",
+  "profile2": {
+    "form": {
+      "noChanges": "لا توجد أي تغييرات",
+      "invalidData": "يرجى تصحيح أخطاء النموذج",
+      "updated": "تم تحديث الملف الشخصي بنجاح",
+      "updateFailed": "فشل تحديث الملف الشخصي",
+      "submit": "تعديل"
+    }
   }
 }

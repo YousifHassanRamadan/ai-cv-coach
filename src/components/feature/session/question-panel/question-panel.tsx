@@ -42,6 +42,8 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
   const question = questionText[currentIndex];
   const diff = question ? getDifficulty(question.difficulty) : null;
 
+  console.log("question=>>", question);
+
   const [isArabic, setIsArabic] = React.useState(false);
 
   // ── NEW: detect if the current question has an Arabic version ─────────────
@@ -63,7 +65,7 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
     }
   }, [i18n.language]);
 
-  // console.log("question", question);
+  console.log("chunkResponse", chunkResponse);
 
   return (
     <div className="w-full sm:w-[340px] lg:w-[420px] bg-bg-primary border-t sm:border-t-0 sm:border-l border-border-light flex flex-col shrink-0 overflow-y-auto sm:overflow-hidden">
@@ -82,7 +84,9 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
 
         <h2 className="text-sm sm:text-xl font-normal leading-relaxed mb-2 sm:mb-3">
           Q{currentIndex + 1}. {""}
-          {question?.text}
+          {isArabic && question.hasTranslation
+            ? question?.text_ar
+            : question?.text}
         </h2>
 
         {/* Difficulty badge */}

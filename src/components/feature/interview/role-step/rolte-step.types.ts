@@ -14,4 +14,5 @@ export interface RoleStepProps {
   customRole: string;
   setCustomRole: (v: string) => void;
   onContinue: () => void;
+  isTracksLoading: boolean;
 }

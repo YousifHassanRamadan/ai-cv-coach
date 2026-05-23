@@ -28,8 +28,29 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
     enableReinitialize: true,
     validationSchema: ProfileSchema,
     onSubmit: (values) => {
+      // no changes
+      if (!formik.dirty) {
+        toast.info(t("profile2.form.noChanges"));
+        return;
+      }
+
+      // invalid form
+      if (!formik.isValid) {
+        toast.error(t("profile2.form.invalidData"));
+        return;
+      }
+
       console.log("Form submitted:", values);
-      updateProfile(values);
+
+      updateProfile(values, {
+        onSuccess: () => {
+          toast.success(t("profile2.form.updated"));
+        },
+
+        onError: () => {
+          toast.error(t("profile2.form.updateFailed"));
+        },
+      });
     },
   });
 
@@ -52,7 +73,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
       <SubmitButton
         type="submit"
         label={
-          isUpdating ? t("profile.form.saving") : t("profile.form.saveChanges")
+          isUpdating ? t("profile2.form.submit") : t("profile2.form.submit")
         }
       />
     </form>

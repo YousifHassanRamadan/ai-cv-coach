@@ -19,6 +19,7 @@ export interface InterviewQuestion {
   difficulty: string;
   category: string;
   keywords: string[];
+  hasTranslation: boolean;
 }
 
 export interface StartInterviewResponse {
