@@ -18,7 +18,7 @@ export const useStartInterview = () => {
     mutationFn: startInterview,
 
     onSuccess: (data) => {
-      toast.success("Interview started successfully!");
+      // toast.success("Interview started successfully!");
       localStorage.removeItem("interview-token");
       localStorage.removeItem("session-id");
       queryClient.removeQueries({ queryKey: ["chunk-response"] });
