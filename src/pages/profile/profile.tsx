@@ -25,6 +25,19 @@ const ProfilePage: React.FC = () => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
+  console.log(
+    "Current data?.userStats?.avgScore preferences:",
+    data?.userStats?.avgScore,
+  );
+  console.log(
+    "Current data?.userStats?.totalInterviews preferences:",
+    data?.userStats?.totalInterviews,
+  );
+  console.log(
+    "Current data?.userStats?.totalUploads preferences:",
+    data?.userStats?.totalUploads,
+  );
+
   return (
     <div className="min-h-screen bg-bg-primary text-white p-8">
       <div className="max-w-5xl mx-auto">

@@ -16,6 +16,7 @@ export const useCoverLetter = () => {
       toast.success("Cover letter generated successfully!");
       queryClient.setQueryData(["cover-letter-response"], data);
       queryClient.invalidateQueries({ queryKey: ["cover-letter-list"] });
+      queryClient.invalidateQueries({ queryKey: ["cv-documents"] });
     },
     onError: (error) => {
       toast.error(`Failed to process chunk: ${error.message}`);
