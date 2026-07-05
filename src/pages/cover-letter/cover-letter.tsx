@@ -39,9 +39,9 @@ const CoverLetterPage = () => {
   const { data: generatedLetters, isLoading: isGeneratedLettersLoading } =
     useGetCoverLetterList();
 
-  console.log("Cover Letter API Response:", coverLetter);
+  // console.log("Cover Letter API Response:", coverLetter);
 
-  console.log("Generated Letters List:", generatedLetters);
+  // console.log("Generated Letters List:", generatedLetters);
 
   const { t } = useTranslation();
 

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 const ImprovementsCard = ({ improvements }: ImprovementsCardProps) => {
   const { t } = useTranslation();
 
-  console.log("improvements", improvements);
+  // console.log("improvements", improvements);
 
   return (
     <SectionCard

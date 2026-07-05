@@ -12,7 +12,7 @@ const ProfilePage: React.FC = () => {
 
   const { t } = useTranslation();
 
-  console.log("User data:", data, "Loading:", isLoading, "Error:", isError);
+  // console.log("User data:", data, "Loading:", isLoading, "Error:", isError);
 
   const [notifications, setNotifications] = useState<NotificationPreferences>({
     emailNotifications: true,
@@ -25,18 +25,18 @@ const ProfilePage: React.FC = () => {
     setNotifications((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  console.log(
-    "Current data?.userStats?.avgScore preferences:",
-    data?.userStats?.avgScore,
-  );
-  console.log(
-    "Current data?.userStats?.totalInterviews preferences:",
-    data?.userStats?.totalInterviews,
-  );
-  console.log(
-    "Current data?.userStats?.totalUploads preferences:",
-    data?.userStats?.totalUploads,
-  );
+  // console.log(
+  //   "Current data?.userStats?.avgScore preferences:",
+  //   data?.userStats?.avgScore,
+  // );
+  // console.log(
+  //   "Current data?.userStats?.totalInterviews preferences:",
+  //   data?.userStats?.totalInterviews,
+  // );
+  // console.log(
+  //   "Current data?.userStats?.totalUploads preferences:",
+  //   data?.userStats?.totalUploads,
+  // );
 
   return (
     <div className="min-h-screen bg-bg-primary text-white p-8">

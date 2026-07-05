@@ -28,7 +28,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSwitch }) => {
     },
     validationSchema: SignInSchema,
     onSubmit: (values) => {
-      console.log("Form submitted:", values);
+      // console.log("Form submitted:", values);
       signIn(values, {
         onSuccess: (data) => {
           // Save tokens in Zustand store

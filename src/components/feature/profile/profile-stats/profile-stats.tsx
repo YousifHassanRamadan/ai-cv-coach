@@ -12,7 +12,7 @@ const ProfileStats = ({
     <div className="flex gap-8">
       <StatItem value={interviews} label={t("profile.stats.interviews")} />
       <StatItem
-        value={avgScore}
+        value={Math.floor(avgScore * 100)}
         label={t("profile.stats.avgScore")}
         highlight
       />

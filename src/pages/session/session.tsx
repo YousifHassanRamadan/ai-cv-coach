@@ -84,7 +84,7 @@ const InterviewSession: React.FC = () => {
   const speakAndResume = useCallback(
     (question: InterviewQuestion, index: number) => {
       if (speakingLockRef.current) {
-        console.log(`⏭️ TTS already in progress, skipping question ${index}`);
+        // console.log(`⏭️ TTS already in progress, skipping question ${index}`);
         return;
       }
       speakingLockRef.current = true;
@@ -118,7 +118,7 @@ const InterviewSession: React.FC = () => {
   }, [isRecording]);
 
   useEffect(() => {
-    console.log("chunkResponse=>>>", chunkResponse);
+    // console.log("chunkResponse=>>>", chunkResponse);
   }, [chunkResponse]);
 
   // ── Release all camera/video tracks ───────────────────────────────────────
@@ -145,7 +145,7 @@ const InterviewSession: React.FC = () => {
       setCameraEnabled(true);
 
       acquireVideoStream(stream);
-      startVideoRecorderForQuestion();
+      startVideoRecorderForQuestion(questions[0]?.id ?? "");
     } catch (error) {
       console.error("Error accessing camera:", error);
       setCameraEnabled(false);
@@ -169,7 +169,7 @@ const InterviewSession: React.FC = () => {
         await openCamera();
       } else {
         await acquireStream(); // 1. get mic permission once
-        startRecorderForQuestion(); // 2. start recording question 0
+        startRecorderForQuestion(questions[0]?.id ?? ""); // 2. start recording question 0
       }
 
       if (questions[0]) speakAndResume(questions[0], 0);
@@ -209,10 +209,12 @@ const InterviewSession: React.FC = () => {
     if (isVideoMode) {
       // ✅ Flush current question's video, start fresh recorder for next
       await stopVideoRecorderAndFlush();
-      startVideoRecorderForQuestion();
+      const nextVideoQuestion = questions[currentQuestionIndex + 1];
+      startVideoRecorderForQuestion(nextVideoQuestion?.id ?? "");
     } else {
       await stopRecorderAndFlush(); // flush current question — don't lose audio
-      startRecorderForQuestion(); // immediately start recording next question
+      const nextQuestion = questions[currentQuestionIndex + 1];
+      startRecorderForQuestion(nextQuestion?.id ?? ""); // immediately start recording next question
     }
 
     setCurrentQuestionIndex((prev) => prev + 1);

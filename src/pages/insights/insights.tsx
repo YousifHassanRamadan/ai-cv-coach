@@ -45,7 +45,7 @@ const InsightsPage = () => {
   const sessionId = getStoredSessionId();
   const { data, isLoading, isError, refetch } = useInterviewResults();
 
-  console.log("Fetched insights data:", data);
+  // console.log("Fetched insights data:", data);
 
   // ── derived data (memoised so it's not recalculated on every render) ──
   const emotionData = useMemo(

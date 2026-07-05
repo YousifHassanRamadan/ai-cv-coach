@@ -15,13 +15,13 @@ export const useProcessChunk = () => {
   return useMutation<ChunkProcessResponse, Error, ProcessChunkPayload>({
     mutationFn: processChunk,
     onSuccess: (data) => {
-      console.log("✅ Chunk success:", data); // 👈 see full response
+      // console.log("✅ Chunk success:", data); // 👈 see full response
       // toast.success("Chunk processed successfully!");
       queryClient.setQueryData(["chunk-response", sessionId], data);
     },
     onError: (error) => {
       toast.error(`Failed to process chunk: ${error.message}`);
-      console.log("✅ error:", error);
+      // console.log("✅ error:", error);
     },
   });
 };
@@ -35,7 +35,7 @@ export const useProcessAudioChunk = () => {
 
     onSuccess: (data) => {
       toast.success("Audio processed successfully!");
-      console.log("Processed audio chunk:", data);
+      // console.log("Processed audio chunk:", data);
       queryClient.setQueryData(["chunk-response", sessionId], data);
     },
 

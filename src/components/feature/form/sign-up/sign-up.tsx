@@ -24,7 +24,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSwitch }) => {
     },
     validationSchema: SignUpSchema,
     onSubmit: (values) => {
-      console.log("Form submitted:", values);
+      // console.log("Form submitted:", values);
       // Here you can call your React Query mutation
 
       signup(values, {

@@ -11,39 +11,13 @@ const MIME_TYPE = MediaRecorder.isTypeSupported("video/webm;codecs=vp8,opus")
     : "video/webm";
 
 export interface UseChunkRecorderReturn {
-  /**
-   * Pass the MediaStream from getUserMedia (camera + mic).
-   * Call once when the session begins — reuses the same stream for every
-   * question so the camera light never flickers between questions.
-   */
   acquireStream: (stream: MediaStream) => void;
-
-  /**
-   * Create a fresh MediaRecorder for the current question and start the
-   * 30-second chunk interval. Requires acquireStream() to have been called.
-   */
-  startRecorderForQuestion: () => void;
-
-  /**
-   * Stop the current recorder, flush any remaining video, and resolve only
-   * after the chunk has been encoded and sent. Await before starting the
-   * next question — no chunk is ever lost or duplicated.
-   */
+  /** @param questionId - The ID of the question being recorded. */
+  startRecorderForQuestion: (questionId: string) => void;
   stopRecorderAndFlush: () => Promise<void>;
-
-  /**
-   * Release the stream and clear all state. Call when the whole interview
-   * session ends (not between questions).
-   */
   releaseStream: () => void;
-
-  /** Pause data collection (e.g. while TTS is playing). */
   pauseRecording: () => void;
-
-  /** Resume data collection after TTS ends. */
   resumeRecording: () => void;
-
-  /** Global chunk index — increments across all questions in the session. */
   chunkIndexRef: React.MutableRefObject<number>;
 }
 
@@ -61,25 +35,22 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
   const chunkIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const flushedRef = useRef(false);
   const pausedRef = useRef(false);
+  // ID of the question currently being recorded.
+  const questionIdRef = useRef<string>("");
 
-  // ── WebM header fix (same as audio hook) ──────────────────────────────────
-  // The first ondataavailable blob contains the WebM EBML header + Tracks
-  // element. Every subsequent fragment — including the onstop tail — is only
-  // decodable when that header is prepended. We keep it per-recorder and
-  // always prepend it before sending.
+  // ── WebM header fix ───────────────────────────────────────────────────────
   const headerChunkRef = useRef<BlobPart | null>(null);
 
-  // ── Build a self-contained blob, always prepending the WebM header ─────────
   const buildParts = useCallback((parts: BlobPart[]): BlobPart[] => {
     const header = headerChunkRef.current;
     if (!header) return parts;
-    if (parts[0] === header) return parts; // already starts with header
+    if (parts[0] === header) return parts;
     return [header, ...parts];
   }, []);
 
-  // ── Encode and send a video chunk ──────────────────────────────────────────
+  // ── Encode and send a video chunk ─────────────────────────────────────────
   const encodeAndSend = useCallback(
-    (parts: BlobPart[], chunkIndex: number): void => {
+    (parts: BlobPart[], chunkIndex: number, questionId: string): void => {
       const blob = new Blob(parts, { type: MIME_TYPE });
 
       if (blob.size < 1000) {
@@ -101,10 +72,14 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
         type: MIME_TYPE,
       });
 
-      console.log(
-        `🎬 Sending video chunk ${chunkIndex}, size: ${file.size} bytes`,
-      );
-      processChunk({ chunk_id: chunkIndex, video_file: file });
+      // console.log(
+      //   `🎬 Sending video chunk ${chunkIndex}, size: ${file.size} bytes, question: ${questionId}`,
+      // );
+      processChunk({
+        chunk_id: chunkIndex,
+        video_file: file,
+        question_id: questionId,
+      });
     },
     [processChunk],
   );
@@ -113,84 +88,82 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
   const flushIntervalChunk = useCallback(() => {
     if (!sessionActiveRef.current) return;
     if (flushedRef.current) return;
-    if (pausedRef.current) return; // skip flush while TTS is playing
+    if (pausedRef.current) return;
 
-    const parts = chunksRef.current.splice(0); // drain, keep recording
+    const parts = chunksRef.current.splice(0);
     if (parts.length === 0) return;
 
     const index = chunkIndexRef.current;
     chunkIndexRef.current += 1;
 
-    encodeAndSend(buildParts(parts), index);
+    encodeAndSend(buildParts(parts), index, questionIdRef.current); // ✅ pass questionId
   }, [encodeAndSend, buildParts]);
 
-  // ── Acquire stream (call once, passing the camera stream) ─────────────────
+  // ── Acquire stream ────────────────────────────────────────────────────────
   const acquireStream = useCallback((stream: MediaStream): void => {
     streamRef.current = stream;
     sessionActiveRef.current = true;
-    console.log("🎥 Video stream acquired");
+    // console.log("🎥 Video stream acquired");
   }, []);
 
   // ── Start a fresh recorder for each question ──────────────────────────────
-  const startRecorderForQuestion = useCallback((): void => {
-    if (!streamRef.current) {
-      console.error("startRecorderForQuestion: stream not acquired yet.");
-      return;
-    }
-    if (!sessionActiveRef.current) return;
-
-    // Reset per-question state
-    chunksRef.current = [];
-    flushedRef.current = false;
-    pausedRef.current = false;
-    headerChunkRef.current = null;
-
-    const recorder = new MediaRecorder(streamRef.current, {
-      mimeType: MIME_TYPE,
-    });
-    mediaRecorderRef.current = recorder;
-
-    recorder.ondataavailable = (e) => {
-      if (flushedRef.current) return; // final flush already started, discard
-      if (pausedRef.current) return; // TTS playing, gate data collection
-      if (!e.data?.size) return;
-
-      // Capture the very first chunk as the WebM header for this recorder.
-      if (headerChunkRef.current === null) {
-        headerChunkRef.current = e.data;
+  const startRecorderForQuestion = useCallback(
+    (questionId: string): void => {
+      if (!streamRef.current) {
+        console.error("startRecorderForQuestion: stream not acquired yet.");
+        return;
       }
+      if (!sessionActiveRef.current) return;
 
-      chunksRef.current.push(e.data);
-    };
+      // Reset per-question state
+      chunksRef.current = [];
+      flushedRef.current = false;
+      pausedRef.current = false;
+      headerChunkRef.current = null;
+      questionIdRef.current = questionId; // ✅ store question ID
 
-    recorder.start(1000); // fire ondataavailable every 1s
+      const recorder = new MediaRecorder(streamRef.current, {
+        mimeType: MIME_TYPE,
+      });
+      mediaRecorderRef.current = recorder;
 
-    chunkIntervalRef.current = setInterval(
-      flushIntervalChunk,
-      CHUNK_INTERVAL_MS,
-    );
+      recorder.ondataavailable = (e) => {
+        if (flushedRef.current) return;
+        if (pausedRef.current) return;
+        if (!e.data?.size) return;
 
-    console.log("▶️ Video recorder started for new question");
-  }, [flushIntervalChunk]);
+        if (headerChunkRef.current === null) {
+          headerChunkRef.current = e.data;
+        }
 
-  // ── Pause data collection (while TTS plays) ───────────────────────────────
+        chunksRef.current.push(e.data);
+      };
+
+      recorder.start(1000);
+
+      chunkIntervalRef.current = setInterval(
+        flushIntervalChunk,
+        CHUNK_INTERVAL_MS,
+      );
+
+      // console.log("▶️ Video recorder started for new question");
+    },
+    [flushIntervalChunk],
+  );
+
+  // ── Pause / resume ────────────────────────────────────────────────────────
   const pauseRecording = useCallback((): void => {
     if (!sessionActiveRef.current) return;
     pausedRef.current = true;
-    chunksRef.current = []; // discard pre-pause buffer to avoid TTS bleed
-    headerChunkRef.current = null; // header will be re-captured on resume
-    console.log("⏸️ Video recording paused (TTS playing)");
+    chunksRef.current = [];
+    headerChunkRef.current = null;
+    // console.log("⏸️ Video recording paused (TTS playing)");
   }, []);
 
-  // ── Resume data collection (after TTS ends) ───────────────────────────────
-  // Note: because we cleared the header on pause, the next chunk that arrives
-  // after resume will be treated as the new header. This works because
-  // MediaRecorder continuously emits chunks with embedded headers when
-  // timeslice (start(1000)) is used — each 1s slice is independently seekable.
   const resumeRecording = useCallback((): void => {
     if (!sessionActiveRef.current) return;
     pausedRef.current = false;
-    console.log("▶️ Video recording resumed (TTS ended)");
+    // console.log("▶️ Video recording resumed (TTS ended)");
   }, []);
 
   // ── Stop recorder + guaranteed final flush ────────────────────────────────
@@ -219,10 +192,9 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
         if (parts.length > 0) {
           const index = chunkIndexRef.current;
           chunkIndexRef.current += 1;
-          // Prepend header so the final tail fragment is decodable
-          encodeAndSend(buildParts(parts), index);
+          encodeAndSend(buildParts(parts), index, questionIdRef.current); // ✅ pass questionId
         } else {
-          console.log("ℹ️ No buffered video at stop — nothing to flush.");
+          // console.log("ℹ️ No buffered video at stop — nothing to flush.");
         }
 
         resolve();
@@ -232,7 +204,7 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
     });
   }, [encodeAndSend, buildParts]);
 
-  // ── Release stream (call when the whole session ends) ─────────────────────
+  // ── Release stream ────────────────────────────────────────────────────────
   const releaseStream = useCallback((): void => {
     sessionActiveRef.current = false;
 
@@ -257,10 +229,9 @@ export const useChunkRecorder = (): UseChunkRecorderReturn => {
     });
     streamRef.current = null;
 
-    console.log("🛑 Video stream released");
+    // console.log("🛑 Video stream released");
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => () => releaseStream(), [releaseStream]);
 
   return {

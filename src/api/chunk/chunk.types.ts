@@ -52,9 +52,11 @@ export interface ChunkProcessResponse {
 export interface ProcessChunkPayload {
   chunk_id: number;
   video_file: File;
+  question_id: string | number;
 }
 
 export interface ProcessAudioChunkPayload {
   chunk_id: number;
   audio_file: File;
+  question_id: string | number;
 }

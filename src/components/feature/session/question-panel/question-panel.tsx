@@ -42,11 +42,8 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
   const question = questionText[currentIndex];
   const diff = question ? getDifficulty(question.difficulty) : null;
 
-  console.log("question=>>", question);
-
   const [isArabic, setIsArabic] = React.useState(false);
 
-  // ── NEW: detect if the current question has an Arabic version ─────────────
   const hasArabic = i18n.language === "ar";
 
   const sessionId = localStorage.getItem("session-id");
@@ -65,8 +62,6 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
     }
   }, [i18n.language]);
 
-  console.log("chunkResponse", chunkResponse);
-
   return (
     <div className="w-full sm:w-[340px] lg:w-[420px] bg-bg-primary border-t sm:border-t-0 sm:border-l border-border-light flex flex-col shrink-0 overflow-y-auto sm:overflow-hidden">
       <div className="p-3 sm:p-6 flex-1 flex flex-col sm:overflow-y-auto">
@@ -77,10 +72,6 @@ const QuestionPanel: React.FC<QuestionPanelProps> = ({
             Current Question
           </span>
         </div>
-
-        {/* English question text */}
-
-        {/* ── NEW: Arabic question text (shown only when text_ar exists) ─── */}
 
         <h2 className="text-sm sm:text-xl font-normal leading-relaxed mb-2 sm:mb-3">
           Q{currentIndex + 1}. {""}

@@ -20,7 +20,7 @@ export const useCoverLetter = () => {
     },
     onError: (error) => {
       toast.error(`Failed to process chunk: ${error.message}`);
-      console.log("✅ error:", error);
+      // console.log("✅ error:", error);
     },
   });
 };

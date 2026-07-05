@@ -19,7 +19,7 @@ const ResumePage = () => {
     enabled: false,
   });
 
-  console.log("CV Evaluation:", cvEvaluation);
+  // console.log("CV Evaluation:", cvEvaluation);
   return (
     <div className="min-h-full bg-bg-primary  p-8">
       {/* Header */}

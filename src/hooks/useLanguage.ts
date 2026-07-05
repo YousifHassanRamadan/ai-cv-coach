@@ -7,7 +7,7 @@ export const useLanguage = () => {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng: AppLanguage) => {
-    console.log("changing language to:", lng);
+    // console.log("changing language to:", lng);
     i18n.changeLanguage(lng);
   };
 

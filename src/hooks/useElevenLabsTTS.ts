@@ -89,7 +89,7 @@ export const useElevenLabsTTS = (): UseElevenLabsTTSReturn => {
     async (question: InterviewQuestion, index: number): Promise<void> => {
       try {
         await fetchAndCache(question, index);
-        console.log(`📦 Preloaded TTS for question ${index}`);
+        // console.log(`📦 Preloaded TTS for question ${index}`);
       } catch (err) {
         console.warn(`⚠️ Preload failed for question ${index}:`, err);
       }

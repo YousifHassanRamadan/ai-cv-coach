@@ -40,7 +40,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
         return;
       }
 
-      console.log("Form submitted:", values);
+      // console.log("Form submitted:", values);
 
       updateProfile(values, {
         onSuccess: () => {
@@ -54,7 +54,7 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({ profile }) => {
     },
   });
 
-  console.log("profile:", profile);
+  // console.log("profile:", profile);
 
   return (
     <form className="flex flex-col gap-5 my-5" onSubmit={formik.handleSubmit}>

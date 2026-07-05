@@ -33,12 +33,12 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleExportData = () => {
-    console.log("Exporting data...");
+    // console.log("Exporting data...");
     // Implement export logic here
   };
 
   const handleClearMemory = () => {
-    console.log("Clearing AI memory...");
+    // console.log("Clearing AI memory...");
     // Implement clear memory logic here
   };
 
@@ -47,7 +47,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const handleConfirmDelete = () => {
-    console.log("Account deleted");
+    // console.log("Account deleted");
     setShowDeleteModal(false);
     // Implement account deletion logic here
   };

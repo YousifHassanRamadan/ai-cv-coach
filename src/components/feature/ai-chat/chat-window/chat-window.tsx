@@ -29,7 +29,7 @@ export default function ChatWindow({
     setPendingMessage(null); // شيل الـ pending
   }, [chat?.messages]);
 
-  console.log("chat?.messages", chat?.messages);
+  // console.log("chat?.messages", chat?.messages);
 
   return (
     <div className="flex flex-col h-full">

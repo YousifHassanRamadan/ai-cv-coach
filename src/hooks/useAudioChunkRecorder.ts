@@ -22,8 +22,9 @@ export interface UseAudioChunkRecorderReturn {
   /**
    * Create a fresh MediaRecorder for the current question and start the
    * 30-second chunk interval. Requires acquireStream() to have been called.
+   * @param questionId - The ID of the question being recorded.
    */
-  startRecorderForQuestion: () => void;
+  startRecorderForQuestion: (questionId: string) => void;
 
   /**
    * Stop the current recorder, flush any remaining audio, and resolve only
@@ -56,6 +57,8 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
   const chunkIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   // Duplicate-send guard: flipped to true the instant a flush begins.
   const flushedRef = useRef(false);
+  // ID of the question currently being recorded.
+  const questionIdRef = useRef<string>("");
 
   // ── FIX: store the very first data chunk (WebM header) per recorder ───────
   // WebM/Opus streams embed the codec initialisation data (EBML header +
@@ -70,6 +73,7 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
       blobParts: BlobPart[],
       chunkIndex: number,
       mimeType: string,
+      questionId: string,
     ): Promise<void> => {
       const blob = new Blob(blobParts, { type: mimeType });
 
@@ -80,9 +84,9 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
         return;
       }
 
-      console.log(
-        `🔄 Encoding chunk ${chunkIndex} to WAV… (${blob.size} bytes)`,
-      );
+      // console.log(
+      //   `🔄 Encoding chunk ${chunkIndex} to WAV… (${blob.size} bytes)`,
+      // );
 
       try {
         const arrayBuffer = await blob.arrayBuffer();
@@ -95,10 +99,14 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
           type: "audio/wav",
         });
 
-        console.log(
-          `🎙️ Sending chunk ${chunkIndex} as WAV, size: ${file.size} bytes`,
-        );
-        processAudioChunk({ chunk_id: chunkIndex, audio_file: file });
+        // console.log(
+        //   `🎙️ Sending chunk ${chunkIndex} as WAV, size: ${file.size} bytes, question: ${questionId}`,
+        // );
+        processAudioChunk({
+          chunk_id: chunkIndex,
+          audio_file: file,
+          question_id: questionId,
+        });
       } catch (err) {
         console.error(`❌ Failed to encode chunk ${chunkIndex}:`, err);
       }
@@ -133,7 +141,7 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
     chunkIndexRef.current += 1;
 
     // Prepend WebM header so the isolated fragment is decodable
-    encodeAndSend(buildParts(parts), index, MIME_TYPE);
+    encodeAndSend(buildParts(parts), index, MIME_TYPE, questionIdRef.current);
   }, [encodeAndSend, buildParts]);
 
   // ── Acquire mic stream (call once per session) ────────────────────────────
@@ -146,49 +154,53 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
     });
     streamRef.current = stream;
     sessionActiveRef.current = true;
-    console.log("🎤 Mic stream acquired");
+    // console.log("🎤 Mic stream acquired");
   }, []);
 
   // ── Start a fresh recorder for each question ──────────────────────────────
-  const startRecorderForQuestion = useCallback((): void => {
-    if (!streamRef.current) {
-      console.error("startRecorderForQuestion: stream not acquired yet.");
-      return;
-    }
-    if (!sessionActiveRef.current) return;
-
-    // Reset per-question state
-    chunksRef.current = [];
-    flushedRef.current = false;
-    headerChunkRef.current = null; // will be set by the first ondataavailable
-
-    const recorder = new MediaRecorder(streamRef.current, {
-      mimeType: MIME_TYPE,
-    });
-    mediaRecorderRef.current = recorder;
-
-    recorder.ondataavailable = (e) => {
-      if (flushedRef.current) return; // final flush already started, discard
-      if (!e.data?.size) return;
-
-      // Capture the very first chunk as the header for this recorder instance.
-      // All subsequent flushes will prepend it so each blob is self-contained.
-      if (headerChunkRef.current === null) {
-        headerChunkRef.current = e.data;
+  const startRecorderForQuestion = useCallback(
+    (questionId: string): void => {
+      if (!streamRef.current) {
+        console.error("startRecorderForQuestion: stream not acquired yet.");
+        return;
       }
+      if (!sessionActiveRef.current) return;
 
-      chunksRef.current.push(e.data);
-    };
+      // Reset per-question state
+      chunksRef.current = [];
+      flushedRef.current = false;
+      headerChunkRef.current = null; // will be set by the first ondataavailable
+      questionIdRef.current = questionId;
 
-    recorder.start(1000); // fire ondataavailable every 1s
+      const recorder = new MediaRecorder(streamRef.current, {
+        mimeType: MIME_TYPE,
+      });
+      mediaRecorderRef.current = recorder;
 
-    chunkIntervalRef.current = setInterval(
-      flushIntervalChunk,
-      CHUNK_INTERVAL_MS,
-    );
+      recorder.ondataavailable = (e) => {
+        if (flushedRef.current) return; // final flush already started, discard
+        if (!e.data?.size) return;
 
-    console.log("▶️ Recorder started for new question");
-  }, [flushIntervalChunk]);
+        // Capture the very first chunk as the header for this recorder instance.
+        // All subsequent flushes will prepend it so each blob is self-contained.
+        if (headerChunkRef.current === null) {
+          headerChunkRef.current = e.data;
+        }
+
+        chunksRef.current.push(e.data);
+      };
+
+      recorder.start(1000); // fire ondataavailable every 1s
+
+      chunkIntervalRef.current = setInterval(
+        flushIntervalChunk,
+        CHUNK_INTERVAL_MS,
+      );
+
+      // console.log("▶️ Recorder started for new question");
+    },
+    [flushIntervalChunk],
+  );
 
   // ── Stop recorder + guaranteed final flush ────────────────────────────────
   const stopRecorderAndFlush = useCallback((): Promise<void> => {
@@ -219,9 +231,14 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
 
           // Always prepend the WebM header so the final tail fragment can be
           // decoded by AudioContext even when it contains no header itself.
-          await encodeAndSend(buildParts(parts), index, MIME_TYPE);
+          await encodeAndSend(
+            buildParts(parts),
+            index,
+            MIME_TYPE,
+            questionIdRef.current,
+          );
         } else {
-          console.log("ℹ️ No buffered audio at stop — nothing to flush.");
+          // console.log("ℹ️ No buffered audio at stop — nothing to flush.");
         }
 
         resolve();
@@ -256,7 +273,7 @@ export const useAudioChunkRecorder = (): UseAudioChunkRecorderReturn => {
     });
     streamRef.current = null;
 
-    console.log("🛑 Mic stream released");
+    // console.log("🛑 Mic stream released");
   }, []);
 
   // Cleanup on unmount

@@ -10,7 +10,7 @@ export const generateCoverLetter = async ({
     trackId,
   });
 
-  console.log("✅ API response:", res.data);
+  // console.log("✅ API response:", res.data);
   return res.data;
 };
 

@@ -8,11 +8,12 @@ import type {
 export const processChunk = async ({
   chunk_id,
   video_file,
+  question_id,
 }: ProcessChunkPayload): Promise<ChunkProcessResponse> => {
   const formData = new FormData();
   formData.append("chunk_id", chunk_id.toString());
   formData.append("video_file", video_file);
-
+  formData.append("question_id", question_id.toString());
   // console.log("formData=>>", formData);
 
   // 👇 Log before sending
@@ -36,10 +37,12 @@ export const processChunk = async ({
 export const processAudioChunk = async ({
   chunk_id,
   audio_file,
+  question_id,
 }: ProcessAudioChunkPayload): Promise<ChunkProcessResponse> => {
   const formData = new FormData();
   formData.append("chunk_id", chunk_id.toString());
   formData.append("audio_file", audio_file);
+  formData.append("question_id", question_id.toString());
 
   const res = await mlApi.post<ChunkProcessResponse>(
     "/chunk/process-audio",
